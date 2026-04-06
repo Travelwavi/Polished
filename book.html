@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polished - קביעת תור</title>
+    <meta name="description" content="קבעי תור אונליין דרך Polished">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #FDF5EF; --pink: #E5ADAF; --pink-dark: #D49598;
+            --pink-light: #F5D5D6; --white: #FFFFFF; --charcoal: #2D2D2D;
+            --warm-gray: #8A8A8A; --green: #4CD964; --yellow: #F5A623;
+            --blue: #5AC8FA; --red: #FF3B30;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Heebo', sans-serif; background: var(--cream); color: var(--charcoal); min-height: 100vh; }
+
+        .container { max-width: 480px; margin: 0 auto; padding: 20px 16px; }
+
+        /* Header */
+        .header { text-align: center; padding: 24px 0 16px; }
+        .header img { height: 32px; margin-bottom: 8px; }
+        .header h1 { font-size: 18px; font-weight: 300; letter-spacing: 2px; color: var(--charcoal); }
+
+        /* Manicurist card */
+        .mani-card {
+            display: flex; align-items: center; gap: 12px;
+            background: var(--white); border-radius: 14px; padding: 14px 16px; margin-bottom: 20px;
+        }
+        .mani-avatar {
+            width: 48px; height: 48px; border-radius: 50%; object-fit: cover;
+            background: var(--pink-light);
+        }
+        .mani-avatar-placeholder {
+            width: 48px; height: 48px; border-radius: 50%;
+            background: var(--pink-light); display: flex; align-items: center; justify-content: center;
+            font-size: 20px; font-weight: 600; color: var(--pink);
+        }
+        .mani-info h3 { font-size: 15px; font-weight: 600; }
+        .mani-info p { font-size: 12px; color: var(--warm-gray); }
+
+        /* Progress */
+        .progress { display: flex; justify-content: center; gap: 8px; margin-bottom: 20px; }
+        .progress-dot {
+            width: 8px; height: 8px; border-radius: 50%; background: #ddd; transition: background 0.3s;
+        }
+        .progress-dot.active { background: var(--pink); }
+
+        /* Step title */
+        .step-title { text-align: center; font-size: 20px; font-weight: 600; margin-bottom: 6px; }
+        .step-subtitle { text-align: center; font-size: 13px; color: var(--warm-gray); margin-bottom: 20px; }
+
+        /* Cards / sections */
+        .card { background: var(--white); border-radius: 14px; padding: 16px; margin-bottom: 12px; }
+        .card-title { font-size: 13px; font-weight: 500; color: var(--warm-gray); margin-bottom: 10px; }
+
+        /* Date picker */
+        .date-input {
+            width: 100%; padding: 14px; border: 1px solid #e0d8d0; border-radius: 12px;
+            font-family: 'Heebo', sans-serif; font-size: 15px; background: var(--white);
+            color: var(--charcoal); text-align: center;
+        }
+
+        /* Service list */
+        .service-item {
+            display: flex; align-items: center; gap: 12px; padding: 12px 14px;
+            border-radius: 12px; background: var(--cream); margin-bottom: 6px; cursor: pointer;
+            transition: all 0.2s; border: 2px solid transparent;
+        }
+        .service-item.selected { background: rgba(229,173,175,0.08); border-color: var(--pink); }
+        .service-item:hover { background: rgba(229,173,175,0.05); }
+        .service-check {
+            width: 22px; height: 22px; border-radius: 50%; border: 2px solid #ddd;
+            display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s;
+        }
+        .service-item.selected .service-check { background: var(--pink); border-color: var(--pink); }
+        .service-item.selected .service-check::after { content: '✓'; color: white; font-size: 12px; }
+        .service-name { font-size: 14px; font-weight: 500; flex: 1; }
+        .service-meta { font-size: 11px; color: var(--warm-gray); }
+        .service-price { font-size: 14px; font-weight: 600; }
+        .category-header { font-size: 12px; font-weight: 500; color: var(--warm-gray); margin: 14px 0 6px; }
+        .service-summary {
+            display: flex; justify-content: space-between; padding: 10px 4px;
+            font-size: 12px; font-weight: 500; color: var(--pink);
+        }
+
+        /* Time slots */
+        .slots-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+        .time-slot {
+            padding: 12px 0; border-radius: 10px; background: var(--cream);
+            text-align: center; font-size: 14px; font-weight: 500; cursor: pointer;
+            transition: all 0.2s; border: 2px solid transparent;
+        }
+        .time-slot:hover { background: rgba(229,173,175,0.1); }
+        .time-slot.selected { background: var(--pink); color: white; border-color: var(--pink); }
+        .no-slots { text-align: center; padding: 30px; color: var(--warm-gray); font-size: 14px; }
+
+        /* Form fields */
+        .field { margin-bottom: 14px; }
+        .field label { display: block; font-size: 12px; font-weight: 500; color: var(--warm-gray); margin-bottom: 6px; }
+        .field input, .field textarea {
+            width: 100%; padding: 12px 14px; border: 1px solid #e0d8d0; border-radius: 12px;
+            font-family: 'Heebo', sans-serif; font-size: 14px; background: var(--white);
+        }
+        .field textarea { resize: vertical; min-height: 80px; }
+
+        /* Buttons */
+        .btn {
+            width: 100%; padding: 16px; border: none; border-radius: 16px;
+            font-family: 'Heebo', sans-serif; font-size: 15px; font-weight: 600;
+            cursor: pointer; transition: all 0.2s; margin-top: 8px;
+        }
+        .btn-primary { background: var(--pink); color: white; }
+        .btn-primary:hover { background: var(--pink-dark); }
+        .btn-primary:disabled { background: #ccc; cursor: not-allowed; }
+        .btn-back {
+            background: none; border: none; color: var(--pink); font-size: 14px;
+            cursor: pointer; padding: 8px 0; font-family: 'Heebo', sans-serif;
+        }
+
+        /* Success */
+        .success-view { text-align: center; padding: 40px 20px; }
+        .success-icon { font-size: 60px; margin-bottom: 16px; }
+        .success-title { font-size: 20px; font-weight: 600; margin-bottom: 8px; }
+        .success-text { font-size: 14px; color: var(--warm-gray); line-height: 1.6; }
+
+        /* Loading */
+        .loading { text-align: center; padding: 60px; color: var(--warm-gray); }
+        .spinner { border: 3px solid #eee; border-top: 3px solid var(--pink); border-radius: 50%; width: 30px; height: 30px; animation: spin 0.8s linear infinite; margin: 0 auto 12px; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Error */
+        .error-msg { color: var(--red); font-size: 12px; text-align: center; margin-top: 8px; }
+
+        /* App promo */
+        .app-promo {
+            text-align: center; margin-top: 24px; padding: 16px;
+            background: var(--white); border-radius: 14px;
+        }
+        .app-promo p { font-size: 12px; color: var(--warm-gray); margin-bottom: 8px; }
+        .app-promo a { color: var(--pink); font-weight: 600; text-decoration: none; font-size: 13px; }
+
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="assets/logo.png" alt="Polished">
+            <h1>Polished</h1>
+        </div>
+
+        <!-- Loading -->
+        <div id="loading" class="loading">
+            <div class="spinner"></div>
+            <p>...טוענת</p>
+        </div>
+
+        <!-- Error -->
+        <div id="error-view" class="hidden" style="text-align:center; padding:40px;">
+            <div style="font-size:50px; margin-bottom:16px;">😔</div>
+            <p style="font-size:16px; font-weight:600;">לא נמצאה מניקוריסטית</p>
+            <p style="font-size:13px; color:var(--warm-gray); margin-top:8px;">הלינק לא תקין או שהפרופיל לא זמין</p>
+        </div>
+
+        <!-- Main booking flow -->
+        <div id="booking-flow" class="hidden">
+            <!-- Manicurist card -->
+            <div class="mani-card" id="mani-card"></div>
+
+            <!-- Progress -->
+            <div class="progress">
+                <div class="progress-dot active" id="dot-1"></div>
+                <div class="progress-dot" id="dot-2"></div>
+                <div class="progress-dot" id="dot-3"></div>
+                <div class="progress-dot" id="dot-4"></div>
+            </div>
+
+            <!-- Step 1: Date -->
+            <div id="step-1">
+                <div class="step-title">באיזה תאריך?</div>
+                <div class="step-subtitle">בחרי יום לתור</div>
+                <div class="card">
+                    <input type="date" class="date-input" id="date-picker">
+                </div>
+                <button class="btn btn-primary" onclick="goToStep(2)">המשיכי</button>
+            </div>
+
+            <!-- Step 2: Services -->
+            <div id="step-2" class="hidden">
+                <div class="step-title">בחרי שירותים</div>
+                <div class="step-subtitle">ניתן לבחור יותר משירות אחד</div>
+                <div id="services-list"></div>
+                <div class="service-summary hidden" id="services-summary"></div>
+                <button class="btn btn-primary" id="services-next-btn" disabled onclick="goToStep(3)">המשיכי</button>
+                <button class="btn-back" onclick="goToStep(1)">← חזרה</button>
+            </div>
+
+            <!-- Step 3: Time -->
+            <div id="step-3" class="hidden">
+                <div class="step-title">בחרי שעה</div>
+                <div class="step-subtitle" id="selected-date-label"></div>
+                <div id="slots-container"></div>
+                <button class="btn-back" onclick="goToStep(2)">← חזרה</button>
+            </div>
+
+            <!-- Step 4: Details -->
+            <div id="step-4" class="hidden">
+                <div class="step-title">פרטים אחרונים</div>
+                <div class="step-subtitle">כדי שנוכל ליצור איתך קשר</div>
+                <div class="card" id="booking-summary"></div>
+                <div class="card">
+                    <div class="field">
+                        <label>שם מלא *</label>
+                        <input type="text" id="client-name" placeholder="השם שלך" required>
+                    </div>
+                    <div class="field">
+                        <label>מספר טלפון *</label>
+                        <input type="tel" id="client-phone" placeholder="050-0000000" required>
+                    </div>
+                    <div class="field">
+                        <label>הערות</label>
+                        <textarea id="client-notes" placeholder="הערות נוספות (אופציונלי)"></textarea>
+                    </div>
+                </div>
+                <div class="error-msg hidden" id="submit-error"></div>
+                <button class="btn btn-primary" id="submit-btn" onclick="submitBooking()">שלחי בקשה</button>
+                <button class="btn-back" onclick="goToStep(3)">← חזרה</button>
+            </div>
+
+            <!-- Success -->
+            <div id="success-view" class="hidden">
+                <div class="success-view">
+                    <div class="success-icon">🤍</div>
+                    <div class="success-title">הבקשה נשלחה!</div>
+                    <div class="success-text">הבקשה נשלחה למניקוריסטית.<br>תקבלי עדכון כשהיא תאשר.</div>
+                </div>
+            </div>
+
+            <!-- App promo -->
+            <div class="app-promo">
+                <p>חוויה טובה יותר באפליקציה</p>
+                <a href="https://apps.apple.com/app/polished" target="_blank">הורידי את Polished →</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js';
+        import { getFirestore, doc, getDoc, collection, query, where, getDocs, addDoc, Timestamp, orderBy }
+            from 'https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js';
+        import { getAuth, signInAnonymously }
+            from 'https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js';
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyC7DgoOf1ZCdOQoMrzuODdsnlf_llRLYE8",
+            authDomain: "polished-cc2ba.firebaseapp.com",
+            projectId: "polished-cc2ba",
+            storageBucket: "polished-cc2ba.firebasestorage.app",
+            messagingSenderId: "242053636998",
+            appId: "1:242053636998:ios:3bda8e4f84ce8032494207"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+        // Sign in anonymously (no UI, secures Firestore writes)
+        try { await signInAnonymously(auth); } catch (e) { console.error('Anon auth error:', e); }
+
+        // State
+        let manicurist = null;
+        let services = [];
+        let workingHours = {};
+        let selectedServices = [];
+        let selectedDate = null;
+        let selectedTime = null;
+        let existingBookings = [];
+
+        const categoryNames = {
+            basic: 'בסיסי', building: 'בנייה', polish_design: 'לק ועיצוב',
+            fixes: 'תיקונים והסרה', packages: 'חבילות'
+        };
+        const categoryOrder = ['basic', 'building', 'polish_design', 'fixes', 'packages'];
+
+        // Get manicurist ID from URL
+        const params = new URLSearchParams(window.location.search);
+        const maniId = params.get('id');
+
+        if (!maniId) {
+            showError();
+        } else {
+            loadManicurist(maniId);
+        }
+
+        async function loadManicurist(id) {
+            try {
+                const docSnap = await getDoc(doc(db, 'manicurists', id));
+                if (!docSnap.exists() || !docSnap.data().acceptsBookings) {
+                    showError(); return;
+                }
+                manicurist = { id: docSnap.id, ...docSnap.data() };
+                workingHours = manicurist.workingHours || {};
+
+                // Load services
+                if (manicurist.services) {
+                    services = manicurist.services;
+                }
+
+                renderManiCard();
+                renderServices();
+                setupDatePicker();
+                document.getElementById('loading').classList.add('hidden');
+                document.getElementById('booking-flow').classList.remove('hidden');
+            } catch (e) {
+                console.error('Load error:', e);
+                showError();
+            }
+        }
+
+        function showError() {
+            document.getElementById('loading').classList.add('hidden');
+            document.getElementById('error-view').classList.remove('hidden');
+        }
+
+        function renderManiCard() {
+            const card = document.getElementById('mani-card');
+            const avatar = manicurist.profileImageURL
+                ? `<img class="mani-avatar" src="${manicurist.profileImageURL}" alt="${manicurist.name}">`
+                : `<div class="mani-avatar-placeholder">${manicurist.name.charAt(0)}</div>`;
+            card.innerHTML = `
+                ${avatar}
+                <div class="mani-info">
+                    <h3>${manicurist.name}</h3>
+                    <p>${manicurist.address || ''}</p>
+                </div>
+            `;
+        }
+
+        function setupDatePicker() {
+            const picker = document.getElementById('date-picker');
+            const today = new Date().toISOString().split('T')[0];
+            picker.min = today;
+            picker.value = today;
+            selectedDate = today;
+            picker.addEventListener('change', (e) => { selectedDate = e.target.value; });
+        }
+
+        function renderServices() {
+            const container = document.getElementById('services-list');
+            if (!services.length) {
+                container.innerHTML = '<p style="text-align:center; color:var(--warm-gray); padding:20px;">אין שירותים מוגדרים</p>';
+                return;
+            }
+
+            // Group by category
+            let html = '';
+            for (const catId of categoryOrder) {
+                const catServices = services.filter(s => s.category === catId);
+                if (!catServices.length) continue;
+                html += `<div class="category-header">${categoryNames[catId] || catId}</div>`;
+                for (const s of catServices) {
+                    html += `
+                        <div class="service-item" data-id="${s.id}" onclick="toggleService('${s.id}')">
+                            <div class="service-check"></div>
+                            <div style="flex:1">
+                                <div class="service-name">${s.nameHE || s.name}</div>
+                                <div class="service-meta">${s.durationMinutes} דק׳</div>
+                            </div>
+                            ${s.price > 0 ? `<div class="service-price">₪${s.price}</div>` : ''}
+                        </div>
+                    `;
+                }
+            }
+
+            // Uncategorized
+            const uncategorized = services.filter(s => !categoryOrder.includes(s.category));
+            for (const s of uncategorized) {
+                html += `
+                    <div class="service-item" data-id="${s.id}" onclick="toggleService('${s.id}')">
+                        <div class="service-check"></div>
+                        <div style="flex:1"><div class="service-name">${s.nameHE || s.name}</div></div>
+                    </div>
+                `;
+            }
+            container.innerHTML = html;
+        }
+
+        window.toggleService = function(id) {
+            const idx = selectedServices.findIndex(s => s.id === id);
+            if (idx >= 0) {
+                selectedServices.splice(idx, 1);
+            } else {
+                const svc = services.find(s => s.id === id);
+                if (svc) selectedServices.push(svc);
+            }
+            // Update UI
+            document.querySelectorAll('.service-item').forEach(el => {
+                el.classList.toggle('selected', selectedServices.some(s => s.id === el.dataset.id));
+            });
+            const totalMin = selectedServices.reduce((sum, s) => sum + (s.durationMinutes || 60), 0);
+            const totalPrice = selectedServices.reduce((sum, s) => sum + (s.price || 0), 0);
+            const summary = document.getElementById('services-summary');
+            const btn = document.getElementById('services-next-btn');
+            if (selectedServices.length > 0) {
+                summary.classList.remove('hidden');
+                summary.innerHTML = `<span>${selectedServices.length} שירותים • ${totalMin} דק׳</span><span>${totalPrice > 0 ? '₪' + totalPrice : ''}</span>`;
+                btn.disabled = false;
+            } else {
+                summary.classList.add('hidden');
+                btn.disabled = true;
+            }
+        };
+
+        async function loadAvailableSlots() {
+            if (!selectedDate) return;
+            const date = new Date(selectedDate);
+            const dayNames = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+            const dayKey = dayNames[date.getDay()];
+            const hours = workingHours[dayKey];
+
+            if (!hours || hours.length < 2) {
+                return [];
+            }
+
+            const [startStr, endStr] = hours;
+            const startMin = timeToMin(startStr);
+            const endMin = timeToMin(endStr);
+            const totalDuration = selectedServices.reduce((sum, s) => sum + (s.durationMinutes || 60), 0);
+
+            // Fetch existing bookings for this date
+            const startOfDay = new Date(selectedDate + 'T00:00:00');
+            const endOfDay = new Date(selectedDate + 'T23:59:59');
+
+            try {
+                const q = query(
+                    collection(db, 'bookings'),
+                    where('manicuristId', '==', manicurist.id),
+                    where('date', '>=', Timestamp.fromDate(startOfDay)),
+                    where('date', '<=', Timestamp.fromDate(endOfDay))
+                );
+                const snap = await getDocs(q);
+                existingBookings = snap.docs
+                    .map(d => d.data())
+                    .filter(b => ['pending', 'accepted', 'confirmed', 'modified'].includes(b.status));
+            } catch (e) {
+                console.error('Fetch bookings error:', e);
+                existingBookings = [];
+            }
+
+            // Generate slots
+            const slots = [];
+            for (let m = startMin; m + totalDuration <= endMin; m += 30) {
+                const slotStart = m;
+                const slotEnd = m + totalDuration;
+                const conflict = existingBookings.some(b => {
+                    const bDate = b.date.toDate();
+                    const bStart = bDate.getHours() * 60 + bDate.getMinutes();
+                    const bEnd = bStart + 60; // default duration
+                    return slotStart < bEnd && slotEnd > bStart;
+                });
+                if (!conflict) {
+                    slots.push(minToTime(m));
+                }
+            }
+            return slots;
+        }
+
+        function timeToMin(t) { const [h, m] = t.split(':').map(Number); return h * 60 + m; }
+        function minToTime(m) { return String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0'); }
+
+        window.goToStep = async function(step) {
+            // Validate
+            if (step === 2 && !selectedDate) return;
+            if (step === 3 && !selectedServices.length) return;
+
+            // Load slots when entering step 3
+            if (step === 3) {
+                const container = document.getElementById('slots-container');
+                container.innerHTML = '<div class="loading"><div class="spinner"></div><p>בודקת שעות פנויות...</p></div>';
+                document.getElementById('selected-date-label').textContent = new Date(selectedDate).toLocaleDateString('he-IL', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+
+                const slots = await loadAvailableSlots();
+                if (!slots || !slots.length) {
+                    container.innerHTML = '<div class="no-slots">😔<br>אין שעות פנויות ביום הזה<br><small>נסי לבחור תאריך אחר</small></div>';
+                } else {
+                    container.innerHTML = '<div class="slots-grid">' +
+                        slots.map(s => `<div class="time-slot" onclick="selectTime('${s}')">${s}</div>`).join('') +
+                        '</div>';
+                }
+            }
+
+            // Render summary on step 4
+            if (step === 4 && selectedTime) {
+                const dateStr = new Date(selectedDate).toLocaleDateString('he-IL', { day: 'numeric', month: 'long', year: 'numeric' });
+                const svcNames = selectedServices.map(s => s.nameHE || s.name).join(', ');
+                const totalMin = selectedServices.reduce((sum, s) => sum + (s.durationMinutes || 60), 0);
+                document.getElementById('booking-summary').innerHTML = `
+                    <div style="display:flex; gap:8px; align-items:center; margin-bottom:8px;">
+                        <span style="color:var(--pink);">📅</span> <span>${dateStr}</span>
+                    </div>
+                    <div style="display:flex; gap:8px; align-items:center; margin-bottom:8px;">
+                        <span style="color:var(--pink);">✨</span> <span>${svcNames}</span>
+                    </div>
+                    <div style="display:flex; gap:8px; align-items:center; margin-bottom:8px;">
+                        <span style="color:var(--pink);">🕐</span> <span>${selectedTime} (${totalMin} דק׳)</span>
+                    </div>
+                `;
+            }
+
+            // Show/hide steps
+            for (let i = 1; i <= 4; i++) {
+                document.getElementById(`step-${i}`).classList.toggle('hidden', i !== step);
+                document.getElementById(`dot-${i}`).classList.toggle('active', i <= step);
+            }
+            document.getElementById('success-view').classList.add('hidden');
+        };
+
+        window.selectTime = function(time) {
+            selectedTime = time;
+            document.querySelectorAll('.time-slot').forEach(el => {
+                el.classList.toggle('selected', el.textContent === time);
+            });
+            setTimeout(() => goToStep(4), 200);
+        };
+
+        window.submitBooking = async function() {
+            const name = document.getElementById('client-name').value.trim();
+            const phone = document.getElementById('client-phone').value.trim();
+            const notes = document.getElementById('client-notes').value.trim();
+            const errorEl = document.getElementById('submit-error');
+
+            if (!name || !phone) {
+                errorEl.textContent = 'נא למלא שם ומספר טלפון';
+                errorEl.classList.remove('hidden');
+                return;
+            }
+
+            const btn = document.getElementById('submit-btn');
+            btn.disabled = true;
+            btn.textContent = '...שולחת';
+            errorEl.classList.add('hidden');
+
+            try {
+                const [h, m] = selectedTime.split(':').map(Number);
+                const bookingDate = new Date(selectedDate);
+                bookingDate.setHours(h, m, 0, 0);
+
+                const svcNames = selectedServices.map(s => s.name).join(' + ');
+
+                await addDoc(collection(db, 'bookings'), {
+                    userId: 'web-' + Date.now(),
+                    userName: name,
+                    userPhone: phone,
+                    manicuristId: manicurist.id,
+                    manicuristName: manicurist.name,
+                    date: Timestamp.fromDate(bookingDate),
+                    serviceName: svcNames,
+                    notes: notes,
+                    status: 'pending',
+                    source: 'web',
+                    createdAt: Timestamp.now()
+                });
+
+                // Show success
+                for (let i = 1; i <= 4; i++) document.getElementById(`step-${i}`).classList.add('hidden');
+                document.getElementById('success-view').classList.remove('hidden');
+                document.querySelectorAll('.progress-dot').forEach(d => d.classList.add('active'));
+            } catch (e) {
+                console.error('Submit error:', e);
+                errorEl.textContent = 'שגיאה בשליחת הבקשה, נסי שוב';
+                errorEl.classList.remove('hidden');
+                btn.disabled = false;
+                btn.textContent = 'שלחי בקשה';
+            }
+        };
+    </script>
+</body>
+</html>

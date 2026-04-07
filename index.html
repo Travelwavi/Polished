@@ -262,7 +262,22 @@
         .phone-screen .img-before { z-index: 1; }
         .phone-screen .img-after {
             z-index: 2;
-            clip-path: circle(0% at 50% 50%);
+            opacity: 0;
+            pointer-events: none;
+        }
+        .reveal-circle {
+            position: absolute; z-index: 3;
+            width: 180px; height: 180px;
+            border-radius: 50%; overflow: hidden;
+            pointer-events: none; display: none;
+            transform: translate(-50%, -50%);
+            will-change: left, top;
+            box-shadow: 0 0 20px rgba(233,30,99,0.15);
+        }
+        .reveal-circle img {
+            position: absolute;
+            width: 0; height: 0;
+            object-fit: cover;
         }
 
         /* Shimmer disabled on phone */
@@ -619,8 +634,9 @@
                         <div class="phone-home"></div>
                     </div>
                     <div class="phone-screen" id="phoneScreen">
-                        <img class="img-before" src="assets/hand-before.png" alt="Hand with french tips">
-                        <img class="img-after" src="assets/hand-after.png" alt="Hand with nail art" id="imgAfter">
+                        <img class="img-before" src="assets/hand-before.jpg" alt="Hand with french tips">
+                        <img class="img-after" src="assets/hand-after.jpg" alt="Hand with nail art" id="imgAfter">
+                        <div class="reveal-circle" id="revealCircle"></div>
                         <div class="sparkle"></div>
                         <div class="sparkle"></div>
                         <div class="sparkle"></div>
@@ -791,36 +807,43 @@
         document.querySelectorAll('.reveal, .reveal-right, .reveal-scale').forEach(el => revealObserver.observe(el));
 
         // ===== Phone cursor-based reveal =====
+        // Reveal: move a circular window showing the "after" image
         const phoneScreen = document.getElementById('phoneScreen');
-        const imgAfter = document.getElementById('imgAfter');
+        const revealCircle = document.getElementById('revealCircle');
         const revealCursor = document.getElementById('revealCursor');
-        const REVEAL_RADIUS = 90;
-
-        let isRevealing = false;
+        const CIRCLE_SIZE = 180;
+        let screenW = 0, screenH = 0;
 
         phoneScreen.addEventListener('mouseenter', () => {
-            isRevealing = true;
+            const rect = phoneScreen.getBoundingClientRect();
+            screenW = rect.width;
+            screenH = rect.height;
+            // Set the inner image to match the screen size
+            revealCircle.innerHTML = `<img src="assets/hand-after.jpg" style="width:${screenW}px;height:${screenH}px;position:absolute;">`;
+            revealCircle.style.display = 'block';
             revealCursor.classList.add('active');
         });
 
         phoneScreen.addEventListener('mousemove', (e) => {
-            if (!isRevealing) return;
             const rect = phoneScreen.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
-
+            // Position the circle
+            revealCircle.style.left = x + 'px';
+            revealCircle.style.top = y + 'px';
+            // Offset the inner image so it aligns with the before image
+            const img = revealCircle.querySelector('img');
+            if (img) {
+                img.style.left = (-x + CIRCLE_SIZE / 2) + 'px';
+                img.style.top = (-y + CIRCLE_SIZE / 2) + 'px';
+            }
             revealCursor.style.left = e.clientX + 'px';
             revealCursor.style.top = e.clientY + 'px';
-
-            imgAfter.style.clipPath = `circle(${REVEAL_RADIUS}px at ${x}px ${y}px)`;
-            imgAfter.style.transition = 'clip-path 0.08s ease-out';
         });
 
         phoneScreen.addEventListener('mouseleave', () => {
-            isRevealing = false;
+            revealCircle.style.display = 'none';
             revealCursor.classList.remove('active');
-            imgAfter.style.transition = 'clip-path 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
-            imgAfter.style.clipPath = 'circle(0% at 50% 50%)';
         });
     </script>
 </body>

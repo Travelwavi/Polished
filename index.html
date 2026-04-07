@@ -385,64 +385,40 @@
             border-radius: 24px; padding: 44px 36px;
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        /* Comparison table */
-        .compare-table {
-            max-width: 800px; margin: 0 auto;
-            border-radius: 24px; overflow: hidden;
-            border: 1px solid rgba(0,0,0,0.06);
-            background: var(--white);
+        /* What-is cards */
+        .what-is-cards {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 28px;
+            max-width: 900px; margin: 0 auto;
         }
-        .compare-header {
-            display: grid; grid-template-columns: 1fr 80px 80px;
-            background: var(--bg-soft); padding: 0; border-bottom: 1px solid rgba(0,0,0,0.06);
+        .what-card {
+            background: var(--bg); border: 1px solid rgba(0,0,0,0.04);
+            border-radius: 24px; padding: 40px 32px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .compare-header .col-label {
-            display: flex; flex-direction: column; align-items: center;
-            justify-content: center; padding: 20px 10px; gap: 6px;
+        .what-card:hover { transform: translateY(-6px); box-shadow: 0 16px 50px rgba(233,30,99,0.08); }
+        .card-header-icon {
+            width: 56px; height: 56px; border-radius: 16px;
+            background: var(--primary-light); display: flex;
+            align-items: center; justify-content: center; margin-bottom: 20px;
         }
-        .compare-header .col-label svg { opacity: 0.7; }
-        .compare-header .col-label span {
-            font-size: 12px; font-weight: 700; color: var(--dark);
-        }
-        .compare-header .col-feature {
-            display: flex; align-items: center; padding: 20px 24px;
-            font-size: 14px; font-weight: 600; color: var(--muted);
-        }
-        .compare-row {
-            display: grid; grid-template-columns: 1fr 80px 80px;
+        .what-card h3 { font-size: 22px; font-weight: 800; margin-bottom: 20px; color: var(--dark); }
+        .what-card ul { list-style: none; margin: 0; padding: 0; }
+        .what-card ul li {
+            color: var(--text); font-size: 15px; line-height: 1.6;
+            padding: 8px 0; display: flex; align-items: flex-start; gap: 12px;
             border-bottom: 1px solid rgba(0,0,0,0.04);
-            transition: background 0.2s;
         }
-        .compare-row:hover { background: var(--bg); }
-        .compare-row:last-child { border-bottom: none; }
-        .compare-row .row-feature {
-            padding: 16px 24px; font-size: 14px; color: var(--text);
-            display: flex; align-items: center;
+        .what-card ul li:last-child { border-bottom: none; }
+        .what-card ul li::before {
+            content: ''; min-width: 8px; height: 8px; margin-top: 8px;
+            border-radius: 50%; background: var(--accent); flex-shrink: 0;
         }
-        .compare-row .row-check {
-            display: flex; align-items: center; justify-content: center;
-            padding: 16px 0;
-        }
-        .check-yes {
-            width: 24px; height: 24px; border-radius: 50%;
-            background: #E8F5E9; display: flex; align-items: center; justify-content: center;
-        }
-        .check-yes svg { width: 14px; height: 14px; }
-        .check-no {
-            width: 24px; height: 24px; border-radius: 50%;
-            background: #f5f5f5; display: flex; align-items: center; justify-content: center;
-            color: #ccc; font-size: 14px; font-weight: 300;
-        }
-        .compare-footer {
-            display: grid; grid-template-columns: 1fr 80px 80px;
+        .free-banner {
+            display: flex; align-items: center; justify-content: center; gap: 12px;
+            max-width: 900px; margin: 28px auto 0;
             background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
-            border-top: 2px solid #A5D6A7;
-        }
-        .compare-footer .row-feature {
-            padding: 18px 24px; font-size: 15px; font-weight: 800; color: #2E7D32;
-        }
-        .compare-footer .row-check {
-            display: flex; align-items: center; justify-content: center; padding: 18px 0;
+            border: 2px solid #A5D6A7; border-radius: 16px;
+            padding: 18px 32px; font-size: 17px; font-weight: 800; color: #2E7D32;
         }
 
         /* ===== S3: HOW IT WORKS ===== */
@@ -604,12 +580,11 @@
             .what-is .section-title { margin-bottom: 36px; }
             .what-is .big-headline { font-size: 36px; }
             .what-is .big-headline .color-polished { display: block; }
-            .compare-table { margin: 0 -8px; border-radius: 16px; }
-            .compare-header, .compare-row, .compare-footer { grid-template-columns: 1fr 60px 60px; }
-            .compare-row .row-feature { font-size: 13px; padding: 12px 16px; }
-            .compare-footer .row-feature { font-size: 13px; padding: 14px 16px; }
-            .compare-header .col-label span { font-size: 10px; }
-            .compare-header .col-label svg { width: 20px; height: 20px; }
+            .what-is-cards { grid-template-columns: 1fr; gap: 20px; }
+            .what-card { padding: 28px 24px; }
+            .what-card h3 { font-size: 20px; }
+            .what-card ul li { font-size: 14px; }
+            .free-banner { font-size: 15px; padding: 14px 20px; }
             /* Split hero-text into flex column so h1 stays on top, rest goes below phone */
             .hero-text { display: contents; }
             .hero-container { display: flex; flex-direction: column; align-items: center; }
@@ -744,61 +719,35 @@
                 <h2 class="big-headline"><span class="color-polished">Polished</span> <span class="he-text">היא</span><span class="en-text" style="display:none">is a</span> <span class="color-accent"><span class="he-text">קהילה</span><span class="en-text" style="display:none">Community</span></span></h2>
                 <p><span class="he-text">נבנתה על ידי בנות, בשביל בנות ומניקוריסטיות. מקום אחד שמחבר בין השראה, טכנולוגיה, וקהילה אמיתית.</span><span class="en-text" style="display:none">Built by girls, for girls and manicurists. One place that connects inspiration, technology, and a real community.</span></p>
             </div>
-            <div class="compare-table reveal">
-                <!-- Header -->
-                <div class="compare-header">
-                    <div class="col-feature"></div>
-                    <div class="col-label">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                        <span><span class="he-text">בנות</span><span class="en-text" style="display:none">Girls</span></span>
+            <div class="what-is-cards">
+                <div class="what-card reveal">
+                    <div class="card-header-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                     </div>
-                    <div class="col-label">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M20 8v6"/><path d="M23 11h-6"/></svg>
-                        <span><span class="he-text">מניקוריסטיות</span><span class="en-text" style="display:none">Pros</span></span>
+                    <h3><span class="he-text">בשביל בנות</span><span class="en-text" style="display:none">For Girls</span></h3>
+                    <ul>
+                        <li><span class="he-text">נסי כל לק על הידיים שלך בעזרת AI</span><span class="en-text" style="display:none">Try any nail polish on your own hands using AI</span></li>
+                        <li><span class="he-text">גלשי בין סוגי וצבעי לקים</span><span class="en-text" style="display:none">Browse the types and colors of nail polishes</span></li>
+                        <li><span class="he-text">חקרי את לוח ההשראה לרעיון הבא שלך</span><span class="en-text" style="display:none">Explore the inspiration board for your next idea</span></li>
+                        <li><span class="he-text">חפשי מניקוריסטיות קרובות אלייך</span><span class="en-text" style="display:none">Search for nearby manicurists</span></li>
+                    </ul>
+                </div>
+                <div class="what-card reveal">
+                    <div class="card-header-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M20 8v6"/><path d="M23 11h-6"/></svg>
                     </div>
+                    <h3><span class="he-text">בשביל מניקוריסטיות</span><span class="en-text" style="display:none">For Manicurists</span></h3>
+                    <ul>
+                        <li><span class="he-text">הראי ללקוחות שלך את העבודות שלך על הידיים שלהן</span><span class="en-text" style="display:none">Show your clients your works on their own hands</span></li>
+                        <li><span class="he-text">גלי סוגי וצבעי לקים חדשים לעסק שלך</span><span class="en-text" style="display:none">Explore new types and colors of nail polishes for your business</span></li>
+                        <li><span class="he-text">העלי את העבודות שלך כדי לתת השראה ולקבל חשיפה</span><span class="en-text" style="display:none">Upload your works to inspire other manicurists and gain exposure</span></li>
+                        <li><span class="he-text">תתכונני לעבור למערכת התורים שלנו :)</span><span class="en-text" style="display:none">Get ready to move to our scheduling system :)</span></li>
+                    </ul>
                 </div>
-                <!-- Rows -->
-                <div class="compare-row">
-                    <div class="row-feature"><span class="he-text">נסיית לק על הידיים בעזרת AI</span><span class="en-text" style="display:none">Try nail polish on hands using AI</span></div>
-                    <div class="row-check"><div class="check-yes"><svg viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div></div>
-                    <div class="row-check"><div class="check-yes"><svg viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div></div>
-                </div>
-                <div class="compare-row">
-                    <div class="row-feature"><span class="he-text">גלישה בסוגי וצבעי לקים</span><span class="en-text" style="display:none">Browse nail polish types and colors</span></div>
-                    <div class="row-check"><div class="check-yes"><svg viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div></div>
-                    <div class="row-check"><div class="check-yes"><svg viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div></div>
-                </div>
-                <div class="compare-row">
-                    <div class="row-feature"><span class="he-text">לוח השראה לרעיון הבא</span><span class="en-text" style="display:none">Inspiration board for your next idea</span></div>
-                    <div class="row-check"><div class="check-yes"><svg viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div></div>
-                    <div class="row-check"><div class="check-yes"><svg viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div></div>
-                </div>
-                <div class="compare-row">
-                    <div class="row-feature"><span class="he-text">חיפוש מניקוריסטיות קרובות</span><span class="en-text" style="display:none">Search for nearby manicurists</span></div>
-                    <div class="row-check"><div class="check-yes"><svg viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div></div>
-                    <div class="row-check"><div class="check-no">-</div></div>
-                </div>
-                <div class="compare-row">
-                    <div class="row-feature"><span class="he-text">הצגת עבודות על ידיים של לקוחות</span><span class="en-text" style="display:none">Show your works on clients' hands</span></div>
-                    <div class="row-check"><div class="check-no">-</div></div>
-                    <div class="row-check"><div class="check-yes"><svg viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div></div>
-                </div>
-                <div class="compare-row">
-                    <div class="row-feature"><span class="he-text">העלאת עבודות לחשיפה והשראה</span><span class="en-text" style="display:none">Upload works to gain exposure and inspire</span></div>
-                    <div class="row-check"><div class="check-no">-</div></div>
-                    <div class="row-check"><div class="check-yes"><svg viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div></div>
-                </div>
-                <div class="compare-row">
-                    <div class="row-feature"><span class="he-text">מערכת קביעת תורים (בקרוב)</span><span class="en-text" style="display:none">Scheduling system (coming soon)</span></div>
-                    <div class="row-check"><div class="check-yes"><svg viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div></div>
-                    <div class="row-check"><div class="check-yes"><svg viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div></div>
-                </div>
-                <!-- Footer: Free -->
-                <div class="compare-footer">
-                    <div class="row-feature"><span class="he-text">לגמרי בחינם</span><span class="en-text" style="display:none">COMPLETELY FREE</span></div>
-                    <div class="row-check"><div class="check-yes"><svg viewBox="0 0 24 24" fill="none" stroke="#2E7D32" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div></div>
-                    <div class="row-check"><div class="check-yes"><svg viewBox="0 0 24 24" fill="none" stroke="#2E7D32" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div></div>
-                </div>
+            </div>
+            <div class="free-banner reveal">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2E7D32" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <span><span class="he-text">הכל בחינם לגמרי — לבנות ולמניקוריסטיות</span><span class="en-text" style="display:none">COMPLETELY FREE — for girls and manicurists</span></span>
             </div>
         </div>
     </section>

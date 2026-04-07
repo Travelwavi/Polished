@@ -549,16 +549,21 @@
             .lang-btn { display: none; }
             .nav-left-group { gap: 8px; position: absolute; left: 16px; }
             .nav-logo { position: absolute; left: 50%; transform: translateX(-50%); }
-            .nav-logo img { height: 40px; position: fixed; right: 16px; top: 8.5px; }
+            .nav-logo img { height: 40px; position: fixed; right: 16px; top: 9px; z-index: 91; }
             .nav-logo span { font-size: 18px; }
+            .nav-logo { position: static; transform: none; }
+            .nav-inner { justify-content: center; position: relative; }
             .hero { padding: 70px 16px 40px; }
             .hero-container { flex-direction: column; text-align: center; padding-left: 0; gap: 24px; }
             .hero-text { order: -1; }
             .hero-text h1 { order: -1; }
             .hero-phone { order: 0; }
             .hero-text .subtitle { order: 1; }
-            .hero-text .hero-download-row { order: 2; }
+            .hero-text .subtitle { margin-bottom: 8px; }
+            .hero-text .hero-download-row { order: 2; margin-bottom: 0; }
             .hero-text .hero-perk-line { order: 3; }
+            .what-is { padding: 60px 16px; }
+            .what-is .section-title { margin-bottom: 36px; }
             /* Split hero-text into flex column so h1 stays on top, rest goes below phone */
             .hero-text { display: contents; }
             .hero-container { display: flex; flex-direction: column; align-items: center; }
@@ -566,7 +571,7 @@
             .hero-text h1 { font-size: 28px; }
             .hero-text h1 .highlight { font-size: 1.15em; }
             .hero-text .subtitle { font-size: 15px; }
-            .hero-perk-line { justify-content: center; font-size: 12px; }
+            .hero-perk-line { justify-content: center; font-size: 11px; flex-wrap: nowrap; white-space: nowrap; }
             .hero-phone { margin-left: 0; }
             .phone-wrapper { width: 220px; height: 450px; margin: 0 auto; }
             .phone-bubble { display: flex; font-size: 11px; padding: 8px 12px; }
@@ -574,8 +579,11 @@
             .bubble-1 { top: 8%; left: -10px; }
             .bubble-2 { top: 55%; right: -10px; left: auto; }
             .bubble-3 { bottom: 5%; left: -10px; }
-            .hero-download-row { justify-content: center; flex-direction: column; align-items: center; gap: 10px; }
-            .hero-download-btn { margin: 0; font-size: 14px; padding: 12px 28px; }
+            .hero-download-row { justify-content: center; flex-direction: row; align-items: center; gap: 10px; }
+            .hero-download-btn { margin: 0; font-size: 12px; padding: 10px 18px; }
+            .hero-download-btn svg { width: 20px; height: 20px; }
+            .hero-download-btn .btn-big { font-size: 14px; }
+            .hero-download-btn .btn-small { font-size: 9px; }
             .reveal-cursor { display: none; }
             .step { flex-direction: column; text-align: center; }
             .steps::before { display: none; }
@@ -835,7 +843,7 @@
             fetch('https://ipapi.co/json/', { signal: AbortSignal.timeout(3000) })
                 .then(r => r.json())
                 .then(data => {
-                    if (data.country_code !== 'IL') setLanguage(false);
+                    if (data.country_code !== 'IL' && data.country_code !== 'JO') setLanguage(false);
                 })
                 .catch(() => {}); // default Hebrew on error
         })();

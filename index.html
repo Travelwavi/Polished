@@ -6,118 +6,510 @@
     <title>Polished - נסי לק וירטואלית על הציפורניים שלך</title>
     <meta name="description" content="Polished - האפליקציה שמאפשרת לך לנסות לק על הציפורניים שלך בעזרת AI.">
     <link rel="icon" type="image/png" href="assets/favicon.png">
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --cream: #F8F2EA; --pink: #E5ADAF; --pink-dark: #D49598;
-            --pink-light: #F5D5D6; --white: #FFFFFF; --charcoal: #2D2D2D;
-            --warm-gray: #8A8A8A; --font-he: 'Heebo', sans-serif; --font-en: 'Inter', sans-serif;
+            --primary: #E91E63;
+            --primary-dark: #C2185B;
+            --primary-light: #FCE4EC;
+            --accent: #FF6B9D;
+            --bg: #FFFBFC;
+            --bg-soft: #FFF0F3;
+            --white: #FFFFFF;
+            --dark: #1A1A2E;
+            --text: #2D2A3E;
+            --muted: #7B7890;
+            --font-he: 'Rubik', sans-serif;
+            --font-en: 'Inter', sans-serif;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-        body { font-family: var(--font-he); color: var(--charcoal); overflow-x: hidden; }
-        body.en { direction: ltr; font-family: var(--font-en); }
+        body { font-family: var(--font-he); color: var(--text); overflow-x: hidden; background: var(--white); }
 
-        .lang-toggle {
-            position: fixed; top: 20px; left: 20px; z-index: 100;
-            background: rgba(255,255,255,0.9); backdrop-filter: blur(10px);
-            border: 1px solid rgba(229,173,175,0.4); color: var(--pink-dark);
-            padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 500;
-            cursor: pointer; transition: all 0.3s; font-family: var(--font-en);
-        }
-        body.en .lang-toggle { right: 20px; left: auto; }
-        .lang-toggle:hover { background: var(--pink); color: var(--white); }
-
-        /* Nav */
+        /* ===== NAV ===== */
         nav {
-            position: fixed; top: 0; width: 100%; padding: 14px 40px;
-            display: flex; justify-content: space-between; align-items: center; z-index: 90;
-            background: transparent; transition: all 0.4s;
+            position: fixed; top: 0; width: 100%; padding: 0 48px;
+            height: 72px; display: flex; align-items: center;
+            z-index: 90; background: rgba(255,255,255,0.97); backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
         }
-        nav.scrolled { background: rgba(248,242,234,0.85); backdrop-filter: blur(20px); box-shadow: 0 2px 20px rgba(0,0,0,0.06); }
-        .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-        .nav-logo img { height: 36px; }
-        .nav-logo span { font-size: 22px; font-weight: 300; letter-spacing: 3px; color: var(--white); transition: color 0.4s; }
-        nav.scrolled .nav-logo span { color: var(--charcoal); }
-        body.en .nav-logo span { font-family: var(--font-en); }
+        .nav-inner {
+            max-width: 1300px; width: 100%; margin: 0 auto;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .nav-logo {
+            display: flex; align-items: center; gap: 10px; text-decoration: none;
+        }
+        .nav-logo img { height: 34px; }
+        .nav-logo span {
+            font-size: 20px; font-weight: 300; letter-spacing: 3px;
+            color: var(--dark); font-family: var(--font-en);
+        }
+
+        .nav-center {
+            display: flex; align-items: center; gap: 36px;
+            position: absolute; left: 42%; transform: translateX(-50%);
+        }
+        .nav-center a {
+            text-decoration: none; color: var(--text); font-size: 15.5px;
+            font-weight: 400; transition: color 0.3s; position: relative;
+            padding: 4px 0;
+        }
+        .nav-center a::after {
+            content: ''; position: absolute; bottom: -2px; right: 0; width: 0;
+            height: 2px; background: var(--primary); transition: width 0.3s;
+        }
+        .nav-center a:hover { color: var(--primary); }
+        .nav-center a:hover::after { width: 100%; }
+
         .nav-cta {
-            background: rgba(255,255,255,0.2); backdrop-filter: blur(8px); color: var(--white);
-            border: 1.5px solid rgba(255,255,255,0.4);
-            padding: 10px 28px; border-radius: 25px; font-size: 14px; font-weight: 600;
-            cursor: pointer; transition: all 0.4s; text-decoration: none;
+            background: var(--primary); color: var(--white) !important;
+            border: none; padding: 12px 32px; border-radius: 28px;
+            font-size: 15px; font-weight: 700; cursor: pointer;
+            transition: all 0.3s; text-decoration: none;
+            display: inline-flex; align-items: center; gap: 8px;
+            box-shadow: 0 4px 16px rgba(233,30,99,0.25);
+            font-family: var(--font-he);
+            position: relative; overflow: hidden;
         }
-        nav.scrolled .nav-cta { background: var(--pink); color: var(--white); border-color: var(--pink); }
-        .nav-cta:hover { background: var(--pink); color: var(--white); border-color: var(--pink); transform: translateY(-1px); }
+        .nav-cta::before {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(
+                105deg,
+                transparent 30%,
+                rgba(255,255,255,0.3) 45%,
+                rgba(255,255,255,0.5) 50%,
+                rgba(255,255,255,0.3) 55%,
+                transparent 70%
+            );
+            background-size: 300% 100%;
+            animation: btnShine 3s ease-in-out infinite;
+        }
+        @keyframes btnShine {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        .nav-cta:hover {
+            background: var(--primary-dark); transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(233,30,99,0.35);
+        }
+        .nav-left-group {
+            display: flex; align-items: center; gap: 12px;
+        }
+        .lang-btn {
+            background: transparent; border: 1.5px solid rgba(0,0,0,0.12);
+            color: var(--text); padding: 6px 14px; border-radius: 20px;
+            font-size: 13px; font-weight: 500; cursor: pointer;
+            transition: all 0.3s; font-family: var(--font-en);
+        }
+        .lang-btn:hover {
+            background: var(--primary-light); border-color: var(--primary);
+            color: var(--primary);
+        }
 
         /* ===== HERO ===== */
         .hero {
-            min-height: 100vh; display: flex; align-items: center; justify-content: center;
-            text-align: center; padding: 120px 20px 80px; position: relative; overflow: hidden;
+            min-height: 100vh; display: flex; align-items: center;
+            padding: 100px 60px 60px;
+            background: linear-gradient(175deg, var(--white) 0%, var(--bg) 30%, var(--bg-soft) 70%, #FFE8EE 100%);
+            position: relative; overflow: hidden;
         }
-        .hero-bg {
-            position: absolute; inset: 0; z-index: 0;
-            background: url('assets/hero-bg.jpg') center/cover no-repeat;
-            transform: scale(1.05);
-            transition: transform 0.1s linear;
+        .hero-container {
+            max-width: 1200px; margin: 0 auto; width: 100%;
+            display: flex; align-items: center; gap: 60px;
+            justify-content: center;
+            padding-left: 40px;
         }
-        .hero-overlay {
-            position: absolute; inset: 0; z-index: 1;
-            background: linear-gradient(180deg,
-                rgba(0,0,0,0.3) 0%,
-                rgba(0,0,0,0.15) 40%,
-                rgba(212,149,152,0.3) 70%,
-                rgba(248,242,234,1) 100%
-            );
-        }
-        .hero-content { position: relative; z-index: 2; max-width: 700px; }
-        .hero-badge {
-            display: inline-block; background: rgba(255,255,255,0.2); backdrop-filter: blur(12px);
-            color: var(--white); padding: 8px 20px; border-radius: 24px;
-            font-size: 13px; font-weight: 500; margin-bottom: 24px;
-            border: 1px solid rgba(255,255,255,0.3);
-        }
-        .hero h1 {
-            font-size: clamp(36px, 6vw, 58px); font-weight: 800; line-height: 1.15;
-            margin-bottom: 20px; color: var(--white);
-            text-shadow: 0 2px 30px rgba(0,0,0,0.2);
-        }
-        .hero h1 .pink { color: var(--pink-light); }
-        .hero p {
-            font-size: 18px; color: rgba(255,255,255,0.9); line-height: 1.7;
-            margin-bottom: 36px; text-shadow: 0 1px 10px rgba(0,0,0,0.15);
-        }
-        .hero-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 
+        /* Right side - Text (RTL start) */
+        .hero-text {
+            flex: 1; max-width: 560px;
+        }
+        .hero-text h1 {
+            font-size: clamp(42px, 5.5vw, 68px); font-weight: 900;
+            line-height: 1.15; color: var(--dark); margin-bottom: 18px;
+        }
+        .hero-text h1 .highlight {
+            font-size: 1.2em;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 40%, var(--primary) 60%, #FF8FB1 80%, var(--primary) 100%);
+            background-size: 300% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: textShine 4s ease-in-out infinite;
+        }
+        @keyframes textShine {
+            0% { background-position: 100% 0; }
+            50% { background-position: 0% 0; }
+            100% { background-position: 100% 0; }
+        }
+        .hero-text .subtitle {
+            font-size: 17px; color: var(--muted); line-height: 1.7;
+            margin-bottom: 30px; font-weight: 400;
+        }
+
+        .hero-download-row {
+            display: flex; gap: 14px; margin-bottom: 20px; flex-wrap: wrap;
+        }
+        .hero-download-btn {
+            display: inline-flex; align-items: center; gap: 12px;
+            background: #000; color: #fff; text-decoration: none;
+            padding: 14px 32px; border-radius: 14px; font-size: 15px;
+            font-weight: 600; transition: all 0.3s; position: relative;
+        }
+        .hero-download-btn:hover {
+            transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+        }
+        .gplay-btn {
+            background: #9E9E9E; cursor: default; pointer-events: none;
+            opacity: 0.7; overflow: visible;
+        }
+        .gplay-btn:hover { transform: none; box-shadow: none; }
+        .soon-ribbon {
+            position: absolute; top: -8px; left: -8px;
+            background: var(--primary); color: var(--white);
+            font-size: 11px; font-weight: 800; padding: 3px 12px;
+            border-radius: 8px; transform: rotate(-12deg);
+            box-shadow: 0 2px 8px rgba(233,30,99,0.3);
+            pointer-events: none;
+        }
+        .hero-download-btn svg { width: 24px; height: 24px; }
+        .hero-download-btn .btn-text-group { display: flex; flex-direction: column; align-items: flex-start; }
+        .hero-download-btn .btn-small { font-size: 10px; font-weight: 400; opacity: 0.8; }
+        .hero-download-btn .btn-big { font-size: 16px; font-weight: 700; line-height: 1.1; }
+
+        .hero-perk-line {
+            display: flex; align-items: center; gap: 8px;
+            font-size: 14px; color: var(--text); font-weight: 400;
+            flex-wrap: wrap;
+        }
+        .hero-perk-line .check-icon {
+            width: 20px; height: 20px; border-radius: 50%;
+            background: #E8F5E9; display: inline-flex; align-items: center;
+            justify-content: center; flex-shrink: 0;
+        }
+        .hero-perk-line .check-icon svg { width: 12px; height: 12px; color: #4CAF50; }
+
+        /* ===== WHITE IPHONE ===== */
+        .hero-phone {
+            flex: 0 0 auto; position: relative;
+        }
+        .phone-wrapper {
+            position: relative; width: 280px; height: 575px;
+            animation: phoneTilt 6s ease-in-out infinite;
+        }
+        @keyframes phoneTilt {
+            0%, 100% { transform: rotate(-3deg) translateY(0); }
+            50% { transform: rotate(3deg) translateY(-10px); }
+        }
+        /* Main phone body - white */
+        .phone-body {
+            position: absolute; inset: 0;
+            background: linear-gradient(145deg, #F8F8F8 0%, #E8E8E8 50%, #F0F0F0 100%);
+            border-radius: 48px;
+            box-shadow:
+                0 30px 80px rgba(0,0,0,0.12),
+                0 0 0 1px rgba(0,0,0,0.08),
+                inset 0 0 0 1px rgba(255,255,255,0.8);
+        }
+        /* Side buttons - right side (RTL: these appear on left visually) */
+        .phone-btn {
+            position: absolute; background: linear-gradient(180deg, #E0E0E0, #C8C8C8);
+            border-radius: 2px; z-index: 5;
+        }
+        .phone-btn.btn-power {
+            width: 3px; height: 48px; left: -3px; top: 140px;
+            border-radius: 3px 0 0 3px;
+        }
+        .phone-btn.btn-vol-up {
+            width: 3px; height: 36px; right: -3px; top: 120px;
+            border-radius: 0 3px 3px 0;
+        }
+        .phone-btn.btn-vol-down {
+            width: 3px; height: 36px; right: -3px; top: 170px;
+            border-radius: 0 3px 3px 0;
+        }
+        .phone-btn.btn-silent {
+            width: 3px; height: 18px; right: -3px; top: 90px;
+            border-radius: 0 3px 3px 0;
+        }
+        /* Dynamic Island */
+        .phone-island {
+            position: absolute; top: 14px;
+            left: 50%; transform: translateX(-50%);
+            width: 100px; height: 28px;
+            background: #1a1a1a; border-radius: 20px; z-index: 12;
+        }
+        /* Home indicator */
+        .phone-home {
+            position: absolute; bottom: 12px;
+            left: 50%; transform: translateX(-50%);
+            width: 100px; height: 4px;
+            background: rgba(0,0,0,0.15); border-radius: 4px; z-index: 12;
+        }
+        /* Screen */
+        .phone-screen {
+            position: absolute;
+            top: 8px; left: 8px; right: 8px; bottom: 8px;
+            border-radius: 42px; overflow: hidden;
+            cursor: none; background: #000;
+        }
+        .phone-screen .img-before,
+        .phone-screen .img-after {
+            position: absolute; inset: 0;
+            width: 100%; height: 100%; object-fit: cover;
+        }
+        .phone-screen .img-before { z-index: 1; }
+        .phone-screen .img-after {
+            z-index: 2;
+            clip-path: circle(0% at 50% 50%);
+        }
+
+        /* Shimmer disabled on phone */
+
+        /* Custom cursor */
+        .reveal-cursor {
+            position: fixed; z-index: 9999; pointer-events: none;
+            width: 120px; height: 120px; border-radius: 50%;
+            border: 2px solid rgba(233,30,99,0.4);
+            background: rgba(233,30,99,0.06);
+            transform: translate(-50%, -50%);
+            opacity: 0; transition: opacity 0.3s;
+        }
+        .reveal-cursor.active { opacity: 1; }
+        .reveal-cursor::after {
+            content: '+'; font-weight: 300; color: var(--primary); position: absolute;
+            top: 50%; left: 50%; transform: translate(-50%, -50%);
+            font-size: 22px;
+        }
+
+        /* Floating bubbles */
+        .phone-bubble {
+            position: absolute;
+            background: var(--white); border-radius: 16px;
+            padding: 10px 16px; box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            display: flex; align-items: center; gap: 8px;
+            font-size: 12px; font-weight: 500; z-index: 15;
+            white-space: nowrap;
+        }
+        .phone-bubble .bubble-icon {
+            width: 28px; height: 28px; border-radius: 50%;
+            display: flex; align-items: center;
+            justify-content: center; flex-shrink: 0;
+        }
+        .bubble-1 {
+            top: 22%; left: -60px;
+            animation: floatBubble1 6s ease-in-out infinite;
+        }
+        .bubble-1 .bubble-icon { background: #E8F5E9; }
+        .bubble-2 {
+            top: 62%; right: -50px; left: auto;
+            animation: floatBubble2 7s ease-in-out infinite 1s;
+        }
+        .bubble-2 .bubble-icon { background: var(--primary-light); }
+        .bubble-3 {
+            bottom: 12%; left: -50px;
+            animation: floatBubble3 5.5s ease-in-out infinite 0.5s;
+        }
+        .bubble-3 .bubble-icon { background: var(--primary-light); }
+        @keyframes floatBubble1 {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes floatBubble2 {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            50% { transform: translateY(-8px) translateX(4px); }
+        }
+        .phone-hint-text {
+            text-align: center; font-size: 13px; color: var(--accent);
+            font-weight: 500; font-style: italic; margin-top: 16px;
+            padding-right: 30px;
+        }
+        @keyframes floatBubble3 {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        /* Sparkles */
+        .sparkle {
+            position: absolute; z-index: 12; pointer-events: none;
+            width: 6px; height: 6px; border-radius: 50%;
+            background: rgba(255,255,255,0.9);
+            box-shadow: 0 0 6px rgba(233,30,99,0.5), 0 0 12px rgba(255,107,157,0.3);
+            animation: sparkleFloat 3s ease-in-out infinite;
+        }
+        .sparkle:nth-child(1) { top: 15%; right: 20%; animation-delay: 0s; }
+        .sparkle:nth-child(2) { top: 40%; right: 10%; animation-delay: 1s; animation-duration: 3.5s; }
+        .sparkle:nth-child(3) { top: 65%; right: 30%; animation-delay: 2s; animation-duration: 2.8s; }
+        .sparkle:nth-child(4) { top: 80%; right: 15%; animation-delay: 0.5s; animation-duration: 4s; }
+        @keyframes sparkleFloat {
+            0%, 100% { opacity: 0; transform: scale(0.5) translateY(0); }
+            50% { opacity: 1; transform: scale(1.2) translateY(-8px); }
+        }
+
+        /* ===== SHARED ===== */
+        .section-title { text-align: center; margin-bottom: 60px; }
+        .section-title h2 { font-size: 38px; font-weight: 900; margin-bottom: 14px; color: var(--dark); }
+        .section-title h2.big-headline {
+            font-size: clamp(42px, 6vw, 64px); line-height: 1.15;
+            text-transform: uppercase; letter-spacing: 2px;
+        }
+        .color-polished { color: var(--primary); }
+        .color-accent { color: var(--accent); }
+        .section-title p { color: var(--muted); font-size: 16px; line-height: 1.7; max-width: 600px; margin: 0 auto; }
         .btn-primary {
-            background: var(--pink); color: var(--white); border: none;
-            padding: 16px 36px; border-radius: 30px; font-size: 16px; font-weight: 600;
+            background: var(--primary); color: var(--white); border: none;
+            padding: 16px 36px; border-radius: 30px; font-size: 16px; font-weight: 700;
             cursor: pointer; transition: all 0.3s; text-decoration: none;
             display: inline-flex; align-items: center; gap: 8px;
+            font-family: var(--font-he);
         }
-        .btn-primary:hover { background: var(--pink-dark); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(229,173,175,0.4); }
-        .btn-secondary {
-            background: rgba(255,255,255,0.15); backdrop-filter: blur(8px);
-            color: var(--white); border: 1.5px solid rgba(255,255,255,0.4);
-            padding: 16px 36px; border-radius: 30px; font-size: 16px; font-weight: 500;
-            cursor: pointer; transition: all 0.3s; text-decoration: none;
-        }
-        .btn-secondary:hover { background: rgba(255,255,255,0.3); }
+        .btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(233,30,99,0.3); }
 
-        /* ===== Scroll reveal ===== */
-        .reveal {
-            opacity: 0; transform: translateY(40px);
-            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        /* ===== S2: WHAT IS POLISHED ===== */
+        .what-is {
+            padding: 100px 20px; background: var(--white);
         }
+        .what-is-inner {
+            max-width: 1100px; margin: 0 auto;
+        }
+        .what-is-cards {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
+            margin-top: 48px;
+        }
+        .what-card {
+            background: var(--bg); border: 1px solid rgba(0,0,0,0.04);
+            border-radius: 24px; padding: 44px 36px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .what-card:hover { transform: translateY(-6px); box-shadow: 0 16px 50px rgba(233,30,99,0.08); }
+        .what-card h3 { font-size: 22px; font-weight: 800; margin-bottom: 12px; color: var(--dark); }
+        .what-card p { color: var(--muted); font-size: 15px; line-height: 1.7; }
+        .what-card .highlight-tag {
+            display: inline-block; background: #E8F5E9; color: #2E7D32;
+            font-size: 13px; font-weight: 700; padding: 4px 14px;
+            border-radius: 20px; margin-top: 16px;
+        }
+
+        /* ===== S3: HOW IT WORKS ===== */
+        .how-section {
+            padding: 100px 20px;
+            background: linear-gradient(170deg, var(--white) 0%, var(--bg-soft) 100%);
+        }
+        .how-steps {
+            display: flex; gap: 24px; max-width: 1000px; margin: 0 auto 40px;
+            justify-content: center;
+        }
+        .how-step {
+            flex: 1; max-width: 300px; text-align: center;
+            background: var(--white); border: 1px solid rgba(0,0,0,0.05);
+            border-radius: 24px; padding: 40px 28px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+        }
+        .how-step:hover { transform: translateY(-8px); box-shadow: 0 16px 50px rgba(233,30,99,0.1); }
+        .how-step .step-num {
+            width: 48px; height: 48px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--primary));
+            color: var(--white); font-size: 20px; font-weight: 800;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 16px;
+            box-shadow: 0 4px 16px rgba(233,30,99,0.25);
+        }
+        .how-step .step-icon { font-size: 40px; margin-bottom: 14px; }
+        .how-step h3 { font-size: 20px; font-weight: 800; margin-bottom: 10px; color: var(--dark); }
+        .how-step p { color: var(--muted); font-size: 14px; line-height: 1.6; }
+        .how-arrow {
+            display: flex; align-items: center; color: var(--primary); font-size: 28px;
+            padding-top: 60px; opacity: 0.4;
+        }
+        .how-extra {
+            text-align: center; max-width: 600px; margin: 0 auto;
+            font-size: 15px; color: var(--muted); line-height: 1.7;
+        }
+        .how-extra a { color: var(--primary); font-weight: 700; text-decoration: none; }
+        .how-extra a:hover { text-decoration: underline; }
+
+        /* ===== S4: FEATURES ===== */
+        .features-section {
+            padding: 100px 20px; background: var(--white);
+        }
+        .features-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px; max-width: 1100px; margin: 0 auto;
+        }
+        .feat-card {
+            background: var(--bg); border: 1px solid rgba(0,0,0,0.04);
+            border-radius: 20px; padding: 36px 30px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative; overflow: hidden;
+        }
+        .feat-card:hover { transform: translateY(-6px); box-shadow: 0 16px 50px rgba(233,30,99,0.08); }
+        .feat-card .feat-icon { font-size: 36px; margin-bottom: 16px; display: block; }
+        .feat-card h3 { font-size: 18px; font-weight: 800; margin-bottom: 10px; color: var(--dark); }
+        .feat-card p { color: var(--muted); font-size: 14px; line-height: 1.7; }
+        .feat-card .feat-tag {
+            display: inline-block; font-size: 12px; font-weight: 700;
+            padding: 3px 12px; border-radius: 16px; margin-top: 14px;
+        }
+        .feat-tag.free { background: #E8F5E9; color: #2E7D32; }
+        .feat-tag.soon { background: #FFF3E0; color: #E65100; }
+        .feat-tag.premium { background: var(--primary-light); color: var(--primary-dark); }
+        /* wide card spans 2 cols */
+        .feat-card.wide { grid-column: span 2; }
+
+        /* ===== S5: WHY US ===== */
+        .why-us {
+            padding: 100px 20px; position: relative; overflow: hidden;
+            background: linear-gradient(135deg, var(--dark) 0%, #16213E 50%, var(--dark) 100%);
+            color: var(--white);
+        }
+        .why-us .section-title h2 { color: var(--white); }
+        .why-us .section-title p { color: rgba(255,255,255,0.6); }
+        .why-inner {
+            max-width: 900px; margin: 0 auto;
+        }
+        .why-blocks {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
+        }
+        .why-block {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 24px; padding: 40px 32px;
+            transition: all 0.4s;
+        }
+        .why-block:hover { background: rgba(255,255,255,0.08); transform: translateY(-4px); }
+        .why-block h3 { font-size: 20px; font-weight: 800; margin-bottom: 12px; }
+        .why-block p { color: rgba(255,255,255,0.7); font-size: 15px; line-height: 1.8; }
+        .why-block .accent-text { color: var(--accent); font-weight: 700; }
+
+        /* Mobile adjustments for new sections */
+        @media (max-width: 768px) {
+            .what-is-cards { grid-template-columns: 1fr; }
+            .how-steps { flex-direction: column; align-items: center; }
+            .how-arrow { display: none; }
+            .features-grid { grid-template-columns: 1fr; }
+            .feat-card.wide { grid-column: span 1; }
+            .why-blocks { grid-template-columns: 1fr; }
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            padding: 40px 20px; text-align: center;
+            background: linear-gradient(180deg, var(--dark) 0%, #12121F 100%);
+            color: rgba(255,255,255,0.5); font-size: 13px;
+        }
+        footer a { color: var(--accent); text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
+        footer .footer-links { margin-bottom: 12px; display: flex; gap: 20px; justify-content: center; }
+
+        /* ===== SCROLL REVEAL ===== */
+        .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
         .reveal.visible { opacity: 1; transform: translateY(0); }
-        .reveal-left { opacity: 0; transform: translateX(-50px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
         .reveal-right { opacity: 0; transform: translateX(50px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
-        body.en .reveal-left { transform: translateX(50px); }
-        body.en .reveal-right { transform: translateX(-50px); }
-        .reveal-left.visible, .reveal-right.visible { opacity: 1; transform: translateX(0); }
+        .reveal-right.visible { opacity: 1; transform: translateX(0); }
         .reveal-scale { opacity: 0; transform: scale(0.9); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
         .reveal-scale.visible { opacity: 1; transform: scale(1); }
-
-        /* Stagger children */
         .stagger > *:nth-child(1) { transition-delay: 0.05s; }
         .stagger > *:nth-child(2) { transition-delay: 0.12s; }
         .stagger > *:nth-child(3) { transition-delay: 0.19s; }
@@ -125,346 +517,310 @@
         .stagger > *:nth-child(5) { transition-delay: 0.33s; }
         .stagger > *:nth-child(6) { transition-delay: 0.40s; }
 
-        /* ===== FEATURES ===== */
-        .features {
-            padding: 100px 20px; max-width: 1100px; margin: 0 auto; position: relative;
-            background:
-                radial-gradient(ellipse 80% 50% at 20% 20%, rgba(229,173,175,0.08) 0%, transparent 50%),
-                radial-gradient(ellipse 60% 40% at 80% 70%, rgba(212,149,152,0.06) 0%, transparent 50%);
+        /* ===== MOBILE ===== */
+        @media (max-width: 1024px) {
+            .hero { padding: 100px 32px 60px; }
+            .hero-container { gap: 30px; }
+            .hero-phone { margin-left: 20px; }
+            .phone-wrapper { width: 250px; height: 512px; }
         }
-        .features::before {
-            content: ''; position: absolute; inset: 0;
-            background-image: radial-gradient(var(--pink) 0.5px, transparent 0.5px);
-            background-size: 28px 28px; opacity: 0.03;
-        }
-        .section-title { text-align: center; margin-bottom: 60px; position: relative; z-index: 1; }
-        .section-title h2 { font-size: 34px; font-weight: 700; margin-bottom: 12px; }
-        .section-title p { color: var(--warm-gray); font-size: 16px; }
-
-        .features-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px; position: relative; z-index: 1;
-        }
-        .feature-card {
-            background: rgba(255,255,255,0.7); backdrop-filter: blur(12px);
-            border: 1px solid rgba(229,173,175,0.1);
-            border-radius: 20px; padding: 36px 28px; text-align: center;
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .feature-card:hover { transform: translateY(-8px); box-shadow: 0 16px 50px rgba(212,149,152,0.15); border-color: var(--pink-light); }
-        .feature-icon {
-            width: 64px; height: 64px;
-            background: linear-gradient(135deg, var(--pink-light), var(--pink-dark));
-            border-radius: 18px; display: flex; align-items: center;
-            justify-content: center; margin: 0 auto 20px; font-size: 28px;
-            box-shadow: 0 6px 20px rgba(212,149,152,0.2);
-            transition: transform 0.3s;
-        }
-        .feature-card:hover .feature-icon { transform: scale(1.1) rotate(-5deg); }
-        .feature-card h3 { font-size: 18px; font-weight: 600; margin-bottom: 10px; }
-        .feature-card p { color: var(--warm-gray); font-size: 14px; line-height: 1.6; }
-
-        /* ===== HOW IT WORKS ===== */
-        .how-it-works {
-            padding: 100px 20px; position: relative; overflow: hidden;
-            background:
-                linear-gradient(160deg, #FFFFFF 0%, #FFF8F5 25%, #FDF0ED 50%, #FAE8E4 75%, #F8F2EA 100%);
-        }
-        .how-it-works::before {
-            content: ''; position: absolute; inset: 0;
-            background:
-                radial-gradient(circle at 15% 30%, rgba(229,173,175,0.1) 0%, transparent 40%),
-                radial-gradient(circle at 85% 60%, rgba(245,213,214,0.12) 0%, transparent 35%),
-                radial-gradient(circle at 50% 90%, rgba(212,149,152,0.08) 0%, transparent 40%);
-            pointer-events: none;
-        }
-        /* Floating shapes */
-        .floating-shape {
-            position: absolute; border-radius: 50%; pointer-events: none; opacity: 0.06;
-        }
-        .fs-1 { width: 300px; height: 300px; top: 5%; right: -5%; background: var(--pink); animation: floatSlow 20s ease-in-out infinite; }
-        .fs-2 { width: 200px; height: 200px; bottom: 10%; left: -3%; background: var(--pink-dark); animation: floatSlow 16s ease-in-out infinite reverse; }
-        .fs-3 { width: 150px; height: 150px; top: 40%; left: 20%; background: var(--pink-light); animation: floatSlow 14s ease-in-out infinite 3s; }
-        @keyframes floatSlow {
-            0%, 100% { transform: translate(0,0) scale(1); }
-            33% { transform: translate(20px, -30px) scale(1.05); }
-            66% { transform: translate(-15px, 20px) scale(0.95); }
-        }
-
-        .steps { max-width: 700px; margin: 0 auto; display: flex; flex-direction: column; gap: 50px; position: relative; z-index: 1; }
-        /* Vertical connector line */
-        .steps::before {
-            content: ''; position: absolute; top: 28px; bottom: 28px;
-            right: 27px; width: 2px;
-            background: linear-gradient(180deg, var(--pink-light), var(--pink-dark), var(--pink-light));
-            opacity: 0.3;
-        }
-        body.en .steps::before { right: auto; left: 27px; }
-
-        .step { display: flex; align-items: flex-start; gap: 28px; position: relative; }
-        .step-number {
-            min-width: 56px; height: 56px;
-            background: linear-gradient(135deg, var(--pink), var(--pink-dark));
-            border-radius: 50%; display: flex; align-items: center;
-            justify-content: center; color: var(--white); font-size: 20px; font-weight: 700;
-            box-shadow: 0 6px 25px rgba(212,149,152,0.3);
-            position: relative; z-index: 2;
-        }
-        .step-content h3 { font-size: 20px; font-weight: 600; margin-bottom: 8px; margin-top: 4px; }
-        .step-content p { color: var(--warm-gray); font-size: 15px; line-height: 1.6; }
-
-        /* ===== PRICING ===== */
-        .pricing {
-            padding: 100px 20px; text-align: center; position: relative;
-            background:
-                radial-gradient(ellipse 60% 40% at 50% 0%, rgba(245,213,214,0.5) 0%, transparent 60%),
-                radial-gradient(ellipse 40% 30% at 10% 80%, rgba(229,173,175,0.12) 0%, transparent 50%),
-                radial-gradient(ellipse 40% 30% at 90% 80%, rgba(212,149,152,0.1) 0%, transparent 50%),
-                var(--cream);
-        }
-        .pricing-card {
-            max-width: 420px; margin: 0 auto;
-            background: rgba(255,255,255,0.85); backdrop-filter: blur(16px);
-            border: 1px solid rgba(229,173,175,0.15);
-            border-radius: 24px; padding: 48px 36px; position: relative; overflow: hidden;
-            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .pricing-card:hover { box-shadow: 0 20px 60px rgba(212,149,152,0.15); }
-        .pricing-card::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
-            background: linear-gradient(90deg, var(--pink), var(--pink-dark), var(--pink));
-            background-size: 200% 100%; animation: shimmer 3s linear infinite;
-        }
-        @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
-        .pricing-badge { display: inline-block; background: var(--pink); color: var(--white); padding: 4px 14px; border-radius: 12px; font-size: 12px; font-weight: 600; margin-bottom: 20px; }
-        .pricing-price { font-size: 52px; font-weight: 800; color: var(--charcoal); margin-bottom: 4px; }
-        .pricing-price .currency { font-size: 22px; font-weight: 400; }
-        .pricing-price .period { font-size: 16px; font-weight: 400; color: var(--warm-gray); }
-        .pricing-subtitle { color: var(--warm-gray); font-size: 14px; margin-bottom: 28px; }
-        .pricing-features { list-style: none; text-align: start; margin-bottom: 32px; }
-        .pricing-features li { padding: 10px 0; font-size: 14px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid rgba(0,0,0,0.04); }
-        .pricing-features li::before { content: '\2713'; color: var(--pink); font-weight: 700; font-size: 16px; }
-
-        /* ===== MANICURISTS ===== */
-        .manicurists {
-            padding: 100px 20px; text-align: center; color: var(--white);
-            position: relative; overflow: hidden;
-            background: linear-gradient(135deg, #D49598 0%, #C4797D 35%, #B76E72 65%, #D49598 100%);
-            background-size: 200% 200%; animation: gradientShift 8s ease-in-out infinite;
-        }
-        @keyframes gradientShift { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
-        .manicurists::before {
-            content: ''; position: absolute; inset: 0;
-            background:
-                radial-gradient(circle at 20% 20%, rgba(255,255,255,0.1) 0%, transparent 40%),
-                radial-gradient(circle at 80% 80%, rgba(255,255,255,0.06) 0%, transparent 30%);
-        }
-        .manicurists h2 { font-size: 34px; font-weight: 700; margin-bottom: 16px; position: relative; }
-        .manicurists > p { font-size: 16px; opacity: 0.9; max-width: 600px; margin: 0 auto 40px; line-height: 1.7; position: relative; }
-        .mani-features {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px; max-width: 900px; margin: 0 auto 40px; position: relative;
-        }
-        .mani-card {
-            background: rgba(255,255,255,0.1); backdrop-filter: blur(12px);
-            border: 1px solid rgba(255,255,255,0.15);
-            border-radius: 16px; padding: 28px 20px; text-align: center;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .mani-card:hover { background: rgba(255,255,255,0.22); transform: translateY(-6px); }
-        .mani-card .icon { font-size: 32px; margin-bottom: 12px; }
-        .mani-card h3 { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
-        .mani-card p { font-size: 13px; opacity: 0.85; line-height: 1.5; }
-
-        /* ===== FOOTER ===== */
-        footer {
-            padding: 40px 20px; text-align: center;
-            background: linear-gradient(180deg, #2D2D2D 0%, #1A1A1A 100%);
-            color: rgba(255,255,255,0.5); font-size: 13px;
-        }
-        footer a { color: var(--pink); text-decoration: none; }
-        footer a:hover { text-decoration: underline; }
-        footer .footer-links { margin-bottom: 12px; display: flex; gap: 20px; justify-content: center; }
-
-        /* ===== Section dividers ===== */
-        .section-divider {
-            height: 80px; position: relative; margin-top: -1px;
-        }
-        .section-divider svg { position: absolute; bottom: 0; width: 100%; height: 80px; }
-
-        /* Animations */
-        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .hero-badge { opacity: 0; animation: fadeUp 0.8s ease forwards 0.3s; }
-        .hero h1 { opacity: 0; animation: fadeUp 0.8s ease forwards 0.5s; }
-        .hero p { opacity: 0; animation: fadeUp 0.8s ease forwards 0.7s; }
-        .hero-buttons { opacity: 0; animation: fadeUp 0.8s ease forwards 0.9s; }
-
-        /* Smooth scroll indicator */
-        .scroll-indicator {
-            position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 3;
-            display: flex; flex-direction: column; align-items: center; gap: 6px;
-            animation: fadeUp 1s ease forwards 1.4s; opacity: 0;
-        }
-        .scroll-indicator span { font-size: 11px; color: rgba(255,255,255,0.6); }
-        .scroll-arrow {
-            width: 20px; height: 20px; border-left: 2px solid rgba(255,255,255,0.5);
-            border-bottom: 2px solid rgba(255,255,255,0.5);
-            transform: rotate(-45deg); animation: scrollBounce 2s infinite;
-        }
-        @keyframes scrollBounce { 0%, 100% { transform: rotate(-45deg) translateY(0); } 50% { transform: rotate(-45deg) translateY(6px); } }
-
-        /* Mobile */
         @media (max-width: 768px) {
-            nav { padding: 12px 20px; }
-            .nav-logo span { font-size: 18px; letter-spacing: 2px; }
-            .nav-cta { padding: 8px 20px; font-size: 13px; }
-            .lang-toggle { top: auto; bottom: 20px; left: 50%; transform: translateX(-50%); }
-            body.en .lang-toggle { right: auto; left: 50%; }
-            .hero h1 { font-size: 32px; }
-            .hero p { font-size: 15px; }
+            nav { padding: 0 20px; height: 60px; }
+            .nav-center { display: none; }
+            .hero { padding: 80px 20px 40px; }
+            .hero-container { flex-direction: column-reverse; text-align: center; }
+            .hero-text { max-width: 100%; }
+            .hero-text h1 { font-size: 30px; }
+            .hero-perk-line { justify-content: center; }
+            .hero-phone { margin-left: 0; }
+            .phone-wrapper { width: 230px; height: 470px; }
+            .phone-bubble { display: none; }
+            .hero-download-row { justify-content: center; }
+            .reveal-cursor { display: none; }
+            .hero-download-btn { margin: 0 auto 20px; }
             .step { flex-direction: column; text-align: center; }
             .steps::before { display: none; }
             .pricing-card { padding: 36px 24px; }
             .pricing-price { font-size: 42px; }
-            .scroll-indicator { display: none; }
         }
     </style>
 </head>
 <body>
 
-    <button class="lang-toggle" onclick="toggleLanguage()">EN</button>
-
-    <nav id="navbar">
-        <a href="#" class="nav-logo"><img src="assets/logo.png" alt="Polished"><span>POLISHED</span></a>
-        <a href="#pricing" class="nav-cta he-text">הורידי עכשיו</a>
-        <a href="#pricing" class="nav-cta en-text" style="display:none">Download Now</a>
-    </nav>
-
-    <!-- Hero with background image -->
-    <section class="hero">
-        <div class="hero-bg" id="heroBg"></div>
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <div class="hero-badge"><span class="he-text">חדש! נסיית לק בבינה מלאכותית</span><span class="en-text" style="display:none">New! AI-Powered Nail Try-On</span></div>
-            <h1><span class="he-text">נסי את <span class="pink">הלק המושלם</span><br>לפני שמתחילים</span><span class="en-text" style="display:none">Try Your <span class="pink">Perfect Polish</span><br>Before You Commit</span></h1>
-            <p><span class="he-text">צלמי את היד שלך, בחרי עיצוב או צבע, וראי בדיוק איך הציפורניים שלך ייראו. בלי ניחושים, בלי חרטות.</span><span class="en-text" style="display:none">Snap your hand, choose a design or color, and see exactly how your nails will look. No guessing, no regrets.</span></p>
-            <div class="hero-buttons">
-                <a href="#pricing" class="btn-primary"><span class="he-text">התחילי בחינם</span><span class="en-text" style="display:none">Start Free</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-                <a href="#features" class="btn-secondary"><span class="he-text">גלי את התכונות</span><span class="en-text" style="display:none">See Features</span></a>
+    <!-- ===== NAV ===== -->
+    <nav>
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">
+                <img src="assets/logo.png" alt="Polished">
+                <span>POLISHED</span>
+            </a>
+            <div class="nav-center">
+                <a href="#about"><span class="he-text">מה זה Polished?</span><span class="en-text" style="display:none">What's Polished?</span></a>
+                <a href="#how"><span class="he-text">איך זה עובד?</span><span class="en-text" style="display:none">How it works?</span></a>
+                <a href="#for-who"><span class="he-text">למי זה?</span><span class="en-text" style="display:none">For who?</span></a>
+                <a href="#why-join"><span class="he-text">למה להצטרף?</span><span class="en-text" style="display:none">Why join?</span></a>
+            </div>
+            <div class="nav-left-group">
+                <a href="#download" class="nav-cta">
+                    <span class="he-text">הורידי עכשיו</span><span class="en-text" style="display:none">Download Now</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                </a>
+                <button class="lang-btn" onclick="toggleLanguage()">EN</button>
             </div>
         </div>
-        <div class="scroll-indicator"><span class="he-text">גללי למטה</span><span class="en-text" style="display:none">Scroll down</span><div class="scroll-arrow"></div></div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="download">
+        <div class="hero-container">
+            <!-- Text Side -->
+            <div class="hero-text">
+                <h1>
+                    <span class="he-text">נסי את<br><span class="highlight">הלק המושלם</span><br>לפני שבכלל קמת מהמיטה.</span>
+                    <span class="en-text" style="display:none">Try<br><span class="highlight">The Perfect Polish</span><br>Before You Even Left The Bed.</span>
+                </h1>
+                <p class="subtitle"><span class="he-text">אפליקציה שנבנתה על ידי בנות, בשביל בנות!</span><span class="en-text" style="display:none">An app made by girls, for girls!</span></p>
+
+                <div class="hero-download-row">
+                    <a href="https://apps.apple.com" class="hero-download-btn">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                        <div class="btn-text-group">
+                            <span class="btn-small">להורדה מ-</span>
+                            <span class="btn-big">App Store</span>
+                        </div>
+                    </a>
+                    <div class="hero-download-btn gplay-btn">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 2.302L14.5 14.5l2.302-2.302 2.302-2.302-1.406-.388zM5.864 2.658L16.8 8.99l-2.302 2.303L5.864 2.658z"/></svg>
+                        <div class="btn-text-group">
+                            <span class="btn-small">להורדה מ-</span>
+                            <span class="btn-big">Google Play</span>
+                        </div>
+                        <div class="soon-ribbon">בקרוב</div>
+                    </div>
+                </div>
+
+                <div class="hero-perk-line">
+                    <span class="check-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    </span>
+                    <span><span class="he-text">לגמרי בחינם, והדובדבן שבקצפת? — אין פרסומות ואין חברות ממומנות</span><span class="en-text" style="display:none">Completely free, and the cherry on top? — no ads and no sponsored companies</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="display:inline-block;vertical-align:middle;margin-right:2px"><circle cx="8" cy="17" r="4" fill="#E91E63"/><circle cx="15" cy="18" r="3.5" fill="#C2185B"/><path d="M8 13c0-4 3-7 6-9" stroke="#4CAF50" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M15 14.5c0-3.5 1.5-6.5 4-8.5" stroke="#4CAF50" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M12 4c1.5 0 3 .5 3.5 1.5s0 2.5-1 3-2.5 0-3-1 -.5-2.5.5-3.5z" fill="#4CAF50"/></svg></span>
+                </div>
+            </div>
+
+            <!-- Phone Side -->
+            <div class="hero-phone">
+                <div class="phone-wrapper">
+                    <div class="phone-body">
+                        <div class="phone-btn btn-power"></div>
+                        <div class="phone-btn btn-vol-up"></div>
+                        <div class="phone-btn btn-vol-down"></div>
+                        <div class="phone-btn btn-silent"></div>
+                        <div class="phone-island"></div>
+                        <div class="phone-home"></div>
+                    </div>
+                    <div class="phone-screen" id="phoneScreen">
+                        <img class="img-before" src="assets/hand-before.png" alt="Hand with french tips">
+                        <img class="img-after" src="assets/hand-after.png" alt="Hand with nail art" id="imgAfter">
+                        <div class="sparkle"></div>
+                        <div class="sparkle"></div>
+                        <div class="sparkle"></div>
+                        <div class="sparkle"></div>
+                    </div>
+                </div>
+                <div class="phone-bubble bubble-1">
+                    <div class="bubble-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+                    <span class="he-text">הלק מתאים לך מושלם</span><span class="en-text" style="display:none">Perfect match for you</span>
+                </div>
+                <div class="phone-bubble bubble-2">
+                    <div class="bubble-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+                    <span class="he-text">שתפי עם הקהילה</span><span class="en-text" style="display:none">Share with the community</span>
+                </div>
+                <div class="phone-bubble bubble-3">
+                    <div class="bubble-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+                    <span class="he-text">מצאי מניקוריסטית קרובה</span><span class="en-text" style="display:none">Find a manicurist nearby</span>
+                </div>
+            </div>
+            <div class="reveal-cursor" id="revealCursor"></div>
+        </div>
     </section>
 
-    <!-- Features -->
-    <section class="features" id="features">
-        <div class="section-title reveal"><h2><span class="he-text">הכל מה שצריך, באפליקציה אחת</span><span class="en-text" style="display:none">Everything You Need, One App</span></h2><p><span class="he-text">Polished נבנתה על ידי מניקוריסטיות, בשביל מניקוריסטיות ונשים שאוהבות ציפורניים</span><span class="en-text" style="display:none">Built by manicurists, for manicurists and women who love nails</span></p></div>
+    <!-- ===== S2: WHAT IS POLISHED ===== -->
+    <section class="what-is" id="about">
+        <div class="what-is-inner">
+            <div class="section-title reveal">
+                <h2 class="big-headline"><span class="color-polished">Polished</span> <span class="he-text">היא</span><span class="en-text" style="display:none">is a</span> <span class="color-accent"><span class="he-text">קהילה</span><span class="en-text" style="display:none">Community</span></span></h2>
+                <p><span class="he-text">נבנתה על ידי בנות, בשביל בנות ומניקוריסטיות. מקום אחד שמחבר בין השראה, טכנולוגיה, וקהילה אמיתית.</span><span class="en-text" style="display:none">Built by girls, for girls and manicurists. One place that connects inspiration, technology, and a real community.</span></p>
+            </div>
+            <div class="what-is-cards">
+                <div class="what-card reveal">
+                    <h3><span class="he-text">בשביל בנות</span><span class="en-text" style="display:none">For Girls</span></h3>
+                    <p><span class="he-text">כל בחורה יכולה פשוט לבדוק איך לק ייראה על היד שלה לפני שהיא בכלל עושה אותו — בחינם לגמרי! צלמי את היד, בחרי צבע, וראי את התוצאה תוך שניות.</span><span class="en-text" style="display:none">Any girl can simply check how a nail polish would look on her hand before she actually does it — completely free! Snap your hand, pick a color, and see the result in seconds.</span></p>
+                    <span class="highlight-tag"><span class="he-text">חינם לגמרי</span><span class="en-text" style="display:none">Completely Free</span></span>
+                </div>
+                <div class="what-card reveal">
+                    <h3><span class="he-text">בשביל מניקוריסטיות</span><span class="en-text" style="display:none">For Manicurists</span></h3>
+                    <p><span class="he-text">חשיפה חינמית לעסק שלך. אנחנו מפרסמות כל מניקוריסטית בחינם ללא קשר לכמות העוקבים. בואי תגדילי את הלקוחות שלך בלי לשלם שקל.</span><span class="en-text" style="display:none">Free exposure for your business. We promote every manicurist for free regardless of follower count. Grow your client base without paying a dime.</span></p>
+                    <span class="highlight-tag"><span class="he-text">חשיפה חינמית</span><span class="en-text" style="display:none">Free Exposure</span></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== S3: HOW IT WORKS ===== -->
+    <section class="how-section" id="how">
+        <div class="section-title reveal">
+            <h2><span class="he-text">איך זה עובד?</span><span class="en-text" style="display:none">How Does It Work?</span></h2>
+            <p><span class="he-text">שלושה צעדים פשוטים — ובום, ציפורניים מושלמות</span><span class="en-text" style="display:none">Three simple steps — and boom, perfect nails</span></p>
+        </div>
+        <div class="how-steps">
+            <div class="how-step reveal">
+                <div class="step-num">1</div>
+                <div class="step-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="10.5" r="2.5"/><circle cx="8.5" cy="7.5" r="2.5"/><circle cx="6.5" cy="12" r="2.5"/><path d="M12 22c-4.97 0-9-2.69-9-6v-.5c0-1.93 1.57-3.5 3.5-3.5 1.29 0 2.41.7 3.02 1.73A3.98 3.98 0 0 1 12 13c.97 0 1.88.35 2.58.95.46-.32 1.02-.5 1.62-.5 1.65 0 3 1.35 3 3v.5c0 3.31-3.13 6-7.2 6Z"/></svg></div>
+                <h3>PICK</h3>
+                <p><span class="he-text">בחרי צבע שאת אוהבת או תמונת השראה מהגלריה</span><span class="en-text" style="display:none">Pick a color you love or an inspiration from the gallery</span></p>
+            </div>
+            <div class="how-arrow reveal">→</div>
+            <div class="how-step reveal">
+                <div class="step-num">2</div>
+                <div class="step-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
+                <h3>PIC</h3>
+                <p><span class="he-text">צלמי את היד שלך ותני ל-AI לעשות את הקסם</span><span class="en-text" style="display:none">Snap your hand and let the AI do the magic</span></p>
+            </div>
+            <div class="how-arrow reveal">→</div>
+            <div class="how-step reveal">
+                <div class="step-num">3</div>
+                <div class="step-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></div>
+                <h3>SHARE</h3>
+                <p><span class="he-text">אהבת את התוצאה? שתפי עם הקהילה</span><span class="en-text" style="display:none">Love the result? Share it with the community</span></p>
+            </div>
+        </div>
+        <p class="how-extra reveal">
+            <span class="he-text">רוצה שמישהי תעשה לך את זה באמת?<br><a href="#near-me">גלי מניקוריסטיות קרובות אלייך →</a></span>
+            <span class="en-text" style="display:none">Want someone to actually do it for you?<br><a href="#near-me">Discover manicurists near you →</a></span>
+        </p>
+    </section>
+
+    <!-- ===== S4: FEATURES ===== -->
+    <section class="features-section" id="for-who">
+        <div class="section-title reveal">
+            <h2><span class="he-text">מה יש באפליקציה?</span><span class="en-text" style="display:none">What's In The App?</span></h2>
+            <p><span class="he-text">כל מה שצריך בשביל ציפורניים מושלמות — במקום אחד</span><span class="en-text" style="display:none">Everything you need for perfect nails — in one place</span></p>
+        </div>
         <div class="features-grid stagger">
-            <div class="feature-card reveal"><div class="feature-icon">🤳</div><h3><span class="he-text">נסיית לק AI</span><span class="en-text" style="display:none">AI Try-On</span></h3><p><span class="he-text">צלמי את היד, בחרי צבע או העלי תמונת השראה, וראי תוצאה מדויקת תוך שניות</span><span class="en-text" style="display:none">Snap your hand, pick a color or upload inspo, and see realistic results in seconds</span></p></div>
-            <div class="feature-card reveal"><div class="feature-icon">🎨</div><h3><span class="he-text">500+ צבעי לק</span><span class="en-text" style="display:none">500+ Polish Colors</span></h3><p><span class="he-text">גלי צבעים ממותגים אמיתיים — OPI, Essie, China Glaze, Zoya ועוד</span><span class="en-text" style="display:none">Explore real brand colors — OPI, Essie, China Glaze, Zoya & more</span></p></div>
-            <div class="feature-card reveal"><div class="feature-icon">✨</div><h3><span class="he-text">השראה אינסופית</span><span class="en-text" style="display:none">Endless Inspiration</span></h3><p><span class="he-text">אלפי תמונות השראה. מצאי את הלוק המושלם ונסי אותו על הציפורניים שלך</span><span class="en-text" style="display:none">Thousands of inspo photos. Find your perfect look and try it on</span></p></div>
-            <div class="feature-card reveal"><div class="feature-icon">📍</div><h3><span class="he-text">מניקוריסטיות קרוב אלייך</span><span class="en-text" style="display:none">Nail Techs Near You</span></h3><p><span class="he-text">מצאי את המניקוריסטיות הכי טובות באזור שלך וקבעי תור</span><span class="en-text" style="display:none">Find the best nail techs in your area and book appointments</span></p></div>
-            <div class="feature-card reveal"><div class="feature-icon">📅</div><h3><span class="he-text">קביעת תורים</span><span class="en-text" style="display:none">Book Appointments</span></h3><p><span class="he-text">קבעי תור ישירות מהאפליקציה. פשוט ומהיר</span><span class="en-text" style="display:none">Book directly from the app. Simple and fast</span></p></div>
-            <div class="feature-card reveal"><div class="feature-icon">💅</div><h3><span class="he-text">שיתוף ושמירה</span><span class="en-text" style="display:none">Share & Save</span></h3><p><span class="he-text">שמרי, שתפי עם חברות בוואטסאפ, או שלחי למניקוריסטית</span><span class="en-text" style="display:none">Save, share on WhatsApp, or send to your nail tech</span></p></div>
+            <div class="feat-card reveal">
+                <span class="feat-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 0 0-4 4v2H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2h-2V6a4 4 0 0 0-4-4z"/><path d="M12 16v-4"/><circle cx="12" cy="16" r="1"/></svg></span>
+                <h3><span class="he-text">נסיית לק AI</span><span class="en-text" style="display:none">AI Nail Try-On</span></h3>
+                <p><span class="he-text">כל משתמשת יכולה לנסות 3 לקים שונים על היד שלה כל יום, תוך פחות מ-20 שניות. רוצה עוד? תצטרכי לעבור לפרימיום כי זה עולה לנו כסף</span><span class="en-text" style="display:none">Every user can try 3 different nail polishes on their hand every day, in under 20 seconds. Want more? You'll need to go premium because it costs us money</span></p>
+                <span class="feat-tag free"><span class="he-text">3 נסיות חינם ביום</span><span class="en-text" style="display:none">3 Free Tries Daily</span></span>
+            </div>
+            <div class="feat-card reveal">
+                <span class="feat-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
+                <h3><span class="he-text">לוח השראה</span><span class="en-text" style="display:none">Inspiration Board</span></h3>
+                <p><span class="he-text">העלי את עיצובי הציפורניים שלך, מצאי את הרעיון הבא שלך, תני לייק לעבודות של מניקוריסטיות שאת אוהבת</span><span class="en-text" style="display:none">Upload your nail designs, find your next idea, like the work of manicurists you love</span></p>
+                <span class="feat-tag free"><span class="he-text">חינם</span><span class="en-text" style="display:none">Free</span></span>
+            </div>
+            <div class="feat-card reveal">
+                <span class="feat-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span>
+                <h3><span class="he-text">גלריית צבעים</span><span class="en-text" style="display:none">Color Gallery</span></h3>
+                <p><span class="he-text">חקרי מאות סוגי לקים וצבעים — מכל המותגים. מצאי בדיוק את הגוון שחלמת עליו</span><span class="en-text" style="display:none">Explore hundreds of nail polish types and colors — from all brands. Find exactly the shade you dreamed of</span></p>
+                <span class="feat-tag free"><span class="he-text">חינם</span><span class="en-text" style="display:none">Free</span></span>
+            </div>
+            <div class="feat-card reveal">
+                <span class="feat-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+                <h3><span class="he-text">קרוב אלייך</span><span class="en-text" style="display:none">Near You</span></h3>
+                <p><span class="he-text">גלי מניקוריסטיות באזור שלך. כבר יותר מ-200 מניקוריסטיות רשומות באפליקציה</span><span class="en-text" style="display:none">Discover manicurists in your area. Already 200+ manicurists registered in the app</span></p>
+                <span class="feat-tag free"><span class="he-text">חינם</span><span class="en-text" style="display:none">Free</span></span>
+            </div>
+            <div class="feat-card wide reveal">
+                <span class="feat-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>
+                <h3><span class="he-text">מערכת קביעת תורים</span><span class="en-text" style="display:none">Scheduling System</span></h3>
+                <p><span class="he-text">בקרוב. ברגע שנוכיח את עצמנו, נשיק מערכת תורים פנימית לכל המניקוריסטיות האהובות עלייך. אנחנו מתכננות להיות הכי זולות והכי טובות בשוק</span><span class="en-text" style="display:none">Coming soon. Once we prove ourselves, we'll launch an internal scheduling system for all your favorite manicurists. We plan on being the cheapest and best in the market</span></p>
+                <span class="feat-tag soon"><span class="he-text">בקרוב</span><span class="en-text" style="display:none">Soon</span></span>
+            </div>
         </div>
     </section>
 
-    <!-- How it works -->
-    <section class="how-it-works" id="how">
-        <div class="floating-shape fs-1"></div>
-        <div class="floating-shape fs-2"></div>
-        <div class="floating-shape fs-3"></div>
-        <div class="section-title reveal"><h2><span class="he-text">איך זה עובד?</span><span class="en-text" style="display:none">How It Works</span></h2><p><span class="he-text">שלושה צעדים פשוטים לציפורניים מושלמות</span><span class="en-text" style="display:none">Three simple steps to perfect nails</span></p></div>
-        <div class="steps">
-            <div class="step reveal-right"><div class="step-number">1</div><div class="step-content"><h3><span class="he-text">בחרי את הלוק שלך</span><span class="en-text" style="display:none">Choose Your Look</span></h3><p><span class="he-text">בחרי צבע מ-500+ גוונים, העלי תמונת השראה, או גלשי באלפי עיצובים באפליקציה</span><span class="en-text" style="display:none">Pick a color from 500+ shades, upload an inspo photo, or browse thousands of designs</span></p></div></div>
-            <div class="step reveal-right"><div class="step-number">2</div><div class="step-content"><h3><span class="he-text">צלמי את היד שלך</span><span class="en-text" style="display:none">Snap Your Hand</span></h3><p><span class="he-text">צלמי תמונה מהירה של היד שלך או בחרי מהגלריה. ה-AI שלנו יעשה את השאר</span><span class="en-text" style="display:none">Take a quick photo of your hand or pick from gallery. Our AI does the rest</span></p></div></div>
-            <div class="step reveal-right"><div class="step-number">3</div><div class="step-content"><h3><span class="he-text">ראי את התוצאה</span><span class="en-text" style="display:none">See the Result</span></h3><p><span class="he-text">תוך שניות תראי בדיוק איך הציפורניים שלך ייראו. שמרי, שתפי, או קבעי תור!</span><span class="en-text" style="display:none">In seconds, see exactly how your nails will look. Save, share, or book!</span></p></div></div>
+    <!-- ===== S5: WHY US ===== -->
+    <section class="why-us" id="why-join">
+        <div class="why-inner">
+            <div class="section-title reveal">
+                <h2><span class="he-text">למה אנחנו?</span><span class="en-text" style="display:none">Why Us?</span></h2>
+                <p><span class="he-text">כי אנחנו בזה בשביל הקהילה</span><span class="en-text" style="display:none">Because we're in it for the community</span></p>
+            </div>
+            <div class="why-blocks">
+                <div class="why-block reveal">
+                    <h3><span class="he-text">הקהילה שלנו</span><span class="en-text" style="display:none">Our Community</span></h3>
+                    <p><span class="he-text">אנחנו רוצות ליצור קהילה של בנות שמתלהבות מציפורניים, משתפות השראה ועבודות. אנחנו רוצות לאפשר לעסקים קטנים לפרוח, <span class="accent-text">בלי קשר לכמות עוקבים</span>. אנחנו מפרסמות כל מניקוריסטית בחינם</span><span class="en-text" style="display:none">We want to create a community of girls who are passionate about nails, share inspiration and work. We want to help small businesses thrive, <span class="accent-text">regardless of follower count</span>. We promote every manicurist for free</span></p>
+                </div>
+                <div class="why-block reveal">
+                    <h3><span class="he-text">איך אנחנו מתכננות להרוויח?</span><span class="en-text" style="display:none">How Do We Plan To Make Money?</span></h3>
+                    <p><span class="he-text">נשיק מערכת תורים למניקוריסטיות — <span class="accent-text">במחיר הכי נמוך בשוק</span>. ובנות שמכורות לנסות לקים עם AI יוכלו לרכוש מנוי פרימיום שנתי. אנחנו כאן כדי לבנות ולתחזק את הקהילה הזו לטווח ארוך.</span><span class="en-text" style="display:none">We'll launch a scheduling system for manicurists — <span class="accent-text">at the lowest price in the market</span>. And girls who are addicted to trying nails with AI can purchase a yearly premium pass. We're here to build and maintain this community long-term.</span></p>
+                </div>
+            </div>
         </div>
-    </section>
-
-    <!-- Pricing -->
-    <section class="pricing" id="pricing">
-        <div class="section-title reveal"><h2><span class="he-text">תוכנית מנוי</span><span class="en-text" style="display:none">Subscription Plan</span></h2><p><span class="he-text">פחות מכוס קפה ביום — ציפורניים מושלמות בכל פעם</span><span class="en-text" style="display:none">Less than a coffee a day — perfect nails every time</span></p></div>
-        <div class="pricing-card reveal-scale">
-            <div class="pricing-badge"><span class="he-text">הכי פופולרי</span><span class="en-text" style="display:none">Most Popular</span></div>
-            <div class="pricing-price"><span class="he-text"><span class="currency">&#8362;</span>50<span class="period"> / חודש</span></span><span class="en-text" style="display:none"><span class="currency">&#8362;</span>50<span class="period"> / month</span></span></div>
-            <p class="pricing-subtitle"><span class="he-text">פחות מ-2 שקל ליום. פחות ממניקור אחד.</span><span class="en-text" style="display:none">Less than 2 NIS a day. Less than one manicure.</span></p>
-            <ul class="pricing-features">
-                <li><span class="he-text">נסיות לק ללא הגבלה</span><span class="en-text" style="display:none">Unlimited nail try-ons</span></li>
-                <li><span class="he-text">גישה ל-500+ צבעים ומותגים</span><span class="en-text" style="display:none">Access to 500+ colors & brands</span></li>
-                <li><span class="he-text">אלפי תמונות השראה</span><span class="en-text" style="display:none">Thousands of inspiration photos</span></li>
-                <li><span class="he-text">נסיית עיצוב מתמונת השראה</span><span class="en-text" style="display:none">Try designs from inspo photos</span></li>
-                <li><span class="he-text">שמירה ושיתוף ללא הגבלה</span><span class="en-text" style="display:none">Unlimited save & share</span></li>
-                <li><span class="he-text">מציאת מניקוריסטיות וקביעת תורים</span><span class="en-text" style="display:none">Find nail techs & book appointments</span></li>
-                <li><span class="he-text">ניתוח צבעים ומותגים בכל תוצאה</span><span class="en-text" style="display:none">Color & brand analysis on every result</span></li>
-            </ul>
-            <button class="btn-primary" style="width:100%; justify-content: center;"><span class="he-text">התחילי תקופת ניסיון חינם</span><span class="en-text" style="display:none">Start Free Trial</span></button>
-            <p style="margin-top: 12px; font-size: 12px; color: var(--warm-gray);"><span class="he-text">7 ימי ניסיון חינם. בטלי בכל עת.</span><span class="en-text" style="display:none">7-day free trial. Cancel anytime.</span></p>
-        </div>
-    </section>
-
-    <!-- Manicurists -->
-    <section class="manicurists" id="manicurists">
-        <h2 class="reveal"><span class="he-text">מניקוריסטיות? Polished בשבילכן</span><span class="en-text" style="display:none">Nail Techs? Polished Is For You</span></h2>
-        <p class="reveal"><span class="he-text">הצטרפי לפלטפורמה שמחברת אותך ללקוחות חדשות. התחברי עם Apple ID, בני פרופיל, וקבלי תורים ישירות מהאפליקציה.</span><span class="en-text" style="display:none">Join the platform that connects you with new clients. Sign in with Apple, build your profile, and receive bookings directly from the app.</span></p>
-        <div class="mani-features stagger">
-            <div class="mani-card reveal"><div class="icon">👩‍💼</div><h3><span class="he-text">פרופיל עסקי</span><span class="en-text" style="display:none">Business Profile</span></h3><p><span class="he-text">הציגי את העבודות שלך, מחירים, ושעות פעילות</span><span class="en-text" style="display:none">Showcase your work, pricing, and hours</span></p></div>
-            <div class="mani-card reveal"><div class="icon">📱</div><h3><span class="he-text">ניהול תורים</span><span class="en-text" style="display:none">Manage Bookings</span></h3><p><span class="he-text">קבלי תורים, אשרי, ונהלי את היומן שלך</span><span class="en-text" style="display:none">Receive bookings, approve, and manage your calendar</span></p></div>
-            <div class="mani-card reveal"><div class="icon">🌟</div><h3><span class="he-text">חשיפה ללקוחות</span><span class="en-text" style="display:none">Client Exposure</span></h3><p><span class="he-text">הופיעי בחיפוש "קרוב אליי" ומשכי לקוחות חדשות</span><span class="en-text" style="display:none">Appear in "Near Me" and attract new clients</span></p></div>
-            <div class="mani-card reveal"><div class="icon">🔐</div><h3><span class="he-text">כניסה עם Apple</span><span class="en-text" style="display:none">Sign in with Apple</span></h3><p><span class="he-text">התחברות מאובטחת ומהירה</span><span class="en-text" style="display:none">Secure and fast login</span></p></div>
-        </div>
-        <a href="#" class="btn-primary reveal" style="background: var(--white); color: var(--pink-dark);"><span class="he-text">הצטרפי כמניקוריסטית</span><span class="en-text" style="display:none">Join as a Nail Tech</span></a>
     </section>
 
     <footer>
         <div class="footer-links">
-            <a href="https://polished.app/privacy"><span class="he-text">מדיניות פרטיות</span><span class="en-text" style="display:none">Privacy Policy</span></a>
-            <a href="https://polished.app/terms"><span class="he-text">תנאי שימוש</span><span class="en-text" style="display:none">Terms of Service</span></a>
+            <a href="privacy.html"><span class="he-text">מדיניות פרטיות</span><span class="en-text" style="display:none">Privacy Policy</span></a>
+            <a href="terms.html"><span class="he-text">תנאי שימוש</span><span class="en-text" style="display:none">Terms of Service</span></a>
             <a href="mailto:polished.app@outlook.com"><span class="he-text">צרו קשר</span><span class="en-text" style="display:none">Contact Us</span></a>
         </div>
         <p>&copy; 2026 Polished. <span class="he-text">כל הזכויות שמורות.</span><span class="en-text" style="display:none">All rights reserved.</span></p>
-        <p style="margin-top: 6px;"><span class="he-text">תמונות השראה מ-</span><span class="en-text" style="display:none">Inspiration photos by </span><a href="https://pexels.com">Pexels</a></p>
     </footer>
 
     <script>
-        // Language
+        // Language toggle
         let isHebrew = true;
         function toggleLanguage() {
             isHebrew = !isHebrew;
-            const body = document.body, html = document.documentElement;
-            body.classList.toggle('en', !isHebrew);
+            const html = document.documentElement;
             html.setAttribute('lang', isHebrew ? 'he' : 'en');
             html.setAttribute('dir', isHebrew ? 'rtl' : 'ltr');
-            document.querySelector('.lang-toggle').textContent = isHebrew ? 'EN' : 'עב';
+            document.querySelector('.lang-btn').textContent = isHebrew ? 'EN' : 'HE';
             document.querySelectorAll('.he-text').forEach(el => el.style.display = isHebrew ? '' : 'none');
             document.querySelectorAll('.en-text').forEach(el => el.style.display = isHebrew ? 'none' : '');
         }
 
-        // Nav scroll
-        window.addEventListener('scroll', () => {
-            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 80);
-        });
-
-        // Parallax hero
-        const heroBg = document.getElementById('heroBg');
-        window.addEventListener('scroll', () => {
-            if (heroBg) {
-                const y = window.scrollY;
-                heroBg.style.transform = `scale(1.05) translateY(${y * 0.3}px)`;
-            }
-        }, { passive: true });
-
         // Scroll reveal
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
+                if (entry.isIntersecting) entry.target.classList.add('visible');
             });
         }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.reveal, .reveal-right, .reveal-scale').forEach(el => revealObserver.observe(el));
 
-        document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => {
-            revealObserver.observe(el);
+        // ===== Phone cursor-based reveal =====
+        const phoneScreen = document.getElementById('phoneScreen');
+        const imgAfter = document.getElementById('imgAfter');
+        const revealCursor = document.getElementById('revealCursor');
+        const REVEAL_RADIUS = 90;
+
+        let isRevealing = false;
+
+        phoneScreen.addEventListener('mouseenter', () => {
+            isRevealing = true;
+            revealCursor.classList.add('active');
+        });
+
+        phoneScreen.addEventListener('mousemove', (e) => {
+            if (!isRevealing) return;
+            const rect = phoneScreen.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            revealCursor.style.left = e.clientX + 'px';
+            revealCursor.style.top = e.clientY + 'px';
+
+            imgAfter.style.clipPath = `circle(${REVEAL_RADIUS}px at ${x}px ${y}px)`;
+            imgAfter.style.transition = 'clip-path 0.08s ease-out';
+        });
+
+        phoneScreen.addEventListener('mouseleave', () => {
+            isRevealing = false;
+            revealCursor.classList.remove('active');
+            imgAfter.style.transition = 'clip-path 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+            imgAfter.style.clipPath = 'circle(0% at 50% 50%)';
         });
     </script>
 </body>

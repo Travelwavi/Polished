@@ -258,6 +258,7 @@
         .phone-screen .img-after {
             position: absolute; inset: 0;
             width: 100%; height: 100%; object-fit: cover;
+            object-position: center center;
         }
         .phone-screen .img-before { z-index: 1; }
         .phone-screen .img-after {
@@ -282,21 +283,8 @@
 
         /* Shimmer disabled on phone */
 
-        /* Custom cursor */
-        .reveal-cursor {
-            position: fixed; z-index: 9999; pointer-events: none;
-            width: 120px; height: 120px; border-radius: 50%;
-            border: 2px solid rgba(233,30,99,0.4);
-            background: rgba(233,30,99,0.06);
-            transform: translate(-50%, -50%);
-            opacity: 0; transition: opacity 0.3s;
-        }
-        .reveal-cursor.active { opacity: 1; }
-        .reveal-cursor::after {
-            content: '+'; font-weight: 300; color: var(--primary); position: absolute;
-            top: 50%; left: 50%; transform: translate(-50%, -50%);
-            font-size: 22px;
-        }
+        /* Custom cursor - hidden */
+        .reveal-cursor { display: none; }
 
         /* Floating bubbles */
         .phone-bubble {
@@ -584,7 +572,6 @@
             .hero-download-btn svg { width: 20px; height: 20px; }
             .hero-download-btn .btn-big { font-size: 14px; }
             .hero-download-btn .btn-small { font-size: 9px; }
-            .reveal-cursor { display: none; }
             .step { flex-direction: column; text-align: center; }
             .steps::before { display: none; }
             .pricing-card { padding: 36px 24px; }
@@ -856,44 +843,43 @@
         }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
         document.querySelectorAll('.reveal, .reveal-right, .reveal-scale').forEach(el => revealObserver.observe(el));
 
-        // ===== Phone cursor-based reveal =====
-        // Reveal: move a circular window showing the "after" image
+        // ===== Phone reveal =====
         const phoneScreen = document.getElementById('phoneScreen');
         const revealCircle = document.getElementById('revealCircle');
-        const revealCursor = document.getElementById('revealCursor');
         const CIRCLE_SIZE = 180;
         let screenW = 0, screenH = 0;
+        let imgReady = false;
+
+        // Preload the after image into the circle on page load
+        const afterImg = new Image();
+        afterImg.src = 'assets/hand-after.jpg';
 
         phoneScreen.addEventListener('mouseenter', () => {
             const rect = phoneScreen.getBoundingClientRect();
             screenW = rect.width;
             screenH = rect.height;
-            // Set the inner image to match the screen size
-            revealCircle.innerHTML = `<img src="assets/hand-after.jpg" style="width:${screenW}px;height:${screenH}px;position:absolute;">`;
+            revealCircle.innerHTML = '';
+            const img = afterImg.cloneNode();
+            img.style.cssText = `width:${screenW}px;height:${screenH}px;position:absolute;object-fit:cover;`;
+            revealCircle.appendChild(img);
             revealCircle.style.display = 'block';
-            revealCursor.classList.add('active');
         });
 
         phoneScreen.addEventListener('mousemove', (e) => {
             const rect = phoneScreen.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
-            // Position the circle
             revealCircle.style.left = x + 'px';
             revealCircle.style.top = y + 'px';
-            // Offset the inner image so it aligns with the before image
             const img = revealCircle.querySelector('img');
             if (img) {
                 img.style.left = (-x + CIRCLE_SIZE / 2) + 'px';
                 img.style.top = (-y + CIRCLE_SIZE / 2) + 'px';
             }
-            revealCursor.style.left = e.clientX + 'px';
-            revealCursor.style.top = e.clientY + 'px';
         });
 
         phoneScreen.addEventListener('mouseleave', () => {
             revealCircle.style.display = 'none';
-            revealCursor.classList.remove('active');
         });
     </script>
 </body>

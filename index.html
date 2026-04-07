@@ -541,9 +541,14 @@
         }
         @media (max-width: 768px) {
             nav { padding: 0 16px; height: 56px; }
+            .nav-inner { justify-content: center; }
             .nav-center { display: none; }
-            .nav-cta { padding: 8px 18px; font-size: 13px; }
-            .nav-left-group { gap: 8px; }
+            .nav-cta { padding: 8px; font-size: 0; width: 38px; height: 38px; border-radius: 50%; justify-content: center; }
+            .nav-cta svg { width: 18px; height: 18px; }
+            .nav-cta .he-text, .nav-cta .en-text { display: none !important; }
+            .lang-btn { display: none; }
+            .nav-left-group { gap: 8px; position: absolute; left: 16px; }
+            .nav-logo { position: absolute; left: 50%; transform: translateX(-50%); }
             .hero { padding: 70px 16px 40px; }
             .hero-container { flex-direction: column-reverse; text-align: center; padding-left: 0; gap: 30px; }
             .hero-text { max-width: 100%; }
@@ -794,17 +799,35 @@
     </footer>
 
     <script>
-        // Language toggle
+        // Language system
         let isHebrew = true;
-        function toggleLanguage() {
-            isHebrew = !isHebrew;
+
+        function setLanguage(hebrew) {
+            isHebrew = hebrew;
             const html = document.documentElement;
             html.setAttribute('lang', isHebrew ? 'he' : 'en');
             html.setAttribute('dir', isHebrew ? 'rtl' : 'ltr');
-            document.querySelector('.lang-btn').textContent = isHebrew ? 'EN' : 'HE';
+            const btn = document.querySelector('.lang-btn');
+            if (btn) btn.textContent = isHebrew ? 'EN' : 'HE';
             document.querySelectorAll('.he-text').forEach(el => el.style.display = isHebrew ? '' : 'none');
             document.querySelectorAll('.en-text').forEach(el => el.style.display = isHebrew ? 'none' : '');
         }
+
+        function toggleLanguage() {
+            setLanguage(!isHebrew);
+        }
+
+        // Auto-detect: Israel = Hebrew, everywhere else = English
+        (function detectLocation() {
+            // Only auto-detect on mobile (desktop has the EN button)
+            if (window.innerWidth > 768) return;
+            fetch('https://ipapi.co/json/', { signal: AbortSignal.timeout(3000) })
+                .then(r => r.json())
+                .then(data => {
+                    if (data.country_code !== 'IL') setLanguage(false);
+                })
+                .catch(() => {}); // default Hebrew on error
+        })();
 
         // Scroll reveal
         const revealObserver = new IntersectionObserver((entries) => {

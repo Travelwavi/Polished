@@ -371,7 +371,7 @@
 
         /* ===== S2: WHAT IS POLISHED ===== */
         .what-is {
-            padding: 100px 20px; background: var(--white);
+            padding: 70px 20px 100px; background: var(--white);
         }
         .what-is-inner {
             max-width: 1100px; margin: 0 auto;
@@ -386,8 +386,18 @@
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .what-card:hover { transform: translateY(-6px); box-shadow: 0 16px 50px rgba(233,30,99,0.08); }
-        .what-card h3 { font-size: 22px; font-weight: 800; margin-bottom: 12px; color: var(--dark); }
-        .what-card p { color: var(--muted); font-size: 15px; line-height: 1.7; }
+        .what-card h3 { font-size: 22px; font-weight: 800; margin-bottom: 16px; color: var(--dark); }
+        .what-card ul {
+            list-style: none; margin: 0; padding: 0;
+        }
+        .what-card ul li {
+            color: var(--muted); font-size: 15px; line-height: 1.7;
+            padding: 6px 0; display: flex; align-items: flex-start; gap: 10px;
+        }
+        .what-card ul li::before {
+            content: ''; min-width: 8px; height: 8px; margin-top: 8px;
+            border-radius: 50%; background: var(--accent); flex-shrink: 0;
+        }
         .what-card .highlight-tag {
             display: inline-block; background: #E8F5E9; color: #2E7D32;
             font-size: 13px; font-weight: 700; padding: 4px 14px;
@@ -550,8 +560,11 @@
             .hero-text .subtitle { margin-bottom: 8px; }
             .hero-text .hero-download-row { order: 2; margin-bottom: 0; }
             .hero-text .hero-perk-line { order: 3; }
-            .what-is { padding: 60px 16px; }
+            .what-is { padding: 40px 16px 60px; }
             .what-is .section-title { margin-bottom: 36px; }
+            .what-is .big-headline { font-size: 36px; }
+            .what-is .big-headline .color-polished { display: block; }
+            .what-is-cards { grid-template-columns: 1fr; }
             /* Split hero-text into flex column so h1 stays on top, rest goes below phone */
             .hero-text { display: contents; }
             .hero-container { display: flex; flex-direction: column; align-items: center; }
@@ -689,14 +702,25 @@
             <div class="what-is-cards">
                 <div class="what-card reveal">
                     <h3><span class="he-text">בשביל בנות</span><span class="en-text" style="display:none">For Girls</span></h3>
-                    <p><span class="he-text">כל בחורה יכולה פשוט לבדוק איך לק ייראה על היד שלה לפני שהיא בכלל עושה אותו — בחינם לגמרי! צלמי את היד, בחרי צבע, וראי את התוצאה תוך שניות.</span><span class="en-text" style="display:none">Any girl can simply check how a nail polish would look on her hand before she actually does it — completely free! Snap your hand, pick a color, and see the result in seconds.</span></p>
-                    <span class="highlight-tag"><span class="he-text">חינם לגמרי</span><span class="en-text" style="display:none">Completely Free</span></span>
+                    <ul>
+                        <li><span class="he-text">נסי כל לק על הידיים שלך בעזרת AI</span><span class="en-text" style="display:none">Try any nail polish on your own hands using AI</span></li>
+                        <li><span class="he-text">גלשי בין סוגי וצבעי לקים</span><span class="en-text" style="display:none">Browse the types and colors of nail polishes</span></li>
+                        <li><span class="he-text">חקרי את לוח ההשראה לרעיון הבא שלך</span><span class="en-text" style="display:none">Explore the inspiration board for your next idea</span></li>
+                        <li><span class="he-text">חפשי מניקוריסטיות קרובות אלייך</span><span class="en-text" style="display:none">Search for nearby manicurists</span></li>
+                    </ul>
                 </div>
                 <div class="what-card reveal">
                     <h3><span class="he-text">בשביל מניקוריסטיות</span><span class="en-text" style="display:none">For Manicurists</span></h3>
-                    <p><span class="he-text">חשיפה חינמית לעסק שלך. אנחנו מפרסמות כל מניקוריסטית בחינם ללא קשר לכמות העוקבים. בואי תגדילי את הלקוחות שלך בלי לשלם שקל.</span><span class="en-text" style="display:none">Free exposure for your business. We promote every manicurist for free regardless of follower count. Grow your client base without paying a dime.</span></p>
-                    <span class="highlight-tag"><span class="he-text">חשיפה חינמית</span><span class="en-text" style="display:none">Free Exposure</span></span>
+                    <ul>
+                        <li><span class="he-text">הראי ללקוחות שלך את העבודות שלך על הידיים שלהן</span><span class="en-text" style="display:none">Show your clients your works on their own hands</span></li>
+                        <li><span class="he-text">גלי סוגי וצבעי לקים חדשים לעסק שלך</span><span class="en-text" style="display:none">Explore new types and colors of nail polishes for your business</span></li>
+                        <li><span class="he-text">העלי את העבודות שלך כדי לתת השראה ולקבל חשיפה</span><span class="en-text" style="display:none">Upload your works to inspire other manicurists and gain exposure</span></li>
+                        <li><span class="he-text">תתכונני לעבור למערכת התורים שלנו :)</span><span class="en-text" style="display:none">Get ready to move to our scheduling system :)</span></li>
+                    </ul>
                 </div>
+            </div>
+            <div style="text-align:center; margin-top: 32px;" class="reveal">
+                <span class="highlight-tag" style="font-size: 16px; padding: 8px 24px;"><span class="he-text">הכל בחינם לגמרי</span><span class="en-text" style="display:none">COMPLETELY FREE</span></span>
             </div>
         </div>
     </section>

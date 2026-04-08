@@ -372,7 +372,7 @@
 
         /* ===== S2: WHAT IS POLISHED ===== */
         .what-is {
-            padding: 70px 20px 50px; background: linear-gradient(180deg, var(--white) 0%, var(--bg-soft) 100%);
+            padding: 70px 20px 50px; background: var(--white);
         }
         .what-is-inner {
             max-width: 1100px; margin: 0 auto;
@@ -467,10 +467,11 @@
             position: relative; display: inline-block; color: var(--primary);
         }
         .floating-phone {
-            position: relative; top: -4px; margin-left: 6px;
+            position: relative; top: -4px; margin-right: 10px;
             width: 34px; height: 52px;
             animation: phoneBob 2s ease-in-out infinite;
         }
+        [dir="ltr"] .floating-phone { margin-right: 0; margin-left: 10px; }
         @keyframes phoneBob {
             0%, 100% { transform: translateY(0) rotate(-6deg); }
             50% { transform: translateY(-6px) rotate(6deg); }
@@ -490,8 +491,8 @@
         }
 
         .how-section {
-            padding: 60px 20px 100px;
-            background: linear-gradient(170deg, var(--white) 0%, var(--bg-soft) 100%);
+            padding: 60px 20px 50px;
+            background: linear-gradient(170deg, var(--bg-soft) 0%, var(--primary-light) 100%);
         }
         .how-steps {
             display: flex; flex-direction: row-reverse; gap: 24px; max-width: 1000px; margin: 0 auto 40px;
@@ -530,7 +531,7 @@
 
         /* ===== S4: FEATURES ===== */
         .features-section {
-            padding: 100px 20px; background: linear-gradient(180deg, var(--bg-soft) 0%, var(--white) 100%);
+            padding: 60px 20px 80px; background: var(--white);
         }
         .features-grid {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -590,6 +591,10 @@
             .features-grid { grid-template-columns: 1fr; }
             .feat-card.wide { grid-column: span 1; }
             .why-blocks { grid-template-columns: 1fr; }
+            .features-section .big-headline { text-align: center; }
+            .app-title-word { display: block; text-align: center; margin-top: -4px; }
+            .floating-phone { width: 24px; height: 36px; top: -2px; margin: 0; }
+            [dir="ltr"] .floating-phone { margin: 0; }
         }
 
         /* ===== FOOTER ===== */

@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Polished - נסי לק וירטואלית על הציפורניים שלך</title>
     <meta name="description" content="Polished - האפליקציה שמאפשרת לך לנסות לק על הציפורניים שלך בעזרת AI.">
+    <!-- Open Graph / WhatsApp Preview -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://polished-il.com/">
+    <meta property="og:title" content="Polished - נסי לק וירטואלית על הציפורניים שלך">
+    <meta property="og:description" content="אפליקציה שנבנתה על ידי בנות, בשביל בנות! נסי כל לק על הידיים שלך בעזרת AI, חקרי מאות צבעים ומצאי מניקוריסטיות קרובות אלייך.">
+    <meta property="og:image" content="https://polished-il.com/assets/logo.png">
+    <meta property="og:locale" content="he_IL">
+    <meta property="og:site_name" content="Polished">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -397,12 +405,15 @@
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .what-card:hover { transform: translateY(-6px); box-shadow: 0 16px 50px rgba(233,30,99,0.08); }
+        .card-header-row {
+            display: flex; align-items: center; gap: 16px; margin-bottom: 20px;
+        }
         .card-header-icon {
             width: 56px; height: 56px; border-radius: 16px;
             background: var(--primary-light); display: flex;
-            align-items: center; justify-content: center; margin-bottom: 20px;
+            align-items: center; justify-content: center; flex-shrink: 0;
         }
-        .what-card h3 { font-size: 22px; font-weight: 800; margin-bottom: 20px; color: var(--dark); }
+        .what-card h3 { font-size: 22px; font-weight: 800; margin-bottom: 0; color: var(--dark); }
         .what-card ul { list-style: none; margin: 0; padding: 0; }
         .what-card ul li {
             color: var(--text); font-size: 15px; line-height: 1.6;
@@ -467,11 +478,11 @@
             position: relative; display: inline-block; color: var(--primary);
         }
         .floating-phone {
-            position: relative; top: -4px; margin-right: 10px;
+            position: relative; top: 4px; margin-right: 18px;
             width: 34px; height: 52px;
             animation: phoneBob 2s ease-in-out infinite;
         }
-        [dir="ltr"] .floating-phone { margin-right: 0; margin-left: 10px; }
+        [dir="ltr"] .floating-phone { margin-right: 0; margin-left: 10px; top: -4px; }
         @keyframes phoneBob {
             0%, 100% { transform: translateY(0) rotate(-6deg); }
             50% { transform: translateY(-6px) rotate(6deg); }
@@ -544,8 +555,10 @@
             position: relative; overflow: visible;
         }
         .feat-card:hover { transform: translateY(-6px); box-shadow: 0 16px 50px rgba(233,30,99,0.08); }
-        .feat-card .feat-icon { font-size: 36px; margin-bottom: 16px; display: block; }
-        .feat-card h3 { font-size: 18px; font-weight: 800; margin-bottom: 10px; color: var(--dark); }
+        .feat-header-row { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; }
+        .feat-card .feat-icon { font-size: 36px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 44px; height: 44px; background: var(--primary-light); border-radius: 12px; }
+        .feat-card .feat-icon svg { width: 24px; height: 24px; }
+        .feat-card h3 { font-size: 18px; font-weight: 800; margin-bottom: 0; color: var(--dark); }
         .feat-card p { color: var(--muted); font-size: 14px; line-height: 1.7; }
         .feat-card .feat-tag {
             position: absolute; top: -12px; right: 20px;
@@ -587,14 +600,18 @@
         /* Mobile adjustments for new sections */
         @media (max-width: 768px) {
             .how-steps { flex-direction: column; align-items: center; }
+            .how-step { max-width: 100%; width: 100%; padding: 24px 20px; }
+            .how-step .step-icon { font-size: 30px; margin-bottom: 10px; }
+            .how-step h3 { font-size: 18px; margin-bottom: 8px; }
+            .how-step p { font-size: 13px; }
             .how-arrow { display: none; }
             .features-grid { grid-template-columns: 1fr; }
             .feat-card.wide { grid-column: span 1; }
             .why-blocks { grid-template-columns: 1fr; }
             .features-section .big-headline { text-align: center; }
-            .app-title-word { display: block; text-align: center; margin-top: -4px; }
-            .floating-phone { width: 24px; height: 36px; top: -2px; margin: 0; }
-            [dir="ltr"] .floating-phone { margin: 0; }
+            .app-title-word { display: block; text-align: center; margin-top: 4px; }
+            .floating-phone { width: 28px; height: 42px; top: 0; margin: 0 auto; display: block; }
+            [dir="ltr"] .floating-phone { margin: 0 auto; top: 0; }
         }
 
         /* ===== FOOTER ===== */
@@ -807,10 +824,12 @@
             </div>
             <div class="what-is-cards">
                 <div class="what-card reveal">
-                    <div class="card-header-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    <div class="card-header-row">
+                        <div class="card-header-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        </div>
+                        <h3><span class="he-text">בשביל כולן</span><span class="en-text" style="display:none">For Everyone</span><span class="de-text" style="display:none">Für alle</span></h3>
                     </div>
-                    <h3><span class="he-text">בשביל בנות</span><span class="en-text" style="display:none">For Girls</span><span class="de-text" style="display:none">Für Mädchen</span></h3>
                     <ul>
                         <li><span class="he-text">נסי כל לק על הידיים שלך בעזרת AI</span><span class="en-text" style="display:none">Try any nail polish on your own hands using AI</span><span class="de-text" style="display:none">Probiere jeden Nagellack auf deinen eigenen Händen mit AI aus</span></li>
                         <li><span class="he-text">תגלשי בין סוגי וצבעי לקים</span><span class="en-text" style="display:none">Browse the types and colors of nail polishes</span><span class="de-text" style="display:none">Stöbere durch Nagellack-Arten und Farben</span></li>
@@ -819,10 +838,12 @@
                     </ul>
                 </div>
                 <div class="what-card reveal">
-                    <div class="card-header-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M20 8v6"/><path d="M23 11h-6"/></svg>
+                    <div class="card-header-row">
+                        <div class="card-header-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M20 8v6"/><path d="M23 11h-6"/></svg>
+                        </div>
+                        <h3><span class="he-text">בשביל מניקוריסטיות</span><span class="en-text" style="display:none">For Manicurists</span><span class="de-text" style="display:none">Für Maniküristinnen</span></h3>
                     </div>
-                    <h3><span class="he-text">בשביל מניקוריסטיות</span><span class="en-text" style="display:none">For Manicurists</span><span class="de-text" style="display:none">Für Maniküristinnen</span></h3>
                     <ul>
                         <li><span class="he-text">הראי ללקוחות שלך את העבודות שלך על הידיים שלהן</span><span class="en-text" style="display:none">Show your clients your works on their own hands</span><span class="de-text" style="display:none">Zeige deinen Kundinnen deine Arbeiten auf ihren eigenen Händen</span></li>
                         <li><span class="he-text">תגלי סוגי וצבעי לקים חדשים לעסק שלך</span><span class="en-text" style="display:none">Explore new types and colors of nail polishes for your business</span><span class="de-text" style="display:none">Entdecke neue Nagellack-Arten und Farben für dein Geschäft</span></li>
@@ -833,7 +854,7 @@
             </div>
             <div class="free-banner reveal">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2E7D32" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                <span><span class="he-text">הכל בחינם לגמרי — לבנות ולמניקוריסטיות</span><span class="en-text" style="display:none">COMPLETELY FREE — for girls and manicurists</span><span class="de-text" style="display:none">KOMPLETT KOSTENLOS — für Mädchen und Maniküristinnen</span></span>
+                <span><span class="he-text">הכל בחינם לגמרי!</span><span class="en-text" style="display:none">COMPLETELY FREE!</span><span class="de-text" style="display:none">KOMPLETT KOSTENLOS!</span></span>
             </div>
         </div>
     </section>
@@ -851,7 +872,7 @@
         <div class="how-steps">
             <div class="how-step reveal">
                 <div class="step-num">1</div>
-                <div class="step-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="10.5" r="2.5"/><circle cx="8.5" cy="7.5" r="2.5"/><circle cx="6.5" cy="12" r="2.5"/><path d="M12 22c-4.97 0-9-2.69-9-6v-.5c0-1.93 1.57-3.5 3.5-3.5 1.29 0 2.41.7 3.02 1.73A3.98 3.98 0 0 1 12 13c.97 0 1.88.35 2.58.95.46-.32 1.02-.5 1.62-.5 1.65 0 3 1.35 3 3v.5c0 3.31-3.13 6-7.2 6Z"/></svg></div>
+                <div class="step-icon">💅</div>
                 <h3>PICK</h3>
                 <p><span class="he-text">בחרי צבע שאת אוהבת או תמונת השראה מהגלריה</span><span class="en-text" style="display:none">Pick a color you love or an inspiration from the gallery</span><span class="de-text" style="display:none">Wähle eine Farbe oder eine Inspiration aus der Galerie</span></p>
             </div>
@@ -885,34 +906,44 @@
         </div>
         <div class="features-grid stagger">
             <div class="feat-card reveal">
-                <span class="feat-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 0 0-4 4v2H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2h-2V6a4 4 0 0 0-4-4z"/><path d="M12 16v-4"/><circle cx="12" cy="16" r="1"/></svg></span>
-                <h3><span class="he-text">נסיית לק AI</span><span class="en-text" style="display:none">AI Nail Try-On</span><span class="de-text" style="display:none">AI Nagellack-Anprobe</span></h3>
+                <div class="feat-header-row">
+                    <span class="feat-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 0 0-4 4v2H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2h-2V6a4 4 0 0 0-4-4z"/><path d="M12 16v-4"/><circle cx="12" cy="16" r="1"/></svg></span>
+                    <h3><span class="he-text">נסיית לק AI</span><span class="en-text" style="display:none">AI Nail Try-On</span><span class="de-text" style="display:none">AI Nagellack-Anprobe</span></h3>
+                </div>
                 <p><span class="he-text">כל משתמשת יכולה לנסות 3 לקים שונים על היד שלה כל יום, תוך פחות מ-20 שניות. <span style="color:var(--primary);font-weight:800">רוצה עוד?</span> תצטרכי לעבור לפרימיום כי זה עולה לנו כסף ;)</span><span class="en-text" style="display:none">Every user can try 3 different nail polishes on their hand every day, in under 20 seconds. <span style="color:var(--primary);font-weight:800">Want more?</span> You'll need to go premium because it costs us money ;)</span><span class="de-text" style="display:none">Jede Nutzerin kann täglich 3 verschiedene Nagellacke auf ihrer Hand ausprobieren, in unter 20 Sekunden. <span style="color:var(--primary);font-weight:800">Mehr?</span> Du brauchst Premium, weil es uns Geld kostet ;)</span></p>
                 <span class="feat-tag free"><span class="he-text">3 נסיונות חינם ביום</span><span class="en-text" style="display:none">3 Free Tries Daily</span><span class="de-text" style="display:none">3 Gratis-Versuche täglich</span></span>
             </div>
             <div class="feat-card reveal">
-                <span class="feat-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
-                <h3><span class="he-text">לוח השראה</span><span class="en-text" style="display:none">Inspiration Board</span><span class="de-text" style="display:none">Inspirations-Board</span></h3>
+                <div class="feat-header-row">
+                    <span class="feat-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
+                    <h3><span class="he-text">לוח השראה</span><span class="en-text" style="display:none">Inspiration Board</span><span class="de-text" style="display:none">Inspirations-Board</span></h3>
+                </div>
                 <p><span class="he-text">העלי את עיצובי הציפורניים שלך. המערכת שלנו אוטומטית תקטלג את סוג הלק והצבעים בשביל סינון בבורד ואז ככה תוכלי בקלות למצוא את הרעיון הבא שלך, לתת לייק לעבודות של מניקוריסטיות שאת אוהבת ולעיצובים מיוחדים שמצאת!</span><span class="en-text" style="display:none">Upload your nail designs. Our system automatically catalogs the polish type and colors for board filtering, so you can easily find your next idea, like the work of manicurists you love and special designs you found.</span><span class="de-text" style="display:none">Lade deine Nageldesigns hoch. Unser System katalogisiert automatisch den Lack-Typ und die Farben zum Filtern im Board, damit du einfach deine nächste Idee findest, die Arbeiten deiner Lieblings-Maniküristinnen likest und besondere Designs entdeckst!</span></p>
                 <span class="feat-tag free"><span class="he-text">חינם</span><span class="en-text" style="display:none">Free</span><span class="de-text" style="display:none">Kostenlos</span></span>
             </div>
             <div class="feat-card reveal">
-                <span class="feat-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span>
-                <h3><span class="he-text">גלריית צבעים</span><span class="en-text" style="display:none">Color Gallery</span><span class="de-text" style="display:none">Farbgalerie</span></h3>
+                <div class="feat-header-row">
+                    <span class="feat-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span>
+                    <h3><span class="he-text">גלריית צבעים</span><span class="en-text" style="display:none">Color Gallery</span><span class="de-text" style="display:none">Farbgalerie</span></h3>
+                </div>
                 <p><span class="he-text">חקרי מאות סוגי לקים וצבעים מכל המותגים. מצאי בדיוק את הגוון שחלמת עליו!</span><span class="en-text" style="display:none">Explore hundreds of nail polish types and colors from all brands. Find exactly the shade you dreamed of!</span><span class="de-text" style="display:none">Entdecke hunderte Nagellack-Arten und Farben aller Marken. Finde genau den Ton, von dem du geträumt hast!</span></p>
                 <span class="feat-tag free"><span class="he-text">חינם</span><span class="en-text" style="display:none">Free</span><span class="de-text" style="display:none">Kostenlos</span></span>
             </div>
             <div class="feat-card reveal">
-                <span class="feat-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
-                <h3><span class="he-text">קרוב אלייך</span><span class="en-text" style="display:none">Near You</span><span class="de-text" style="display:none">In deiner Nähe</span></h3>
+                <div class="feat-header-row">
+                    <span class="feat-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+                    <h3><span class="he-text">קרוב אלייך</span><span class="en-text" style="display:none">Near You</span><span class="de-text" style="display:none">In deiner Nähe</span></h3>
+                </div>
                 <p><span class="he-text">גלי מניקוריסטיות באזור שלך. כבר יותר מ-200 מניקוריסטיות רשומות אצלנו באפליקציה.</span><span class="en-text" style="display:none">Discover manicurists in your area. Already 200+ manicurists registered in our app.</span><span class="de-text" style="display:none">Entdecke Maniküristinnen in deiner Nähe. Bereits 200+ Maniküristinnen in unserer App registriert.</span></p>
                 <p style="margin-top:12px"><span class="he-text"><span style="color:var(--primary);font-weight:800">מניקוריסטית?</span> את לא ברשימה? פשוט תרשמי בקלות, שם העסק, פרטי התקשרות, שעות פעילות, מחירים ותמונות של עבודות וסיימת. אין בירוקרטיה כלל. והכל בחינם!</span><span class="en-text" style="display:none"><span style="color:var(--primary);font-weight:800">Manicurist?</span> Not on the list? Simply register easily, business name, contact details, working hours, prices and photos of your work and you're done. No bureaucracy at all. And it's all free!</span><span class="de-text" style="display:none"><span style="color:var(--primary);font-weight:800">Maniküristin?</span> Nicht auf der Liste? Einfach registrieren: Geschäftsname, Kontaktdaten, Öffnungszeiten, Preise und Fotos deiner Arbeiten – fertig. Keine Bürokratie. Und alles kostenlos!</span></p>
                 <span class="feat-tag free"><span class="he-text">חינם</span><span class="en-text" style="display:none">Free</span><span class="de-text" style="display:none">Kostenlos</span></span>
             </div>
             <div class="feat-card wide reveal">
-                <span class="feat-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>
-                <h3><span class="he-text">מערכת קביעת תורים</span><span class="en-text" style="display:none">Scheduling System</span><span class="de-text" style="display:none">Buchungssystem</span></h3>
-                <p><span class="he-text">בקרוב. ברגע שנוכיח את עצמנו, נשיק מערכת תורים פנימית לכל המניקוריסטיות האהובות עלייך. אנחנו מתכננות להיות הכי זולות והכי טובות בשוק!</span><span class="en-text" style="display:none">Coming soon. Once we prove ourselves, we'll launch an internal scheduling system for all your favorite manicurists. We plan on being the cheapest and best in the market!</span><span class="de-text" style="display:none">Kommt bald. Sobald wir uns bewiesen haben, starten wir ein internes Buchungssystem für alle deine Lieblings-Maniküristinnen. Wir planen, die günstigsten und besten am Markt zu sein!</span></p>
+                <div class="feat-header-row">
+                    <span class="feat-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>
+                    <h3><span class="he-text">מערכת קביעת תורים</span><span class="en-text" style="display:none">Scheduling System</span><span class="de-text" style="display:none">Buchungssystem</span></h3>
+                </div>
+                <p><span class="he-text">בקרוב! ברגע שנוכיח את עצמנו, נשיק מערכת תורים פנימית לכל המניקוריסטיות האהובות עלינו. אנחנו מתכננות להיות הכי טובות בשוק ולייצר את המנגנון הכי נוח ללקוחות ולבעלות עסק!</span><span class="en-text" style="display:none">Coming soon! Once we prove ourselves, we'll launch an internal scheduling system for all our beloved manicurists. We plan on being the best in the market and creating the most convenient system for clients and business owners!</span><span class="de-text" style="display:none">Kommt bald! Sobald wir uns bewiesen haben, starten wir ein internes Buchungssystem für alle unsere geliebten Maniküristinnen. Wir planen, die Besten am Markt zu sein und das bequemste System für Kundinnen und Geschäftsinhaberinnen zu schaffen!</span></p>
                 <span class="feat-tag soon"><span class="he-text">בקרוב</span><span class="en-text" style="display:none">Soon</span><span class="de-text" style="display:none">Bald</span></span>
             </div>
         </div>
@@ -922,7 +953,7 @@
     <section class="why-us" id="why-join">
         <div class="why-inner">
             <div class="section-title reveal">
-                <h2><span class="he-text">למה אנחנו?</span><span class="en-text" style="display:none">Why Us?</span><span class="de-text" style="display:none">Warum wir?</span></h2>
+                <h2 class="big-headline"><span class="he-text">למה אנחנו?</span><span class="en-text" style="display:none">Why Us?</span><span class="de-text" style="display:none">Warum wir?</span></h2>
                 <p><span class="he-text">כי אנחנו בזה בשביל הקהילה</span><span class="en-text" style="display:none">Because we're in it for the community</span><span class="de-text" style="display:none">Weil wir es für die Community tun</span></p>
             </div>
             <div class="why-blocks">
@@ -932,7 +963,7 @@
                 </div>
                 <div class="why-block reveal">
                     <h3><span class="he-text">איך אנחנו מתכננות להרוויח?</span><span class="en-text" style="display:none">How Do We Plan To Make Money?</span><span class="de-text" style="display:none">Wie planen wir Geld zu verdienen?</span></h3>
-                    <p><span class="he-text">1. נשיק מערכת תורים למניקוריסטיות, <span class="accent-text">במחיר הכי נמוך בשוק</span>.<br>2. בנות שמכורות ללק עם AI יוכלו לרכוש מנוי פרימיום שנתי ב-<span class="accent-text">19.9&#8362;</span><br><br><strong>אנחנו כאן כדי לבנות ולתחזק את הקהילה הזו לטווח ארוך.</strong></span><span class="en-text" style="display:none">1. We'll launch a scheduling system for manicurists, <span class="accent-text">at the lowest price in the market</span>.<br>2. Girls who are addicted to nail polish with AI can purchase a yearly premium pass for <span class="accent-text">19.9 ILS</span><br><br><strong>We're here to build and maintain this community long-term.</strong></span><span class="de-text" style="display:none">1. Wir starten ein Buchungssystem für Maniküristinnen, <span class="accent-text">zum niedrigsten Preis am Markt</span>.<br>2. Mädchen, die süchtig nach AI-Nagellack sind, können einen jährlichen Premium-Pass für <span class="accent-text">19,9&#8362;</span> kaufen<br><br><strong>Wir sind hier, um diese Community langfristig aufzubauen und zu pflegen.</strong></span></p>
+                    <p><span class="he-text">1. נשיק מערכת תורים למניקוריסטיות, <span class="accent-text">במחיר הכי נמוך בשוק</span>.<br>2. בנות שמכורות ללק עם AI יוכלו לרכוש מנוי פרימיום שנתי ב-<span class="accent-text">19.9&#8362;</span> ולהנות מנסיון ללא מגבלה<br><br><strong>אנחנו כאן כדי לבנות ולתחזק את הקהילה הזו לטווח ארוך.</strong></span><span class="en-text" style="display:none">1. We'll launch a scheduling system for manicurists, <span class="accent-text">at the lowest price in the market</span>.<br>2. Girls who are addicted to nail polish with AI can purchase a yearly premium pass for <span class="accent-text">19.9 ILS</span> and enjoy unlimited tries<br><br><strong>We're here to build and maintain this community long-term.</strong></span><span class="de-text" style="display:none">1. Wir starten ein Buchungssystem für Maniküristinnen, <span class="accent-text">zum niedrigsten Preis am Markt</span>.<br>2. Mädchen, die süchtig nach AI-Nagellack sind, können einen jährlichen Premium-Pass für <span class="accent-text">19,9&#8362;</span> kaufen und unbegrenzte Versuche genießen<br><br><strong>Wir sind hier, um diese Community langfristig aufzubauen und zu pflegen.</strong></span></p>
                 </div>
             </div>
         </div>

@@ -545,7 +545,7 @@
             padding: 60px 20px 80px; background: var(--white);
         }
         .features-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            display: grid; grid-template-columns: repeat(2, 1fr);
             gap: 24px; max-width: 1100px; margin: 0 auto;
         }
         .feat-card {
@@ -569,8 +569,7 @@
         .feat-tag.free { background: #E8F5E9; color: #2E7D32; }
         .feat-tag.soon { background: #FFF3E0; color: #E65100; }
         .feat-tag.premium { background: var(--primary-light); color: var(--primary-dark); }
-        /* wide card spans 2 cols */
-        .feat-card.wide { grid-column: span 2; }
+        /* features grid: max 2 columns on desktop for even sizing */
 
         /* ===== S5: WHY US ===== */
         .why-us {
@@ -606,7 +605,6 @@
             .how-step p { font-size: 13px; }
             .how-arrow { display: none; }
             .features-grid { grid-template-columns: 1fr; }
-            .feat-card.wide { grid-column: span 1; }
             .why-blocks { grid-template-columns: 1fr; }
             .features-section .big-headline { text-align: center; }
             .app-title-word { display: block; text-align: center; margin-top: 4px; }
@@ -872,7 +870,7 @@
         <div class="how-steps">
             <div class="how-step reveal">
                 <div class="step-num">1</div>
-                <div class="step-icon">💅</div>
+                <div class="step-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 18v-6"/><path d="M8 14l4 4 4-4"/><rect x="4" y="2" width="16" height="8" rx="3" fill="var(--primary-light)" stroke="var(--primary)" stroke-width="1.5"/><circle cx="8" cy="6" r="1.5" fill="var(--primary)" opacity="0.6"/><circle cx="12" cy="6" r="1.5" fill="var(--accent)"/><circle cx="16" cy="6" r="1.5" fill="var(--primary)" opacity="0.4"/></svg></div>
                 <h3>PICK</h3>
                 <p><span class="he-text">בחרי צבע שאת אוהבת או תמונת השראה מהגלריה</span><span class="en-text" style="display:none">Pick a color you love or an inspiration from the gallery</span><span class="de-text" style="display:none">Wähle eine Farbe oder eine Inspiration aus der Galerie</span></p>
             </div>
@@ -938,7 +936,7 @@
                 <p style="margin-top:12px"><span class="he-text"><span style="color:var(--primary);font-weight:800">מניקוריסטית?</span> את לא ברשימה? פשוט תרשמי בקלות, שם העסק, פרטי התקשרות, שעות פעילות, מחירים ותמונות של עבודות וסיימת. אין בירוקרטיה כלל. והכל בחינם!</span><span class="en-text" style="display:none"><span style="color:var(--primary);font-weight:800">Manicurist?</span> Not on the list? Simply register easily, business name, contact details, working hours, prices and photos of your work and you're done. No bureaucracy at all. And it's all free!</span><span class="de-text" style="display:none"><span style="color:var(--primary);font-weight:800">Maniküristin?</span> Nicht auf der Liste? Einfach registrieren: Geschäftsname, Kontaktdaten, Öffnungszeiten, Preise und Fotos deiner Arbeiten – fertig. Keine Bürokratie. Und alles kostenlos!</span></p>
                 <span class="feat-tag free"><span class="he-text">חינם</span><span class="en-text" style="display:none">Free</span><span class="de-text" style="display:none">Kostenlos</span></span>
             </div>
-            <div class="feat-card wide reveal">
+            <div class="feat-card reveal">
                 <div class="feat-header-row">
                     <span class="feat-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>
                     <h3><span class="he-text">מערכת קביעת תורים</span><span class="en-text" style="display:none">Scheduling System</span><span class="de-text" style="display:none">Buchungssystem</span></h3>
@@ -963,7 +961,7 @@
                 </div>
                 <div class="why-block reveal">
                     <h3><span class="he-text">איך אנחנו מתכננות להרוויח?</span><span class="en-text" style="display:none">How Do We Plan To Make Money?</span><span class="de-text" style="display:none">Wie planen wir Geld zu verdienen?</span></h3>
-                    <p><span class="he-text">1. נשיק מערכת תורים למניקוריסטיות, <span class="accent-text">במחיר הכי נמוך בשוק</span>.<br>2. בנות שמכורות ללק עם AI יוכלו לרכוש מנוי פרימיום שנתי ב-<span class="accent-text">19.9&#8362;</span> ולהנות מנסיון ללא מגבלה<br><br><strong>אנחנו כאן כדי לבנות ולתחזק את הקהילה הזו לטווח ארוך.</strong></span><span class="en-text" style="display:none">1. We'll launch a scheduling system for manicurists, <span class="accent-text">at the lowest price in the market</span>.<br>2. Girls who are addicted to nail polish with AI can purchase a yearly premium pass for <span class="accent-text">19.9 ILS</span> and enjoy unlimited tries<br><br><strong>We're here to build and maintain this community long-term.</strong></span><span class="de-text" style="display:none">1. Wir starten ein Buchungssystem für Maniküristinnen, <span class="accent-text">zum niedrigsten Preis am Markt</span>.<br>2. Mädchen, die süchtig nach AI-Nagellack sind, können einen jährlichen Premium-Pass für <span class="accent-text">19,9&#8362;</span> kaufen und unbegrenzte Versuche genießen<br><br><strong>Wir sind hier, um diese Community langfristig aufzubauen und zu pflegen.</strong></span></p>
+                    <p><span class="he-text">1. נשיק מערכת תורים למניקוריסטיות, <span class="accent-text">במחיר הכי נמוך בשוק</span>.<br>2. בנות שמכורות ללק עם AI יוכלו לרכוש מנוי פרימיום שנתי ב-<span class="accent-text">19.9&#8362;</span> ולהנות מנסיון ללא מגבלה.<br><br><strong>אנחנו כאן כדי לבנות ולתחזק את הקהילה הזו לטווח ארוך.</strong></span><span class="en-text" style="display:none">1. We'll launch a scheduling system for manicurists, <span class="accent-text">at the lowest price in the market</span>.<br>2. Girls who are addicted to nail polish with AI can purchase a yearly premium pass for <span class="accent-text">19.9 ILS</span> and enjoy unlimited tries.<br><br><strong>We're here to build and maintain this community long-term.</strong></span><span class="de-text" style="display:none">1. Wir starten ein Buchungssystem für Maniküristinnen, <span class="accent-text">zum niedrigsten Preis am Markt</span>.<br>2. Mädchen, die süchtig nach AI-Nagellack sind, können einen jährlichen Premium-Pass für <span class="accent-text">19,9&#8362;</span> kaufen und unbegrenzte Versuche genießen.<br><br><strong>Wir sind hier, um diese Community langfristig aufzubauen und zu pflegen.</strong></span></p>
                 </div>
             </div>
         </div>

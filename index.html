@@ -14,7 +14,7 @@
             --primary-light: #FCE4EC;
             --accent: #FF6B9D;
             --bg: #FFFBFC;
-            --bg-soft: #FFF0F3;
+            --bg-soft: #FFF8F9;
             --white: #FFFFFF;
             --dark: #1A1A2E;
             --text: #2D2A3E;
@@ -111,7 +111,7 @@
         .hero {
             min-height: 100vh; display: flex; align-items: center;
             padding: 100px 60px 60px;
-            background: linear-gradient(175deg, var(--white) 0%, var(--bg) 30%, var(--bg-soft) 70%, #FFE8EE 100%);
+            background: linear-gradient(175deg, var(--white) 0%, var(--bg) 30%, var(--bg-soft) 60%, var(--white) 100%);
             position: relative; overflow: hidden;
         }
         .hero-container {
@@ -162,10 +162,10 @@
         }
         .appstore-btn, .gplay-btn { min-width: 180px; justify-content: center; overflow: visible; }
         .gplay-btn {
-            background: #9E9E9E; cursor: default; pointer-events: none;
+            background: #9E9E9E; cursor: pointer;
             opacity: 0.7;
         }
-        .gplay-btn:hover { transform: none; box-shadow: none; }
+        .gplay-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.15); opacity: 0.85; }
         .soon-ribbon {
             position: absolute; top: -8px; left: -8px;
             background: var(--primary); color: var(--white);
@@ -177,7 +177,7 @@
         .hero-download-btn svg { width: 24px; height: 24px; }
         .hero-download-btn .btn-text-group { display: flex; flex-direction: column; align-items: flex-start; }
         .hero-download-btn .btn-small { font-size: 10px; font-weight: 400; opacity: 0.8; }
-        .hero-download-btn .btn-big { font-size: 16px; font-weight: 700; line-height: 1.1; }
+        .hero-download-btn .btn-big { font-size: 16px; font-weight: 700; line-height: 1.1; white-space: nowrap; }
 
         .hero-perk-line {
             display: flex; align-items: center; gap: 8px;
@@ -423,35 +423,22 @@
         }
 
         /* ===== S3: HOW IT WORKS ===== */
-        /* Saw man on question mark */
-        .saw-qmark {
+        /* Saw man on letter */
+        .saw-letter {
             position: relative; display: inline-block;
-            width: 50px; height: 64px; vertical-align: bottom;
-            margin: 0 -4px;
         }
-        .qmark-svg {
-            width: 28px; height: 58px;
-            position: absolute; bottom: 0; right: 8px;
-        }
-        .qmark-cut {
-            animation: cutGlow 1.5s ease-in-out infinite;
-        }
-        @keyframes cutGlow {
-            0%, 100% { opacity: 0.6; }
-            50% { opacity: 1; stroke-width: 4; }
-        }
-        .saw-man-qmark {
-            position: absolute; top: 6px; right: -8px;
-            width: 40px; height: 40px;
+        .saw-man-letter {
+            position: absolute; top: -18px; left: 50%; transform: translateX(-50%);
+            width: 36px; height: 36px;
             animation: sawing 0.8s ease-in-out infinite;
             transform-origin: bottom center;
         }
         @keyframes sawing {
-            0%, 100% { transform: rotate(-8deg); }
-            50% { transform: rotate(8deg); }
+            0%, 100% { transform: translateX(-50%) rotate(-8deg); }
+            50% { transform: translateX(-50%) rotate(8deg); }
         }
         .saw-sparks {
-            position: absolute; top: 32px; right: 10px; width: 8px; height: 8px;
+            position: absolute; top: -6px; left: 50%; width: 8px; height: 8px;
         }
         .saw-sparks::before, .saw-sparks::after {
             content: ''; position: absolute; width: 3px; height: 3px;
@@ -499,12 +486,13 @@
 
         .how-section {
             padding: 60px 20px 100px;
-            background: linear-gradient(170deg, var(--white) 0%, var(--bg-soft) 100%);
+            background: linear-gradient(170deg, var(--white) 0%, var(--bg) 100%);
         }
         .how-steps {
             display: flex; flex-direction: row-reverse; gap: 24px; max-width: 1000px; margin: 0 auto 40px;
             justify-content: center;
         }
+        [dir="ltr"] .how-steps { flex-direction: row; }
         .how-step {
             flex: 1; max-width: 300px; text-align: center;
             background: var(--white); border: 1px solid rgba(0,0,0,0.05);
@@ -547,15 +535,17 @@
             background: var(--bg); border: 1px solid rgba(0,0,0,0.04);
             border-radius: 20px; padding: 36px 30px;
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative; overflow: hidden;
+            position: relative; overflow: visible;
         }
         .feat-card:hover { transform: translateY(-6px); box-shadow: 0 16px 50px rgba(233,30,99,0.08); }
         .feat-card .feat-icon { font-size: 36px; margin-bottom: 16px; display: block; }
         .feat-card h3 { font-size: 18px; font-weight: 800; margin-bottom: 10px; color: var(--dark); }
         .feat-card p { color: var(--muted); font-size: 14px; line-height: 1.7; }
         .feat-card .feat-tag {
-            display: inline-block; font-size: 12px; font-weight: 700;
-            padding: 3px 12px; border-radius: 16px; margin-top: 14px;
+            position: absolute; top: -12px; right: 20px;
+            font-size: 12px; font-weight: 700;
+            padding: 5px 16px; border-radius: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
         .feat-tag.free { background: #E8F5E9; color: #2E7D32; }
         .feat-tag.soon { background: #FFF3E0; color: #E65100; }
@@ -678,7 +668,7 @@
             .hero-download-row { justify-content: center; flex-direction: row; align-items: center; gap: 10px; }
             .hero-download-btn { margin: 0; font-size: 12px; padding: 10px 18px; }
             .hero-download-btn svg { width: 20px; height: 20px; }
-            .hero-download-btn .btn-big { font-size: 14px; }
+            .hero-download-btn .btn-big { font-size: 13px; white-space: nowrap; }
             .hero-download-btn .btn-small { font-size: 9px; }
             .step { flex-direction: column; text-align: center; }
             .steps::before { display: none; }
@@ -699,7 +689,7 @@
             <div class="nav-center">
                 <a href="#about"><span class="he-text">מה זה Polished?</span><span class="en-text" style="display:none">What's Polished?</span></a>
                 <a href="#how"><span class="he-text">איך זה עובד?</span><span class="en-text" style="display:none">How it works?</span></a>
-                <a href="#for-who"><span class="he-text">מה ה-X פקטור?</span><span class="en-text" style="display:none">The X Factor?</span></a>
+                <a href="#xfactor"><span class="he-text">מה ה-X פקטור?</span><span class="en-text" style="display:none">The X Factor?</span></a>
                 <a href="#why-join"><span class="he-text">למה להצטרף?</span><span class="en-text" style="display:none">Why join?</span></a>
             </div>
             <div class="nav-left-group">
@@ -803,8 +793,8 @@
                     <h3><span class="he-text">בשביל בנות</span><span class="en-text" style="display:none">For Girls</span></h3>
                     <ul>
                         <li><span class="he-text">נסי כל לק על הידיים שלך בעזרת AI</span><span class="en-text" style="display:none">Try any nail polish on your own hands using AI</span></li>
-                        <li><span class="he-text">גלשי בין סוגי וצבעי לקים</span><span class="en-text" style="display:none">Browse the types and colors of nail polishes</span></li>
-                        <li><span class="he-text">חקרי את לוח ההשראה לרעיון הבא שלך</span><span class="en-text" style="display:none">Explore the inspiration board for your next idea</span></li>
+                        <li><span class="he-text">תגלשי בין סוגי וצבעי לקים</span><span class="en-text" style="display:none">Browse the types and colors of nail polishes</span></li>
+                        <li><span class="he-text">תחקרי את לוח ההשראה ללק הבא שלך ותשתפי את הלק שעשית</span><span class="en-text" style="display:none">Explore the inspiration board for your next idea</span></li>
                         <li><span class="he-text">חפשי מניקוריסטיות קרובות אלייך</span><span class="en-text" style="display:none">Search for nearby manicurists</span></li>
                     </ul>
                 </div>
@@ -815,7 +805,7 @@
                     <h3><span class="he-text">בשביל מניקוריסטיות</span><span class="en-text" style="display:none">For Manicurists</span></h3>
                     <ul>
                         <li><span class="he-text">הראי ללקוחות שלך את העבודות שלך על הידיים שלהן</span><span class="en-text" style="display:none">Show your clients your works on their own hands</span></li>
-                        <li><span class="he-text">גלי סוגי וצבעי לקים חדשים לעסק שלך</span><span class="en-text" style="display:none">Explore new types and colors of nail polishes for your business</span></li>
+                        <li><span class="he-text">תגלי סוגי וצבעי לקים חדשים לעסק שלך</span><span class="en-text" style="display:none">Explore new types and colors of nail polishes for your business</span></li>
                         <li><span class="he-text">העלי את העבודות שלך כדי לתת השראה ולקבל חשיפה</span><span class="en-text" style="display:none">Upload your works to inspire other manicurists and gain exposure</span></li>
                         <li><span class="he-text">תתכונני לעבור למערכת התורים שלנו :)</span><span class="en-text" style="display:none">Get ready to move to our scheduling system :)</span></li>
                     </ul>
@@ -832,8 +822,8 @@
     <section class="how-section" id="how">
         <div class="section-title reveal">
             <h2 class="big-headline">
-                <span class="he-text">איך זה <span style="color:var(--primary)">עובד</span><span class="saw-qmark"><!-- SVG question mark with cut --><svg class="qmark-svg" viewBox="0 0 30 64" fill="none"><path d="M15 4C8 4 4 9 4 15c0 5 3 8 6 11 2 2 4 4 4 7" stroke="var(--dark)" stroke-width="5" stroke-linecap="round" fill="none"/><line class="qmark-cut" x1="0" y1="37" x2="22" y2="37" stroke="var(--bg-soft)" stroke-width="3"/><circle cx="14" cy="50" r="3.5" fill="var(--dark)"/></svg><!-- Saw man sitting on the cut --><svg class="saw-man-qmark" viewBox="0 0 44 44" fill="none"><circle cx="22" cy="8" r="5" fill="var(--primary)"/><line x1="22" y1="13" x2="22" y2="26" stroke="var(--primary)" stroke-width="2.5" stroke-linecap="round"/><line x1="22" y1="18" x2="15" y2="23" stroke="var(--primary)" stroke-width="2" stroke-linecap="round"/><line x1="22" y1="18" x2="30" y2="14" stroke="var(--primary)" stroke-width="2" stroke-linecap="round"/><line x1="22" y1="26" x2="16" y2="34" stroke="var(--primary)" stroke-width="2" stroke-linecap="round"/><line x1="22" y1="26" x2="28" y2="34" stroke="var(--primary)" stroke-width="2" stroke-linecap="round"/><rect x="28" y="12" width="14" height="3" rx="1" fill="var(--accent)" transform="rotate(-5 28 12)"/><line x1="32" y1="11" x2="32" y2="16" stroke="var(--primary-dark)" stroke-width="0.8"/><line x1="35" y1="11" x2="35" y2="16" stroke="var(--primary-dark)" stroke-width="0.8"/><line x1="38" y1="11" x2="38" y2="16" stroke="var(--primary-dark)" stroke-width="0.8"/></svg><span class="saw-sparks"></span></span></span>
-                <span class="en-text" style="display:none">How Does It <span style="color:var(--primary)">Work</span><span class="saw-qmark"><svg class="qmark-svg" viewBox="0 0 30 64" fill="none"><path d="M15 4C8 4 4 9 4 15c0 5 3 8 6 11 2 2 4 4 4 7" stroke="var(--dark)" stroke-width="5" stroke-linecap="round" fill="none"/><line class="qmark-cut" x1="0" y1="37" x2="22" y2="37" stroke="var(--bg-soft)" stroke-width="3"/><circle cx="14" cy="50" r="3.5" fill="var(--dark)"/></svg><svg class="saw-man-qmark" viewBox="0 0 44 44" fill="none"><circle cx="22" cy="8" r="5" fill="var(--primary)"/><line x1="22" y1="13" x2="22" y2="26" stroke="var(--primary)" stroke-width="2.5" stroke-linecap="round"/><line x1="22" y1="18" x2="15" y2="23" stroke="var(--primary)" stroke-width="2" stroke-linecap="round"/><line x1="22" y1="18" x2="30" y2="14" stroke="var(--primary)" stroke-width="2" stroke-linecap="round"/><line x1="22" y1="26" x2="16" y2="34" stroke="var(--primary)" stroke-width="2" stroke-linecap="round"/><line x1="22" y1="26" x2="28" y2="34" stroke="var(--primary)" stroke-width="2" stroke-linecap="round"/><rect x="28" y="12" width="14" height="3" rx="1" fill="var(--accent)" transform="rotate(-5 28 12)"/><line x1="32" y1="11" x2="32" y2="16" stroke="var(--primary-dark)" stroke-width="0.8"/><line x1="35" y1="11" x2="35" y2="16" stroke="var(--primary-dark)" stroke-width="0.8"/><line x1="38" y1="11" x2="38" y2="16" stroke="var(--primary-dark)" stroke-width="0.8"/></svg><span class="saw-sparks"></span></span></span>
+                <span class="he-text">איך זה <span style="color:var(--primary)"><span class="saw-letter">ע<svg class="saw-man-letter" viewBox="0 0 44 44" fill="none"><circle cx="22" cy="8" r="5" fill="var(--primary-dark)"/><line x1="22" y1="13" x2="22" y2="26" stroke="var(--primary-dark)" stroke-width="2.5" stroke-linecap="round"/><line x1="22" y1="18" x2="15" y2="23" stroke="var(--primary-dark)" stroke-width="2" stroke-linecap="round"/><line x1="22" y1="18" x2="30" y2="14" stroke="var(--primary-dark)" stroke-width="2" stroke-linecap="round"/><line x1="22" y1="26" x2="16" y2="34" stroke="var(--primary-dark)" stroke-width="2" stroke-linecap="round"/><line x1="22" y1="26" x2="28" y2="34" stroke="var(--primary-dark)" stroke-width="2" stroke-linecap="round"/><rect x="28" y="12" width="14" height="3" rx="1" fill="var(--accent)" transform="rotate(-5 28 12)"/><line x1="32" y1="11" x2="32" y2="16" stroke="var(--primary-dark)" stroke-width="0.8"/><line x1="33" y1="11" x2="33" y2="16" stroke="var(--primary-dark)" stroke-width="0.8"/><line x1="36" y1="11" x2="36" y2="16" stroke="var(--primary-dark)" stroke-width="0.8"/></svg><span class="saw-sparks"></span></span>ובד</span>?</span>
+                <span class="en-text" style="display:none">How Does It <span style="color:var(--primary)">Wo<span class="saw-letter">R<svg class="saw-man-letter" viewBox="0 0 44 44" fill="none"><circle cx="22" cy="8" r="5" fill="var(--primary-dark)"/><line x1="22" y1="13" x2="22" y2="26" stroke="var(--primary-dark)" stroke-width="2.5" stroke-linecap="round"/><line x1="22" y1="18" x2="15" y2="23" stroke="var(--primary-dark)" stroke-width="2" stroke-linecap="round"/><line x1="22" y1="18" x2="30" y2="14" stroke="var(--primary-dark)" stroke-width="2" stroke-linecap="round"/><line x1="22" y1="26" x2="16" y2="34" stroke="var(--primary-dark)" stroke-width="2" stroke-linecap="round"/><line x1="22" y1="26" x2="28" y2="34" stroke="var(--primary-dark)" stroke-width="2" stroke-linecap="round"/><rect x="28" y="12" width="14" height="3" rx="1" fill="var(--accent)" transform="rotate(-5 28 12)"/><line x1="32" y1="11" x2="32" y2="16" stroke="var(--primary-dark)" stroke-width="0.8"/><line x1="33" y1="11" x2="33" y2="16" stroke="var(--primary-dark)" stroke-width="0.8"/><line x1="36" y1="11" x2="36" y2="16" stroke="var(--primary-dark)" stroke-width="0.8"/></svg><span class="saw-sparks"></span></span>k</span>?</span>
             </h2>
             <p><span class="he-text">שלושה צעדים פשוטים, ובום, ציפורניים מושלמות</span><span class="en-text" style="display:none">Three simple steps, and boom, perfect nails</span></p>
         </div>
@@ -860,13 +850,13 @@
             </div>
         </div>
         <p class="how-extra reveal">
-            <span class="he-text">רוצה שמישהי תעשה לך את זה באמת?<br><a href="#near-me">גלי מניקוריסטיות קרובות אלייך →</a></span>
+            <span class="he-text">רוצה שמישהי תעשה לך את זה באמת?<br><a href="#near-me">גלי מניקוריסטיות קרובות אלייך ←</a></span>
             <span class="en-text" style="display:none">Want someone to actually do it for you?<br><a href="#near-me">Discover manicurists near you →</a></span>
         </p>
     </section>
 
     <!-- ===== S4: FEATURES ===== -->
-    <section class="features-section" id="for-who">
+    <section class="features-section" id="xfactor">
         <div class="section-title reveal">
             <h2 class="big-headline"><span class="he-text">מה יש <span class="app-title-word">באפליקציה<svg class="floating-phone" viewBox="0 0 28 44" fill="none"><rect x="2" y="2" width="24" height="40" rx="5" stroke="var(--primary)" stroke-width="2" fill="var(--white)"/><rect class="phone-color-screen" x="5" y="7" width="18" height="28" rx="2"/><circle cx="14" cy="39" r="1.5" fill="var(--primary)" opacity="0.3"/><rect x="10" y="3.5" width="8" height="2" rx="1" fill="var(--primary)" opacity="0.2"/></svg></span>?</span><span class="en-text" style="display:none">What's In The <span class="app-title-word">App<svg class="floating-phone" viewBox="0 0 28 44" fill="none"><rect x="2" y="2" width="24" height="40" rx="5" stroke="var(--primary)" stroke-width="2" fill="var(--white)"/><rect class="phone-color-screen" x="5" y="7" width="18" height="28" rx="2"/><circle cx="14" cy="39" r="1.5" fill="var(--primary)" opacity="0.3"/><rect x="10" y="3.5" width="8" height="2" rx="1" fill="var(--primary)" opacity="0.2"/></svg></span>?</span></h2>
             <p><span class="he-text">כל מה שצריך בשביל ציפורניים מושלמות, במקום אחד</span><span class="en-text" style="display:none">Everything you need for perfect nails, in one place</span></p>
@@ -881,7 +871,7 @@
             <div class="feat-card reveal">
                 <span class="feat-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
                 <h3><span class="he-text">לוח השראה</span><span class="en-text" style="display:none">Inspiration Board</span></h3>
-                <p><span class="he-text">העלי את עיצובי הציפורניים שלך. המערכת שלנו אוטומטית תקטלג את סוג הלק והצבעים בשביל סינון בבורד ואז ככה תוכלי בקלות למצוא את הרעיון הבא שלך, לתת לייק לעבודות של מניקוריסטיות שאת אוהבת ולעיצובים מיוחדים שמצאת</span><span class="en-text" style="display:none">Upload your nail designs. Our system automatically catalogs the polish type and colors for board filtering, so you can easily find your next idea, like the work of manicurists you love and special designs you found</span></p>
+                <p><span class="he-text">העלי את עיצובי הציפורניים שלך. המערכת שלנו אוטומטית תקטלג את סוג הלק והצבעים בשביל סינון בבורד ואז ככה תוכלי בקלות למצוא את הרעיון הבא שלך, לתת לייק לעבודות של מניקוריסטיות שאת אוהבת ולעיצובים מיוחדים שמצאת!</span><span class="en-text" style="display:none">Upload your nail designs. Our system automatically catalogs the polish type and colors for board filtering, so you can easily find your next idea, like the work of manicurists you love and special designs you found.</span></p>
                 <span class="feat-tag free"><span class="he-text">חינם</span><span class="en-text" style="display:none">Free</span></span>
             </div>
             <div class="feat-card reveal">
@@ -893,14 +883,14 @@
             <div class="feat-card reveal">
                 <span class="feat-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
                 <h3><span class="he-text">קרוב אלייך</span><span class="en-text" style="display:none">Near You</span></h3>
-                <p><span class="he-text">גלי מניקוריסטיות באזור שלך. כבר יותר מ-200 מניקוריסטיות רשומות אצלנו באפליקציה</span><span class="en-text" style="display:none">Discover manicurists in your area. Already 200+ manicurists registered in our app</span></p>
-                <p style="margin-top:12px"><span class="he-text"><span style="color:var(--primary);font-weight:800">מניקוריסטית?</span> את לא ברשימה? פשוט תרשמי בקלות, שם העסק, פרטי התקשרות, שעות פעילות, מחירים ותמונות של עבודות וסיימת. אין בירוקרטיה כלל. והכל בחינם</span><span class="en-text" style="display:none"><span style="color:var(--primary);font-weight:800">Manicurist?</span> Not on the list? Simply register easily, business name, contact details, working hours, prices and photos of your work and you're done. No bureaucracy at all. And it's all free</span></p>
+                <p><span class="he-text">גלי מניקוריסטיות באזור שלך. כבר יותר מ-200 מניקוריסטיות רשומות אצלנו באפליקציה.</span><span class="en-text" style="display:none">Discover manicurists in your area. Already 200+ manicurists registered in our app.</span></p>
+                <p style="margin-top:12px"><span class="he-text"><span style="color:var(--primary);font-weight:800">מניקוריסטית?</span> את לא ברשימה? פשוט תרשמי בקלות, שם העסק, פרטי התקשרות, שעות פעילות, מחירים ותמונות של עבודות וסיימת. אין בירוקרטיה כלל. והכל בחינם!</span><span class="en-text" style="display:none"><span style="color:var(--primary);font-weight:800">Manicurist?</span> Not on the list? Simply register easily, business name, contact details, working hours, prices and photos of your work and you're done. No bureaucracy at all. And it's all free!</span></p>
                 <span class="feat-tag free"><span class="he-text">חינם</span><span class="en-text" style="display:none">Free</span></span>
             </div>
             <div class="feat-card wide reveal">
                 <span class="feat-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>
                 <h3><span class="he-text">מערכת קביעת תורים</span><span class="en-text" style="display:none">Scheduling System</span></h3>
-                <p><span class="he-text">בקרוב. ברגע שנוכיח את עצמנו, נשיק מערכת תורים פנימית לכל המניקוריסטיות האהובות עלייך. אנחנו מתכננות להיות הכי זולות והכי טובות בשוק</span><span class="en-text" style="display:none">Coming soon. Once we prove ourselves, we'll launch an internal scheduling system for all your favorite manicurists. We plan on being the cheapest and best in the market</span></p>
+                <p><span class="he-text">בקרוב. ברגע שנוכיח את עצמנו, נשיק מערכת תורים פנימית לכל המניקוריסטיות האהובות עלייך. אנחנו מתכננות להיות הכי זולות והכי טובות בשוק!</span><span class="en-text" style="display:none">Coming soon. Once we prove ourselves, we'll launch an internal scheduling system for all your favorite manicurists. We plan on being the cheapest and best in the market!</span></p>
                 <span class="feat-tag soon"><span class="he-text">בקרוב</span><span class="en-text" style="display:none">Soon</span></span>
             </div>
         </div>
@@ -916,11 +906,11 @@
             <div class="why-blocks">
                 <div class="why-block reveal">
                     <h3><span class="he-text">הקהילה שלנו</span><span class="en-text" style="display:none">Our Community</span></h3>
-                    <p><span class="he-text">אנחנו רוצות ליצור קהילה של בנות שמתלהבות מציפורניים, משתפות השראה ועבודות. אנחנו רוצות לאפשר לעסקים קטנים לפרוח, <span class="accent-text">בלי קשר לכמות עוקבים</span>. אנחנו מפרסמות כל מניקוריסטית בחינם</span><span class="en-text" style="display:none">We want to create a community of girls who are passionate about nails, share inspiration and work. We want to help small businesses thrive, <span class="accent-text">regardless of follower count</span>. We promote every manicurist for free</span></p>
+                    <p><span class="he-text">אנחנו רוצות ליצור קהילה של בנות שמתלהבות מציפורניים, משתפות השראה ועבודות. אנחנו רוצות לאפשר לעסקים קטנים לפרוח, <span class="accent-text">בלי קשר לכמות עוקבים</span>. אנחנו מפרסמות כל מניקוריסטית בחינם!</span><span class="en-text" style="display:none">We want to create a community of girls who are passionate about nails, share inspiration and work. We want to help small businesses thrive, <span class="accent-text">regardless of follower count</span>. We promote every manicurist for free!</span></p>
                 </div>
                 <div class="why-block reveal">
                     <h3><span class="he-text">איך אנחנו מתכננות להרוויח?</span><span class="en-text" style="display:none">How Do We Plan To Make Money?</span></h3>
-                    <p><span class="he-text">נשיק מערכת תורים למניקוריסטיות — <span class="accent-text">במחיר הכי נמוך בשוק</span>. ובנות שמכורות לנסות לקים עם AI יוכלו לרכוש מנוי פרימיום שנתי. אנחנו כאן כדי לבנות ולתחזק את הקהילה הזו לטווח ארוך.</span><span class="en-text" style="display:none">We'll launch a scheduling system for manicurists — <span class="accent-text">at the lowest price in the market</span>. And girls who are addicted to trying nails with AI can purchase a yearly premium pass. We're here to build and maintain this community long-term.</span></p>
+                    <p><span class="he-text">1. נשיק מערכת תורים למניקוריסטיות, <span class="accent-text">במחיר הכי נמוך בשוק</span>.<br>2. בנות שמכורות ללק עם AI יוכלו לרכוש מנוי פרימיום שנתי ב-<span class="accent-text">19.9&#8362;</span><br><br><strong>אנחנו כאן כדי לבנות ולתחזק את הקהילה הזו לטווח ארוך.</strong></span><span class="en-text" style="display:none">1. We'll launch a scheduling system for manicurists, <span class="accent-text">at the lowest price in the market</span>.<br>2. Girls who are addicted to nail polish with AI can purchase a yearly premium pass for <span class="accent-text">19.9 ILS</span><br><br><strong>We're here to build and maintain this community long-term.</strong></span></p>
                 </div>
             </div>
         </div>

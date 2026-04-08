@@ -4,55 +4,139 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Polished - Privacy Policy</title>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root { --cream: #F8F2EA; --pink: #E5ADAF; --charcoal: #2D2D2D; --warm-gray: #8A8A8A; }
+        :root {
+            --primary: #E91E63;
+            --primary-dark: #C2185B;
+            --primary-light: #FCE4EC;
+            --accent: #FF6B9D;
+            --bg: #FFFBFC;
+            --bg-soft: #FFF8F9;
+            --white: #FFFFFF;
+            --dark: #1A1A2E;
+            --text: #2D2A3E;
+            --muted: #7B7890;
+            --font-he: 'Rubik', sans-serif;
+            --font-en: 'Inter', sans-serif;
+        }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Heebo', sans-serif; background: var(--cream); color: var(--charcoal); padding: 40px 20px; max-width: 800px; margin: 0 auto; line-height: 1.8; }
-        h1 { font-size: 28px; margin-bottom: 8px; }
-        h2 { font-size: 20px; margin-top: 32px; margin-bottom: 12px; color: var(--pink); }
-        p, li { font-size: 15px; color: #444; margin-bottom: 12px; }
-        ul { padding-right: 20px; }
-        .date { font-size: 13px; color: var(--warm-gray); margin-bottom: 24px; }
-        a { color: var(--pink); }
+        body {
+            font-family: var(--font-he); background: var(--white);
+            color: var(--text); line-height: 1.8;
+        }
+        .page-header {
+            background: var(--bg-soft);
+            padding: 100px 20px 50px;
+            text-align: center;
+            border-bottom: 1px solid rgba(0,0,0,0.04);
+        }
+        .page-header h1 {
+            font-size: 36px; font-weight: 900; color: var(--dark);
+            margin-bottom: 6px;
+        }
+        .page-header .date {
+            font-size: 13px; color: var(--muted);
+        }
+        .back-nav {
+            position: fixed; top: 0; width: 100%; z-index: 90;
+            background: rgba(255,255,255,0.95); backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+            padding: 0 32px; height: 60px;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .back-nav a {
+            display: inline-flex; align-items: center; gap: 8px;
+            text-decoration: none; color: var(--primary); font-weight: 600;
+            font-size: 15px; transition: opacity 0.3s;
+        }
+        .back-nav a:hover { opacity: 0.7; }
+        .back-nav .logo {
+            font-size: 16px; font-weight: 800; letter-spacing: 4px;
+            color: var(--dark); text-decoration: none;
+        }
+        .content {
+            max-width: 750px; margin: 0 auto;
+            padding: 50px 24px 80px;
+        }
+        h2 {
+            font-size: 20px; font-weight: 800; color: var(--primary);
+            margin-top: 36px; margin-bottom: 14px;
+            padding-bottom: 8px; border-bottom: 2px solid var(--primary-light);
+        }
+        p, li {
+            font-size: 15px; color: var(--text); margin-bottom: 12px;
+        }
+        ul {
+            padding-right: 20px; margin-bottom: 16px;
+        }
+        li { margin-bottom: 8px; }
+        a { color: var(--primary); transition: color 0.3s; }
+        a:hover { color: var(--primary-dark); }
+        .page-footer {
+            background: var(--dark); color: rgba(255,255,255,0.5);
+            text-align: center; padding: 32px 20px; font-size: 13px;
+        }
+        .page-footer a { color: var(--accent); text-decoration: none; }
+        .page-footer a:hover { text-decoration: underline; }
+        @media (max-width: 768px) {
+            .page-header { padding: 80px 16px 36px; }
+            .page-header h1 { font-size: 28px; }
+            .back-nav { padding: 0 16px; }
+            .content { padding: 32px 16px 60px; }
+        }
     </style>
 </head>
 <body>
-    <h1>מדיניות פרטיות</h1>
-    <p class="date">עדכון אחרון: אפריל 2026</p>
+    <div class="back-nav">
+        <a href="index.html">→ חזרה לאתר</a>
+        <a href="index.html" class="logo">POLISHED</a>
+    </div>
 
-    <h2>1. מידע שאנחנו אוספים</h2>
-    <p>כאשר את משתמשת באפליקציית Polished, אנחנו עשויים לאסוף את המידע הבא:</p>
-    <ul>
-        <li>שם ואימייל (דרך התחברות עם Apple)</li>
-        <li>תמונות שאת מעלה לנסיית לק או לגלריית ההשראה</li>
-        <li>מיקום (לצורך מציאת מניקוריסטיות בקרבתך)</li>
-        <li>מידע עסקי (למניקוריסטיות שנרשמות לפלטפורמה)</li>
-    </ul>
+    <div class="page-header">
+        <h1>מדיניות פרטיות</h1>
+        <p class="date">עדכון אחרון: אפריל 2026</p>
+    </div>
 
-    <h2>2. כיצד אנחנו משתמשים במידע</h2>
-    <ul>
-        <li>לספק את שירותי האפליקציה (נסיית לק, גלריה, מציאת מניקוריסטיות)</li>
-        <li>לשפר את חוויית המשתמש</li>
-        <li>לעבד תמונות באמצעות שירותי AI (Gemini) לצורך נסיית לק וירטואלית</li>
-        <li>להציג פרופילים עסקיים של מניקוריסטיות</li>
-    </ul>
+    <div class="content">
+        <h2>1. מידע שאנחנו אוספים</h2>
+        <p>כאשר את משתמשת באפליקציית Polished, אנחנו עשויים לאסוף את המידע הבא:</p>
+        <ul>
+            <li>שם ואימייל (דרך התחברות עם Apple)</li>
+            <li>תמונות שאת מעלה לנסיית לק או לגלריית ההשראה</li>
+            <li>מיקום (לצורך מציאת מניקוריסטיות בקרבתך)</li>
+            <li>מידע עסקי (למניקוריסטיות שנרשמות לפלטפורמה)</li>
+        </ul>
 
-    <h2>3. שיתוף מידע</h2>
-    <p>אנחנו לא מוכרים את המידע שלך. המידע משותף רק עם:</p>
-    <ul>
-        <li>Google Firebase (אחסון נתונים ותמונות)</li>
-        <li>Google Gemini AI (עיבוד תמונות לנסיית לק)</li>
-        <li>Apple (התחברות ותשלומים)</li>
-    </ul>
+        <h2>2. כיצד אנחנו משתמשים במידע</h2>
+        <ul>
+            <li>לספק את שירותי האפליקציה (נסיית לק, גלריה, מציאת מניקוריסטיות)</li>
+            <li>לשפר את חוויית המשתמש</li>
+            <li>לעבד תמונות באמצעות שירותי AI (Gemini) לצורך נסיית לק וירטואלית</li>
+            <li>להציג פרופילים עסקיים של מניקוריסטיות</li>
+        </ul>
 
-    <h2>4. אבטחת מידע</h2>
-    <p>אנחנו משתמשים באמצעי אבטחה מתקדמים כולל הצפנה ואימות דו-שלבי להגנה על המידע שלך.</p>
+        <h2>3. שיתוף מידע</h2>
+        <p>אנחנו לא מוכרים את המידע שלך. המידע משותף רק עם:</p>
+        <ul>
+            <li>Google Firebase (אחסון נתונים ותמונות)</li>
+            <li>Google Gemini AI (עיבוד תמונות לנסיית לק)</li>
+            <li>Apple (התחברות ותשלומים)</li>
+        </ul>
 
-    <h2>5. זכויותייך</h2>
-    <p>את יכולה בכל עת לבקש למחוק את החשבון שלך ואת כל המידע המשויך אליו. לבקשות, פני אלינו ב: <a href="mailto:polished.app@outlook.com">polished.app@outlook.com</a></p>
+        <h2>4. אבטחת מידע</h2>
+        <p>אנחנו משתמשים באמצעי אבטחה מתקדמים כולל הצפנה ואימות דו-שלבי להגנה על המידע שלך.</p>
 
-    <h2>6. יצירת קשר</h2>
-    <p>לשאלות בנוגע למדיניות הפרטיות: <a href="mailto:polished.app@outlook.com">polished.app@outlook.com</a></p>
+        <h2>5. זכויותייך</h2>
+        <p>את יכולה בכל עת לבקש למחוק את החשבון שלך ואת כל המידע המשויך אליו. לבקשות, פני אלינו ב: <a href="mailto:polished.app@outlook.com">polished.app@outlook.com</a></p>
+
+        <h2>6. יצירת קשר</h2>
+        <p>לשאלות בנוגע למדיניות הפרטיות: <a href="mailto:polished.app@outlook.com">polished.app@outlook.com</a></p>
+    </div>
+
+    <footer class="page-footer">
+        <p>&copy; 2026 Polished. כל הזכויות שמורות.</p>
+    </footer>
 </body>
 </html>

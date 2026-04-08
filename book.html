@@ -268,8 +268,15 @@
         const db = getFirestore(app);
         const auth = getAuth(app);
 
-        // Sign in anonymously (no UI, secures Firestore writes)
-        try { await signInAnonymously(auth); } catch (e) { console.error('Anon auth error:', e); }
+        // Sign in anonymously — must complete before any writes
+        let anonUser = null;
+        try {
+            const cred = await signInAnonymously(auth);
+            anonUser = cred.user;
+            console.log('Anonymous auth OK, uid:', anonUser.uid);
+        } catch (e) {
+            console.error('Anonymous auth failed:', e);
+        }
 
         // State
         let manicurist = null;
@@ -539,6 +546,21 @@
                 return;
             }
 
+            // Must be authenticated
+            if (!anonUser && !auth.currentUser) {
+                try {
+                    const cred = await signInAnonymously(auth);
+                    anonUser = cred.user;
+                } catch (e) {
+                    console.error('Auth retry failed:', e);
+                    errorEl.textContent = 'שגיאת אימות, נסי לרענן את הדף';
+                    errorEl.classList.remove('hidden');
+                    return;
+                }
+            }
+
+            const currentUid = auth.currentUser?.uid || anonUser?.uid;
+
             const btn = document.getElementById('submit-btn');
             btn.disabled = true;
             btn.textContent = '...שולחת';
@@ -552,7 +574,7 @@
                 const svcNames = selectedServices.map(s => s.name).join(' + ');
 
                 await addDoc(collection(db, 'bookings'), {
-                    userId: 'web-' + Date.now(),
+                    userId: currentUid,
                     userName: name,
                     userPhone: phone,
                     manicuristId: manicurist.id,
@@ -570,7 +592,7 @@
                 document.getElementById('success-view').classList.remove('hidden');
                 document.querySelectorAll('.progress-dot').forEach(d => d.classList.add('active'));
             } catch (e) {
-                console.error('Submit error:', e);
+                console.error('Submit error:', e.code, e.message);
                 errorEl.textContent = 'שגיאה בשליחת הבקשה, נסי שוב';
                 errorEl.classList.remove('hidden');
                 btn.disabled = false;

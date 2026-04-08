@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Polished - Terms of Service</title>
+    <title>Polished - Terms of Use</title>
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -56,6 +56,19 @@
             font-size: 16px; font-weight: 800; letter-spacing: 4px;
             color: var(--dark); text-decoration: none;
         }
+        .nav-right {
+            display: flex; align-items: center; gap: 16px;
+        }
+        .lang-btn {
+            background: transparent; border: 1.5px solid rgba(0,0,0,0.12);
+            color: var(--text); padding: 6px 14px; border-radius: 20px;
+            font-size: 13px; font-weight: 500; cursor: pointer;
+            transition: all 0.3s; font-family: var(--font-en);
+        }
+        .lang-btn:hover {
+            background: var(--primary-light); border-color: var(--primary);
+            color: var(--primary);
+        }
         .content {
             max-width: 750px; margin: 0 auto;
             padding: 50px 24px 80px;
@@ -71,6 +84,9 @@
         ul {
             padding-right: 20px; margin-bottom: 16px;
         }
+        [dir="ltr"] ul {
+            padding-right: 0; padding-left: 20px;
+        }
         li { margin-bottom: 8px; }
         a { color: var(--primary); transition: color 0.3s; }
         a:hover { color: var(--primary-dark); }
@@ -80,6 +96,7 @@
         }
         .page-footer a { color: var(--accent); text-decoration: none; }
         .page-footer a:hover { text-decoration: underline; }
+        .en-text, .de-text { display: none; }
         @media (max-width: 768px) {
             .page-header { padding: 80px 16px 36px; }
             .page-header h1 { font-size: 28px; }
@@ -90,67 +107,208 @@
 </head>
 <body>
     <div class="back-nav">
-        <a href="index.html">→ חזרה לאתר</a>
-        <a href="index.html" class="logo">POLISHED</a>
+        <a href="index.html">
+            <span class="he-text">→ חזרה לאתר</span>
+            <span class="en-text">← Back to site</span>
+            <span class="de-text">← Zurück zur Seite</span>
+        </a>
+        <div class="nav-right">
+            <button class="lang-btn" onclick="cycleLang()">EN</button>
+            <a href="index.html" class="logo">POLISHED</a>
+        </div>
     </div>
 
     <div class="page-header">
-        <h1>תנאי שימוש</h1>
-        <p class="date">עדכון אחרון: אפריל 2026</p>
+        <h1>
+            <span class="he-text">תנאי שימוש</span>
+            <span class="en-text">Terms of Use</span>
+            <span class="de-text">Nutzungsbedingungen</span>
+        </h1>
+        <p class="date">
+            <span class="he-text">עדכון אחרון: אפריל 2026</span>
+            <span class="en-text">Last Updated: April 2026</span>
+            <span class="de-text">Letzte Aktualisierung: April 2026</span>
+        </p>
     </div>
 
     <div class="content">
-        <h2>1. קבלת התנאים</h2>
-        <p>בשימוש באפליקציית Polished את מסכימה לתנאי שימוש אלו. אם אינך מסכימה, אנא הפסיקי להשתמש באפליקציה.</p>
 
-        <h2>2. השירות</h2>
-        <p>Polished מספקת שירותי נסיית לק וירטואלית, גלריית צבעים, גלריית השראה קהילתית, חיפוש מניקוריסטיות וקביעת תורים.</p>
+        <!-- Section 1 -->
+        <h2>
+            <span class="he-text">1. קבלת התנאים</span>
+            <span class="en-text">1. Acceptance of Terms</span>
+            <span class="de-text">1. Annahme der Bedingungen</span>
+        </h2>
+        <p>
+            <span class="he-text">בהורדה ובשימוש באפליקציית Polished ("האפליקציה"), את מסכימה לתנאי שימוש אלו. אם אינך מסכימה, אנא אל תשתמשי באפליקציה.</span>
+            <span class="en-text">By downloading and using the Polished app ("the App"), you agree to these Terms of Use. If you do not agree, please do not use the App.</span>
+            <span class="de-text">Durch das Herunterladen und die Nutzung der Polished-App ("die App") stimmst du diesen Nutzungsbedingungen zu. Wenn du nicht zustimmst, nutze die App bitte nicht.</span>
+        </p>
 
-        <h2>3. חשבון משתמש</h2>
+        <!-- Section 2 -->
+        <h2>
+            <span class="he-text">2. השירות והצהרת פלטפורמה</span>
+            <span class="en-text">2. The Service & Platform Disclaimer</span>
+            <span class="de-text">2. Der Service & Plattform-Haftungsausschluss</span>
+        </h2>
+        <p>
+            <span class="he-text">Polished מספקת נסיית לק וירטואלית, גלריית השראה, ומדריך לגילוי והזמנת מניקוריסטיות עצמאיות. Polished היא פלטפורמה טכנולוגית, לא סלון. אנחנו לא מעסיקים את המניקוריסטיות, לא מעבדים תשלומים עבור שירותיהן ולא מבטיחים את איכות עבודתן. כל הזמנה היא הסכם ישיר בין הלקוחה למניקוריסטית.</span>
+            <span class="en-text">Polished provides virtual nail polish try-ons, an inspiration gallery, and a directory to discover and book independent manicurists. Polished is a technology platform, not a salon. We do not employ the manicurists, process payments for their services, or guarantee the quality of their work. Any booking is a direct agreement between the client and the manicurist.</span>
+            <span class="de-text">Polished bietet virtuelle Nagellack-Anproben, eine Inspirationsgalerie und ein Verzeichnis zum Entdecken und Buchen unabhängiger Maniküristinnen. Polished ist eine Technologieplattform, kein Salon. Wir beschäftigen die Maniküristinnen nicht, verarbeiten keine Zahlungen für ihre Dienste und garantieren nicht die Qualität ihrer Arbeit. Jede Buchung ist eine direkte Vereinbarung zwischen der Kundin und der Maniküristin.</span>
+        </p>
+
+        <!-- Section 3 -->
+        <h2>
+            <span class="he-text">3. חשבון משתמש</span>
+            <span class="en-text">3. User Accounts</span>
+            <span class="de-text">3. Benutzerkonten</span>
+        </h2>
+        <p>
+            <span class="he-text">שימוש מלא באפליקציה דורש התחברות דרך Apple ID או חשבון Google. את אחראית לשמירה על אבטחת החשבון שלך. ניתן למחוק את החשבון ואת כל המידע המשויך אליו בכל עת דרך הגדרות האפליקציה.</span>
+            <span class="en-text">Full use of the App requires sign-in via Apple ID or Google Account. You are responsible for maintaining the security of your account. You may delete your account and all associated data at any time via the App settings.</span>
+            <span class="de-text">Die vollständige Nutzung der App erfordert eine Anmeldung über Apple ID oder Google-Konto. Du bist für die Sicherheit deines Kontos verantwortlich. Du kannst dein Konto und alle zugehörigen Daten jederzeit über die App-Einstellungen löschen.</span>
+        </p>
+
+        <!-- Section 4 -->
+        <h2>
+            <span class="he-text">4. תוכן משתמשים וסימני מים</span>
+            <span class="en-text">4. User-Generated Content & Watermarks</span>
+            <span class="de-text">4. Nutzergenerierte Inhalte & Wasserzeichen</span>
+        </h2>
+        <p>
+            <span class="he-text">את אחראית לתמונות ולפרופילים העסקיים שאת מעלה. תוכן פוגעני, מטעה או מפר זכויות יוצרים אסור בתכלית האיסור ויוסר. תמונות שמשותפות לגלריית ההשראה הקהילתית גלויות לכל המשתמשות. כאשר את מייצאת או משתפת תמונה מעובדת AI מחוץ לאפליקציה, Polished עשויה להוסיף אוטומטית סימן מים או לוגו לזיהוי מקור התמונה.</span>
+            <span class="en-text">You are responsible for the photos and business profiles you upload. Content that is offensive, misleading, or infringes on copyrights is strictly prohibited and will be removed. Photos shared to the Community Inspiration Gallery are visible to all users. When you export or share an AI-processed image outside of the App, Polished may automatically apply a visual watermark or logo to identify it as originating from our platform.</span>
+            <span class="de-text">Du bist für die Fotos und Geschäftsprofile verantwortlich, die du hochlädst. Beleidigende, irreführende oder urheberrechtsverletzende Inhalte sind streng verboten und werden entfernt. Fotos, die in der Community-Inspirationsgalerie geteilt werden, sind für alle Nutzerinnen sichtbar. Wenn du ein AI-verarbeitetes Bild außerhalb der App exportierst oder teilst, kann Polished automatisch ein Wasserzeichen oder Logo hinzufügen.</span>
+        </p>
+
+        <!-- Section 5 -->
+        <h2>
+            <span class="he-text">5. פרופילים עסקיים של מניקוריסטיות</span>
+            <span class="en-text">5. Manicurist Business Profiles</span>
+            <span class="de-text">5. Geschäftsprofile von Maniküristinnen</span>
+        </h2>
+        <p>
+            <span class="he-text">מניקוריסטיות אחראיות באופן בלעדי לדיוק המידע בפרופיל שלהן, כולל הכתובת הפיזית ותמונות העבודות. Polished אינה אחראית לגישור בסכסוכים, אי-הגעות או ביטולים בין לקוחות למניקוריסטיות.</span>
+            <span class="en-text">Manicurists are solely responsible for the accuracy of their profile information, including their physical address and portfolio images. Polished is not responsible for mediating disputes, no-shows, or cancellations between clients and manicurists.</span>
+            <span class="de-text">Maniküristinnen sind allein für die Richtigkeit ihrer Profilinformationen verantwortlich, einschließlich ihrer physischen Adresse und Portfolio-Bilder. Polished ist nicht für die Vermittlung bei Streitigkeiten, Nichterscheinen oder Stornierungen zwischen Kundinnen und Maniküristinnen verantwortlich.</span>
+        </p>
+
+        <!-- Section 6 -->
+        <h2>
+            <span class="he-text">6. עיבוד AI ומציאות רבודה</span>
+            <span class="en-text">6. AI Processing & Augmented Reality</span>
+            <span class="de-text">6. AI-Verarbeitung & Augmented Reality</span>
+        </h2>
+        <p>
+            <span class="he-text">האפליקציה משתמשת ב-AI מתקדם (Google Gemini) ובמציאות רבודה לסימולציית לק. התוצאות הן הדמיות וירטואליות בלבד. אנחנו לא מבטיחים שהצבע, הצורה או הגימור הוירטואלי יתאימו בדיוק ללק הפיזי שיורח במציאות.</span>
+            <span class="en-text">The App uses advanced AI (Google Gemini) and Augmented Reality to simulate nail polish. These results are virtual simulations only. We do not guarantee that the virtual color, shape, or finish will perfectly match the physical nail polish applied in real life.</span>
+            <span class="de-text">Die App verwendet fortschrittliche AI (Google Gemini) und Augmented Reality zur Simulation von Nagellack. Diese Ergebnisse sind ausschließlich virtuelle Simulationen. Wir garantieren nicht, dass Farbe, Form oder Finish virtuell exakt dem physisch aufgetragenen Nagellack entsprechen.</span>
+        </p>
+
+        <!-- Section 7 -->
+        <h2>
+            <span class="he-text">7. מנוי פרימיום (EULA)</span>
+            <span class="en-text">7. Premium Subscriptions (EULA)</span>
+            <span class="de-text">7. Premium-Abonnements (EULA)</span>
+        </h2>
+        <p>
+            <span class="he-text">Polished מציעה מנוי פרימיום חודשי מתחדש אוטומטית לנסיונות AI ללא הגבלה וגישה מלאה לגלריה.</span>
+            <span class="en-text">Polished offers an optional auto-renewing monthly Premium subscription for unlimited AI try-ons and full gallery access.</span>
+            <span class="de-text">Polished bietet ein optionales, automatisch verlängerbares monatliches Premium-Abonnement für unbegrenzte AI-Anproben und vollen Galeriezugang.</span>
+        </p>
         <ul>
-            <li>נדרשת התחברות עם Apple ID לשימוש מלא באפליקציה</li>
-            <li>את אחראית לשמירה על אבטחת החשבון שלך</li>
-            <li>ניתן למחוק את החשבון בכל עת</li>
+            <li>
+                <span class="he-text"><strong>חיוב:</strong> התשלום יחויב לחשבון Apple ID שלך באישור הרכישה.</span>
+                <span class="en-text"><strong>Billing:</strong> Payment will be charged to your Apple ID account at confirmation of purchase.</span>
+                <span class="de-text"><strong>Abrechnung:</strong> Die Zahlung wird bei Kaufbestätigung deinem Apple-ID-Konto belastet.</span>
+            </li>
+            <li>
+                <span class="he-text"><strong>חידוש:</strong> מנויים מתחדשים אוטומטית אלא אם בוטלו לפחות 24 שעות לפני סיום התקופה הנוכחית.</span>
+                <span class="en-text"><strong>Renewal:</strong> Subscriptions automatically renew unless canceled at least 24 hours before the end of the current period.</span>
+                <span class="de-text"><strong>Verlängerung:</strong> Abonnements verlängern sich automatisch, sofern sie nicht mindestens 24 Stunden vor Ende des aktuellen Zeitraums gekündigt werden.</span>
+            </li>
+            <li>
+                <span class="he-text"><strong>ביטול:</strong> ניתן לנהל ולבטל את המנוי בהגדרות חשבון App Store. לא יינתנו החזרים על תקופות חלקיות.</span>
+                <span class="en-text"><strong>Cancellation:</strong> You can manage and cancel your subscription in your App Store Account Settings. No refunds are provided for partial subscription periods.</span>
+                <span class="de-text"><strong>Kündigung:</strong> Du kannst dein Abonnement in den App-Store-Kontoeinstellungen verwalten und kündigen. Für angebrochene Abonnementzeiträume werden keine Erstattungen gewährt.</span>
+            </li>
         </ul>
 
-        <h2>4. תוכן משתמשים</h2>
-        <ul>
-            <li>את אחראית לתוכן שאת מעלה (תמונות, פרופיל עסקי)</li>
-            <li>אסור להעלות תוכן פוגעני, מטעה או מפר זכויות יוצרים</li>
-            <li>Polished שומרת את הזכות להסיר תוכן לא ראוי</li>
-            <li>תמונות שמשותפות לקהילה יהיו גלויות לכל משתמשות האפליקציה</li>
-        </ul>
+        <!-- Section 8 -->
+        <h2>
+            <span class="he-text">8. קניין רוחני וסימני מסחר</span>
+            <span class="en-text">8. Intellectual Property & Trademarks</span>
+            <span class="de-text">8. Geistiges Eigentum & Marken</span>
+        </h2>
+        <p>
+            <span class="he-text">כל סימני המסחר, הלוגואים ושמות המותגים (לדוגמה, מותגי לק ספציפיים) המוצגים באפליקציה הם רכוש בעליהם. השימוש בהם הוא לצורכי תיאור וזיהוי מידע בלבד ואינו מרמז על חסות או שיוך ל-Polished.</span>
+            <span class="en-text">All trademarks, logos, and brand names (e.g., specific nail polish brands) displayed in the App are the property of their respective owners. Their use is strictly for descriptive, informational identification purposes and does not imply endorsement or affiliation with Polished.</span>
+            <span class="de-text">Alle Marken, Logos und Markennamen (z.B. bestimmte Nagellackmarken), die in der App angezeigt werden, sind Eigentum ihrer jeweiligen Inhaber. Ihre Verwendung dient ausschließlich beschreibenden, informativen Identifikationszwecken und impliziert keine Billigung oder Zugehörigkeit zu Polished.</span>
+        </p>
 
-        <h2>5. פרופיל עסקי (מניקוריסטיות)</h2>
-        <ul>
-            <li>מניקוריסטיות אחראיות לדיוק המידע בפרופיל שלהן</li>
-            <li>הכתובת חייבת להיות מדויקת</li>
-            <li>Polished אינה אחראית לאיכות השירותים שניתנים על ידי המניקוריסטיות</li>
-            <li>ניתן למחוק את הפרופיל העסקי בכל עת</li>
-        </ul>
+        <!-- Section 9 -->
+        <h2>
+            <span class="he-text">9. הגבלת אחריות</span>
+            <span class="en-text">9. Limitation of Liability</span>
+            <span class="de-text">9. Haftungsbeschränkung</span>
+        </h2>
+        <p>
+            <span class="he-text">האפליקציה מסופקת "כפי שהיא" (as-is). אנחנו לא מבטיחים שירות רצוף. במידה המרבית המותרת בחוק, Polished ויוצרת האפליקציה לא יהיו אחראיות לנזקים עקיפים, מקריים או תוצאתיים הנובעים משימוש באפליקציה או משירותים של מניקוריסטיות צד שלישי.</span>
+            <span class="en-text">The App is provided "as-is." We do not guarantee uninterrupted service. To the maximum extent permitted by law, Polished and its creator shall not be liable for any indirect, incidental, or consequential damages arising from your use of the App or services provided by third-party manicurists.</span>
+            <span class="de-text">Die App wird "wie besehen" (as-is) bereitgestellt. Wir garantieren keinen ununterbrochenen Service. Im gesetzlich zulässigen Rahmen haften Polished und ihre Erstellerin nicht für indirekte, zufällige oder Folgeschäden, die aus der Nutzung der App oder den Diensten von Drittanbieter-Maniküristinnen entstehen.</span>
+        </p>
 
-        <h2>6. שימוש ב-AI</h2>
-        <p>האפליקציה משתמשת בטכנולוגיית AI (Google Gemini) לעיבוד תמונות. התוצאות הן הדמיה בלבד ואינן מבטיחות תוצאה זהה במציאות.</p>
+        <!-- Section 10 -->
+        <h2>
+            <span class="he-text">10. יצירת קשר</span>
+            <span class="en-text">10. Contact Us</span>
+            <span class="de-text">10. Kontakt</span>
+        </h2>
+        <p>
+            <span class="he-text">לשאלות בנוגע לתנאים אלו, ניתן לפנות אלינו ב: <a href="mailto:polished.app@outlook.com">polished.app@outlook.com</a></span>
+            <span class="en-text">For any questions regarding these Terms, please contact us at: <a href="mailto:polished.app@outlook.com">polished.app@outlook.com</a></span>
+            <span class="de-text">Bei Fragen zu diesen Bedingungen kontaktiere uns bitte unter: <a href="mailto:polished.app@outlook.com">polished.app@outlook.com</a></span>
+        </p>
 
-        <h2>7. מנויים ותשלומים</h2>
-        <ul>
-            <li>חלק מהשירותים עשויים לדרוש מנוי בתשלום</li>
-            <li>ניתן לבטל מנוי בכל עת דרך הגדרות Apple</li>
-            <li>לא יינתנו החזרים על תקופות שכבר שולמו</li>
-        </ul>
-
-        <h2>8. הגבלת אחריות</h2>
-        <p>Polished מסופקת "כפי שהיא" (as-is). אנחנו לא מתחייבים שהשירות יהיה זמין בכל עת או נטול שגיאות.</p>
-
-        <h2>9. שינויים בתנאים</h2>
-        <p>אנחנו עשויים לעדכן תנאים אלו מעת לעת. שינויים מהותיים יפורסמו באפליקציה.</p>
-
-        <h2>10. יצירת קשר</h2>
-        <p>לשאלות בנוגע לתנאי השימוש: <a href="mailto:polished.app@outlook.com">polished.app@outlook.com</a></p>
     </div>
 
     <footer class="page-footer">
-        <p>&copy; 2026 Polished. כל הזכויות שמורות.</p>
+        <p>
+            <span class="he-text">&copy; 2026 Polished. כל הזכויות שמורות.</span>
+            <span class="en-text">&copy; 2026 Polished. All rights reserved.</span>
+            <span class="de-text">&copy; 2026 Polished. Alle Rechte vorbehalten.</span>
+        </p>
     </footer>
+
+    <script>
+        // Language system: 'he', 'en', 'de'
+        let currentLang = 'he';
+        const langs = ['he', 'en', 'de'];
+        const langLabels = { he: 'HE', en: 'EN', de: 'DE' };
+        const rtlLangs = ['he'];
+
+        function setLang(lang) {
+            currentLang = lang;
+            const html = document.documentElement;
+            html.setAttribute('lang', lang);
+            html.setAttribute('dir', rtlLangs.includes(lang) ? 'rtl' : 'ltr');
+            // Show/hide text spans
+            ['he', 'en', 'de'].forEach(l => {
+                document.querySelectorAll('.' + l + '-text').forEach(el => {
+                    el.style.display = (l === lang) ? '' : 'none';
+                });
+            });
+            // Update all lang buttons to show NEXT language
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                const nextIdx = (langs.indexOf(lang) + 1) % langs.length;
+                btn.textContent = langLabels[langs[nextIdx]];
+            });
+        }
+
+        function cycleLang() {
+            const nextIdx = (langs.indexOf(currentLang) + 1) % langs.length;
+            setLang(langs[nextIdx]);
+        }
+    </script>
 </body>
 </html>

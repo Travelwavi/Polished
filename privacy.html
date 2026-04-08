@@ -56,6 +56,19 @@
             font-size: 16px; font-weight: 800; letter-spacing: 4px;
             color: var(--dark); text-decoration: none;
         }
+        .back-nav .nav-left-group {
+            display: flex; align-items: center; gap: 12px;
+        }
+        .lang-btn {
+            background: transparent; border: 1.5px solid rgba(0,0,0,0.12);
+            color: var(--text); padding: 6px 14px; border-radius: 20px;
+            font-size: 13px; font-weight: 500; cursor: pointer;
+            transition: all 0.3s; font-family: var(--font-en);
+        }
+        .lang-btn:hover {
+            background: var(--primary-light); border-color: var(--primary);
+            color: var(--primary);
+        }
         .content {
             max-width: 750px; margin: 0 auto;
             padding: 50px 24px 80px;
@@ -70,6 +83,9 @@
         }
         ul {
             padding-right: 20px; margin-bottom: 16px;
+        }
+        [dir="ltr"] ul {
+            padding-right: 0; padding-left: 20px;
         }
         li { margin-bottom: 8px; }
         a { color: var(--primary); transition: color 0.3s; }
@@ -90,53 +106,220 @@
 </head>
 <body>
     <div class="back-nav">
-        <a href="index.html">→ חזרה לאתר</a>
+        <div class="nav-left-group">
+            <a href="index.html">
+                <span class="he-text">&rarr; חזרה לאתר</span>
+                <span class="en-text" style="display:none">&larr; Back to site</span>
+                <span class="de-text" style="display:none">&larr; Zur&uuml;ck zur Seite</span>
+            </a>
+            <button class="lang-btn" onclick="cycleLang()">EN</button>
+        </div>
         <a href="index.html" class="logo">POLISHED</a>
     </div>
 
     <div class="page-header">
-        <h1>מדיניות פרטיות</h1>
-        <p class="date">עדכון אחרון: אפריל 2026</p>
+        <h1>
+            <span class="he-text">מדיניות פרטיות</span>
+            <span class="en-text" style="display:none">Privacy Policy</span>
+            <span class="de-text" style="display:none">Datenschutzrichtlinie</span>
+        </h1>
+        <p class="date">
+            <span class="he-text">עדכון אחרון: אפריל 2026</span>
+            <span class="en-text" style="display:none">Last Updated: April 2026</span>
+            <span class="de-text" style="display:none">Letzte Aktualisierung: April 2026</span>
+        </p>
     </div>
 
     <div class="content">
-        <h2>1. מידע שאנחנו אוספים</h2>
-        <p>כאשר את משתמשת באפליקציית Polished, אנחנו עשויים לאסוף את המידע הבא:</p>
+
+        <!-- Section 1 -->
+        <h2>
+            <span class="he-text">1. מידע שאנחנו אוספים</span>
+            <span class="en-text" style="display:none">1. Information We Collect</span>
+            <span class="de-text" style="display:none">1. Informationen, die wir erfassen</span>
+        </h2>
+        <p>
+            <span class="he-text">כאשר את משתמשת ב-Polished, אנחנו עשויים לאסוף:</span>
+            <span class="en-text" style="display:none">When you use Polished, we may collect:</span>
+            <span class="de-text" style="display:none">Wenn du Polished nutzt, erfassen wir m&ouml;glicherweise:</span>
+        </p>
         <ul>
-            <li>שם ואימייל (דרך התחברות עם Apple)</li>
-            <li>תמונות שאת מעלה לנסיית לק או לגלריית ההשראה</li>
-            <li>מיקום (לצורך מציאת מניקוריסטיות בקרבתך)</li>
-            <li>מידע עסקי (למניקוריסטיות שנרשמות לפלטפורמה)</li>
+            <li>
+                <span class="he-text">נתוני חשבון: שם וכתובת אימייל (דרך התחברות עם Apple).</span>
+                <span class="en-text" style="display:none">Account Data: Name and email address (via Apple Sign-In).</span>
+                <span class="de-text" style="display:none">Kontodaten: Name und E-Mail-Adresse (&uuml;ber Apple-Anmeldung).</span>
+            </li>
+            <li>
+                <span class="he-text">מדיה: תמונות של הידיים שלך ותמונות השראה שאת מעלה לנסיית לק AI או לגלריה הקהילתית.</span>
+                <span class="en-text" style="display:none">Media: Photos of your hands and inspiration images you upload for the AI try-on or community gallery.</span>
+                <span class="de-text" style="display:none">Medien: Fotos deiner H&auml;nde und Inspirationsbilder, die du f&uuml;r die AI-Anprobe oder Community-Galerie hochl&auml;dst.</span>
+            </li>
+            <li>
+                <span class="he-text">נתוני מיקום: באישורך המפורש, המיקום המדויק של המכשיר שלך למציאת מניקוריסטיות בקרבתך.</span>
+                <span class="en-text" style="display:none">Location Data: With your explicit permission, your device's precise location to find manicurists near you.</span>
+                <span class="de-text" style="display:none">Standortdaten: Mit deiner ausdr&uuml;cklichen Genehmigung den genauen Standort deines Ger&auml;ts, um Manik&uuml;ristinnen in deiner N&auml;he zu finden.</span>
+            </li>
+            <li>
+                <span class="he-text">נתונים עסקיים: כתובת, פרטי התקשרות ותמונות עבודות למניקוריסטיות שנרשמות לפלטפורמה.</span>
+                <span class="en-text" style="display:none">Business Data: Address, contact details, and portfolio images for manicurists who register on the platform.</span>
+                <span class="de-text" style="display:none">Gesch&auml;ftsdaten: Adresse, Kontaktdaten und Portfolio-Bilder f&uuml;r Manik&uuml;ristinnen, die sich auf der Plattform registrieren.</span>
+            </li>
         </ul>
 
-        <h2>2. כיצד אנחנו משתמשים במידע</h2>
+        <!-- Section 2 -->
+        <h2>
+            <span class="he-text">2. מצלמה בזמן אמת ומעקב ידיים (AR)</span>
+            <span class="en-text" style="display:none">2. Real-Time Camera &amp; Hand Tracking Data (AR)</span>
+            <span class="de-text" style="display:none">2. Echtzeit-Kamera &amp; Hand-Tracking-Daten (AR)</span>
+        </h2>
+        <p>
+            <span class="he-text">כדי לספק חוויית נסיית לק וירטואלית חיה, האפליקציה משתמשת ב-Vision של Apple לזיהוי תנוחות יד ומיקומי אצבעות. נתוני מעקב הידיים מעובדים במכשיר בלבד. אנחנו לא שומרים, מאחסנים או מעבירים את הזנת המצלמה החיה או נתוני תנוחות היד לשרתים שלנו. רק תמונות סטטיות שאת בוחרת לצלם במפורש מועברות לעיבוד AI.</span>
+            <span class="en-text" style="display:none">To provide the live virtual try-on experience, the App uses Apple's Vision framework to detect human hand poses and finger positions. This hand-tracking data is processed purely on-device. We do not save, store, or transmit your live camera feed or mathematical hand-pose data to our servers. Only static photos you explicitly choose to capture are transmitted for AI processing.</span>
+            <span class="de-text" style="display:none">Um das Live-Anprobeerlebnis zu erm&ouml;glichen, verwendet die App Apples Vision-Framework zur Erkennung von Handposen und Fingerpositionen. Diese Hand-Tracking-Daten werden ausschlie&szlig;lich auf dem Ger&auml;t verarbeitet. Wir speichern, archivieren oder &uuml;bertragen weder deinen Live-Kamerafeed noch mathematische Handposendaten an unsere Server. Nur statische Fotos, die du ausdr&uuml;cklich aufnimmst, werden zur AI-Verarbeitung &uuml;bertragen.</span>
+        </p>
+
+        <!-- Section 3 -->
+        <h2>
+            <span class="he-text">3. כיצד אנחנו משתמשים במידע שלך</span>
+            <span class="en-text" style="display:none">3. How We Use Your Information</span>
+            <span class="de-text" style="display:none">3. Wie wir deine Informationen verwenden</span>
+        </h2>
         <ul>
-            <li>לספק את שירותי האפליקציה (נסיית לק, גלריה, מציאת מניקוריסטיות)</li>
-            <li>לשפר את חוויית המשתמש</li>
-            <li>לעבד תמונות באמצעות שירותי AI (Gemini) לצורך נסיית לק וירטואלית</li>
-            <li>להציג פרופילים עסקיים של מניקוריסטיות</li>
+            <li>
+                <span class="he-text">לספק תכונות ליבה (נסיית לק, גלריה, מדריך מניקוריסטיות וקביעת תורים).</span>
+                <span class="en-text" style="display:none">To provide core features (virtual try-on, gallery, directory, and scheduling).</span>
+                <span class="de-text" style="display:none">Um Kernfunktionen bereitzustellen (virtuelle Anprobe, Galerie, Verzeichnis und Terminplanung).</span>
+            </li>
+            <li>
+                <span class="he-text">לעבד תמונות באמצעות AI (Google Gemini) לנסיית לק.</span>
+                <span class="en-text" style="display:none">To process images via AI (Google Gemini) for the virtual try-on.</span>
+                <span class="de-text" style="display:none">Um Bilder &uuml;ber AI (Google Gemini) f&uuml;r die virtuelle Anprobe zu verarbeiten.</span>
+            </li>
+            <li>
+                <span class="he-text">להציג פרופילים עסקיים ציבוריים של מניקוריסטיות.</span>
+                <span class="en-text" style="display:none">To display public business profiles for manicurists.</span>
+                <span class="de-text" style="display:none">Um &ouml;ffentliche Gesch&auml;ftsprofile von Manik&uuml;ristinnen anzuzeigen.</span>
+            </li>
+            <li>
+                <span class="he-text">לשפר את חוויית המשתמש הנקייה והמינימליסטית של האפליקציה.</span>
+                <span class="en-text" style="display:none">To improve the clean, minimalist user experience of the App.</span>
+                <span class="de-text" style="display:none">Um die saubere, minimalistische Benutzererfahrung der App zu verbessern.</span>
+            </li>
         </ul>
 
-        <h2>3. שיתוף מידע</h2>
-        <p>אנחנו לא מוכרים את המידע שלך. המידע משותף רק עם:</p>
+        <!-- Section 4 -->
+        <h2>
+            <span class="he-text">4. שיתוף המידע שלך</span>
+            <span class="en-text" style="display:none">4. Sharing Your Information</span>
+            <span class="de-text" style="display:none">4. Weitergabe deiner Informationen</span>
+        </h2>
+        <p>
+            <span class="he-text">אנחנו לא מוכרים את המידע האישי שלך. להפעלת האפליקציה, מידע משותף באופן מאובטח רק עם ספקי שירות חיוניים:</span>
+            <span class="en-text" style="display:none">We do not sell your personal data. To operate the App, data is shared securely only with essential service providers:</span>
+            <span class="de-text" style="display:none">Wir verkaufen deine pers&ouml;nlichen Daten nicht. Zum Betrieb der App werden Daten sicher nur mit wesentlichen Dienstleistern geteilt:</span>
+        </p>
         <ul>
-            <li>Google Firebase (אחסון נתונים ותמונות)</li>
-            <li>Google Gemini AI (עיבוד תמונות לנסיית לק)</li>
-            <li>Apple (התחברות ותשלומים)</li>
+            <li>
+                <span class="he-text">Google Firebase: לאחסון מסד נתונים, חשבונות משתמשים ואחסון תמונות.</span>
+                <span class="en-text" style="display:none">Google Firebase: For database hosting, user accounts, and image storage.</span>
+                <span class="de-text" style="display:none">Google Firebase: F&uuml;r Datenbank-Hosting, Benutzerkonten und Bildspeicherung.</span>
+            </li>
+            <li>
+                <span class="he-text">Google Gemini AI: לעיבוד תמונות ידיים ויצירת סימולציות לק.</span>
+                <span class="en-text" style="display:none">Google Gemini AI: For processing hand photos and generating nail polish simulations.</span>
+                <span class="de-text" style="display:none">Google Gemini AI: F&uuml;r die Verarbeitung von Handfotos und Generierung von Nagellack-Simulationen.</span>
+            </li>
+            <li>
+                <span class="he-text">Apple: לאימות (התחברות עם Apple) ולעיבוד מנויי פרימיום.</span>
+                <span class="en-text" style="display:none">Apple: For authentication (Sign in with Apple) and processing Premium subscriptions.</span>
+                <span class="de-text" style="display:none">Apple: F&uuml;r Authentifizierung (Anmeldung mit Apple) und Verarbeitung von Premium-Abonnements.</span>
+            </li>
         </ul>
 
-        <h2>4. אבטחת מידע</h2>
-        <p>אנחנו משתמשים באמצעי אבטחה מתקדמים כולל הצפנה ואימות דו-שלבי להגנה על המידע שלך.</p>
+        <!-- Section 5 -->
+        <h2>
+            <span class="he-text">5. קישורים חיצוניים</span>
+            <span class="en-text" style="display:none">5. External Links</span>
+            <span class="de-text" style="display:none">5. Externe Links</span>
+        </h2>
+        <p>
+            <span class="he-text">האפליקציה מכילה קישורים לפלטפורמות צד שלישי (WhatsApp, TikTok, Instagram, Apple Maps). בלחיצה על קישורים אלו, את כפופה למדיניות הפרטיות של שירותים חיצוניים אלו.</span>
+            <span class="en-text" style="display:none">The App contains links to third-party platforms (WhatsApp, TikTok, Instagram, Apple Maps). When you click these links, you are subject to the privacy policies of those external services.</span>
+            <span class="de-text" style="display:none">Die App enth&auml;lt Links zu Drittanbieter-Plattformen (WhatsApp, TikTok, Instagram, Apple Maps). Beim Klicken auf diese Links unterliegen Sie den Datenschutzrichtlinien dieser externen Dienste.</span>
+        </p>
 
-        <h2>5. זכויותייך</h2>
-        <p>את יכולה בכל עת לבקש למחוק את החשבון שלך ואת כל המידע המשויך אליו. לבקשות, פני אלינו ב: <a href="mailto:polished.app@outlook.com">polished.app@outlook.com</a></p>
+        <!-- Section 6 -->
+        <h2>
+            <span class="he-text">6. אבטחת מידע</span>
+            <span class="en-text" style="display:none">6. Data Security</span>
+            <span class="de-text" style="display:none">6. Datensicherheit</span>
+        </h2>
+        <p>
+            <span class="he-text">אנחנו משתמשים באמצעי אבטחה מתקדמים בתקן תעשייתי, כולל הצפנה, להגנה על המידע שלך המאוחסן בשרתים שלנו.</span>
+            <span class="en-text" style="display:none">We utilize advanced, industry-standard security measures, including encryption, to protect your data stored on our servers.</span>
+            <span class="de-text" style="display:none">Wir verwenden fortschrittliche, branchen&uuml;bliche Sicherheitsma&szlig;nahmen, einschlie&szlig;lich Verschl&uuml;sselung, zum Schutz deiner auf unseren Servern gespeicherten Daten.</span>
+        </p>
 
-        <h2>6. יצירת קשר</h2>
-        <p>לשאלות בנוגע למדיניות הפרטיות: <a href="mailto:polished.app@outlook.com">polished.app@outlook.com</a></p>
+        <!-- Section 7 -->
+        <h2>
+            <span class="he-text">7. הזכויות שלך ומחיקת חשבון</span>
+            <span class="en-text" style="display:none">7. Your Rights &amp; Account Deletion</span>
+            <span class="de-text" style="display:none">7. Deine Rechte &amp; Kontol&ouml;schung</span>
+        </h2>
+        <p>
+            <span class="he-text">המידע שלך שייך לך. את יכולה לבקש למחוק את החשבון, הפרופיל העסקי וכל התמונות המשויכות בכל עת ישירות דרך הגדרות האפליקציה, או ביצירת קשר איתנו. עם המחיקה, המידע שלך נמחק מהשרתים הפעילים שלנו.</span>
+            <span class="en-text" style="display:none">You own your data. You may request to delete your account, business profile, and all associated photos at any time directly through the App settings, or by contacting us. Upon deletion, your data is wiped from our active servers.</span>
+            <span class="de-text" style="display:none">Deine Daten geh&ouml;ren dir. Du kannst jederzeit die L&ouml;schung deines Kontos, Gesch&auml;ftsprofils und aller zugeh&ouml;rigen Fotos direkt &uuml;ber die App-Einstellungen oder durch Kontaktaufnahme mit uns beantragen. Nach der L&ouml;schung werden deine Daten von unseren aktiven Servern gel&ouml;scht.</span>
+        </p>
+
+        <!-- Section 8 -->
+        <h2>
+            <span class="he-text">8. יצירת קשר</span>
+            <span class="en-text" style="display:none">8. Contact Us</span>
+            <span class="de-text" style="display:none">8. Kontakt</span>
+        </h2>
+        <p>
+            <span class="he-text">לבקשות או שאלות הקשורות לפרטיות, ניתן לפנות אלינו ב: <a href="mailto:polished.app@outlook.com">polished.app@outlook.com</a></span>
+            <span class="en-text" style="display:none">For privacy-related requests or questions, please contact: <a href="mailto:polished.app@outlook.com">polished.app@outlook.com</a></span>
+            <span class="de-text" style="display:none">F&uuml;r datenschutzbezogene Anfragen oder Fragen kontaktiere uns bitte unter: <a href="mailto:polished.app@outlook.com">polished.app@outlook.com</a></span>
+        </p>
+
     </div>
 
     <footer class="page-footer">
-        <p>&copy; 2026 Polished. כל הזכויות שמורות.</p>
+        <p>
+            <span class="he-text">&copy; 2026 Polished. כל הזכויות שמורות.</span>
+            <span class="en-text" style="display:none">&copy; 2026 Polished. All rights reserved.</span>
+            <span class="de-text" style="display:none">&copy; 2026 Polished. Alle Rechte vorbehalten.</span>
+        </p>
     </footer>
+
+    <script>
+        let currentLang = 'he';
+        const langs = ['he', 'en', 'de'];
+        const langLabels = { he: 'HE', en: 'EN', de: 'DE' };
+        const rtlLangs = ['he'];
+
+        function setLang(lang) {
+            currentLang = lang;
+            const html = document.documentElement;
+            html.setAttribute('lang', lang);
+            html.setAttribute('dir', rtlLangs.includes(lang) ? 'rtl' : 'ltr');
+            ['he', 'en', 'de'].forEach(l => {
+                document.querySelectorAll('.' + l + '-text').forEach(el => {
+                    el.style.display = (l === lang) ? '' : 'none';
+                });
+            });
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                const nextIdx = (langs.indexOf(lang) + 1) % langs.length;
+                btn.textContent = langLabels[langs[nextIdx]];
+            });
+        }
+
+        function cycleLang() {
+            const nextIdx = (langs.indexOf(currentLang) + 1) % langs.length;
+            setLang(langs[nextIdx]);
+        }
+    </script>
 </body>
 </html>

@@ -307,7 +307,7 @@
             html.setAttribute('dir', rtlLangs.includes(lang) ? 'rtl' : 'ltr');
             ['he', 'en', 'de'].forEach(l => {
                 document.querySelectorAll('.' + l + '-text').forEach(el => {
-                    el.style.display = (l === lang) ? '' : 'none';
+                    el.style.display = (l === lang) ? 'inline' : 'none';
                 });
             });
             document.querySelectorAll('.lang-btn').forEach(btn => {

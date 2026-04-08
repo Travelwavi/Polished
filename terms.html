@@ -295,7 +295,7 @@
             // Show/hide text spans
             ['he', 'en', 'de'].forEach(l => {
                 document.querySelectorAll('.' + l + '-text').forEach(el => {
-                    el.style.display = (l === lang) ? '' : 'none';
+                    el.style.display = (l === lang) ? 'inline' : 'none';
                 });
             });
             // Update all lang buttons to show NEXT language

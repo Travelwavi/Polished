@@ -1276,16 +1276,15 @@
             setLang(langs[nextIdx]);
         }
 
-        // Privacy-safe language detection: URL param > localStorage > browser language (no third-party calls)
+        // Language detection: URL param > localStorage > Hebrew default (no auto browser detection)
         (function detectLang() {
             try {
                 const urlLang = new URLSearchParams(window.location.search).get('lang');
                 if (urlLang && langs.includes(urlLang)) { setLang(urlLang); return; }
                 const savedLang = localStorage.getItem('polished_lang');
                 if (savedLang && langs.includes(savedLang)) { setLang(savedLang); return; }
-                const browserLang = (navigator.language || 'he').toLowerCase().split('-')[0];
-                if (browserLang === 'de') setLang('de');
-                else if (browserLang !== 'he' && browserLang !== 'iw') setLang('en');
+                // Default is always Hebrew — no browser-language auto-switch
+                setLang('he');
             } catch (e) { /* fallback to Hebrew default */ }
         })();
 

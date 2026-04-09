@@ -750,29 +750,6 @@
         }
         .modal-consent a { color: var(--primary); text-decoration: underline; }
 
-        /* ===== COOKIE / PRIVACY BANNER ===== */
-        .cookie-banner {
-            position: fixed; bottom: 16px; inset-inline-start: 16px; inset-inline-end: 16px;
-            max-width: 520px; background: var(--white);
-            border: 1px solid rgba(0,0,0,0.08); border-radius: 16px;
-            padding: 18px 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.15);
-            z-index: 900; display: none;
-            font-size: 13px; color: var(--text); line-height: 1.5;
-        }
-        .cookie-banner.show { display: block; animation: modalSlideUp 0.4s ease; }
-        .cookie-banner p { margin-bottom: 12px; }
-        .cookie-banner a { color: var(--primary); text-decoration: underline; }
-        .cookie-banner-btns { display: flex; gap: 8px; flex-wrap: wrap; }
-        .cookie-banner button {
-            border: none; padding: 8px 18px; border-radius: 20px;
-            font-size: 13px; font-weight: 600; cursor: pointer;
-            font-family: inherit; transition: all 0.2s;
-        }
-        .cookie-accept { background: var(--primary); color: var(--white); }
-        .cookie-accept:hover { background: var(--primary-dark); }
-        .cookie-decline { background: rgba(0,0,0,0.06); color: var(--text); }
-        .cookie-decline:hover { background: rgba(0,0,0,0.1); }
-
         /* ===== STATS / SOCIAL PROOF ===== */
         .stats-row {
             display: flex; justify-content: center; gap: 48px; flex-wrap: wrap;
@@ -1203,18 +1180,6 @@
         </div>
     </div>
 
-    <!-- ===== COOKIE / PRIVACY BANNER ===== -->
-    <div class="cookie-banner" id="cookieBanner" role="region" aria-label="Privacy notice">
-        <p>
-            <span class="he-text">אנחנו משתמשות ב-localStorage בלבד כדי לזכור את העדפות השפה שלך. אין מעקב צד שלישי, אין פרסומות. למידע נוסף - <a href="privacy.html">מדיניות פרטיות</a>.</span>
-            <span class="en-text" style="display:none">We use localStorage only to remember your language preference. No third-party tracking, no ads. Read our <a href="privacy.html">Privacy Policy</a>.</span>
-            <span class="de-text" style="display:none">Wir nutzen localStorage nur, um deine Spracheinstellung zu merken. Kein Drittanbieter-Tracking, keine Werbung. <a href="privacy.html">Datenschutzerklärung</a>.</span>
-        </p>
-        <div class="cookie-banner-btns">
-            <button class="cookie-accept" onclick="acceptCookies()"><span class="he-text">הבנתי</span><span class="en-text" style="display:none">Got it</span><span class="de-text" style="display:none">Verstanden</span></button>
-        </div>
-    </div>
-
     </main>
 
     <footer role="contentinfo">
@@ -1268,7 +1233,7 @@
                 opt.classList.toggle('active', opt.dataset.lang === lang);
             });
             // Persist language choice
-            try { localStorage.setItem('polished_lang', lang); } catch(e) {}
+            try { localStorage.setItem('polished_lang_v2', lang); } catch(e) {}
         }
 
         function cycleLang() {
@@ -1279,9 +1244,13 @@
         // Language detection: URL param > localStorage > Hebrew default (no auto browser detection)
         (function detectLang() {
             try {
+                // Clean up old v1 keys so existing visitors reset to Hebrew default
+                localStorage.removeItem('polished_lang');
+                localStorage.removeItem('polished_consent');
+
                 const urlLang = new URLSearchParams(window.location.search).get('lang');
                 if (urlLang && langs.includes(urlLang)) { setLang(urlLang); return; }
-                const savedLang = localStorage.getItem('polished_lang');
+                const savedLang = localStorage.getItem('polished_lang_v2');
                 if (savedLang && langs.includes(savedLang)) { setLang(savedLang); return; }
                 // Default is always Hebrew — no browser-language auto-switch
                 setLang('he');
@@ -1333,19 +1302,6 @@
                 btn.disabled = false;
             }
         }
-
-        // ===== Cookie / Privacy Banner =====
-        function acceptCookies() {
-            try { localStorage.setItem('polished_consent', '1'); } catch(e) {}
-            document.getElementById('cookieBanner').classList.remove('show');
-        }
-        (function initCookieBanner() {
-            try {
-                if (!localStorage.getItem('polished_consent')) {
-                    setTimeout(() => document.getElementById('cookieBanner').classList.add('show'), 1200);
-                }
-            } catch(e) {}
-        })();
 
         // Scroll reveal
         const revealObserver = new IntersectionObserver((entries) => {

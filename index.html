@@ -3,17 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Polished - נסי לק וירטואלית על הציפורניים שלך</title>
-    <meta name="description" content="Polished - האפליקציה שמאפשרת לך לנסות לק על הציפורניים שלך בעזרת AI.">
-    <!-- Open Graph / WhatsApp Preview -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://polished-il.com/">
-    <meta property="og:title" content="Polished - נסי לק וירטואלית על הציפורניים שלך">
-    <meta property="og:description" content="אפליקציה שנבנתה על ידי בנות, בשביל בנות! נסי כל לק על הידיים שלך בעזרת AI, חקרי מאות צבעים ומצאי מניקוריסטיות קרובות אלייך.">
-    <meta property="og:image" content="https://polished-il.com/assets/logo.png">
-    <meta property="og:locale" content="he_IL">
-    <meta property="og:site_name" content="Polished">
+    <meta name="theme-color" content="#E91E63">
+    <title>Polished - נסי לק וירטואלית על הציפורניים שלך | AI Nail Polish Try-On</title>
+    <meta name="description" content="Polished - אפליקציית AI שמאפשרת לך לנסות לק וירטואלית על הציפורניים שלך, לחקור מאות צבעים ולמצוא מניקוריסטיות קרובות אלייך. בחינם לגמרי.">
+    <meta name="keywords" content="polished, nail polish, AI, manicure, virtual try-on, לק, ציפורניים, מניקוריסטית, AI לק, nagellack, maniküre">
+    <meta name="author" content="Polished">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://www.polished-il.com/">
+
+    <!-- Security Headers (meta fallbacks; real headers should be set via _headers file) -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), interest-cohort=()">
+
+    <!-- Favicons -->
     <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="apple-touch-icon" href="assets/favicon.png">
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Hreflang for trilingual SEO -->
+    <link rel="alternate" hreflang="he" href="https://www.polished-il.com/">
+    <link rel="alternate" hreflang="en" href="https://www.polished-il.com/?lang=en">
+    <link rel="alternate" hreflang="de" href="https://www.polished-il.com/?lang=de">
+    <link rel="alternate" hreflang="x-default" href="https://www.polished-il.com/">
+
+    <!-- Open Graph / WhatsApp / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.polished-il.com/">
+    <meta property="og:title" content="Polished - נסי לק וירטואלית על הציפורניים שלך">
+    <meta property="og:description" content="אפליקציה שנבנתה על ידי בנות בשבילנו! נסי כל לק על הידיים שלך בעזרת AI, חקרי מאות צבעים ומצאי מניקוריסטיות קרובות אלייך.">
+    <meta property="og:image" content="https://www.polished-il.com/assets/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Polished - AI Nail Polish Try-On App">
+    <meta property="og:locale" content="he_IL">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:locale:alternate" content="de_DE">
+    <meta property="og:site_name" content="Polished">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Polished - נסי לק וירטואלית על הציפורניים שלך">
+    <meta name="twitter:description" content="אפליקציה שנבנתה על ידי בנות, בשבילנו! נסי כל לק על הידיים שלך בעזרת AI.">
+    <meta name="twitter:image" content="https://www.polished-il.com/assets/og-image.jpg">
+
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Polished",
+        "operatingSystem": "iOS, Android",
+        "applicationCategory": "LifestyleApplication",
+        "description": "AI-powered virtual nail polish try-on app with community inspiration board and local manicurist directory.",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "ILS"
+        },
+        "url": "https://www.polished-il.com/",
+        "inLanguage": ["he", "en", "de"],
+        "publisher": {
+            "@type": "Organization",
+            "name": "Polished",
+            "url": "https://www.polished-il.com/",
+            "email": "polished.app@outlook.com"
+        }
+    }
+    </script>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -190,7 +247,7 @@
         .hero-perk-line {
             display: flex; align-items: center; gap: 8px;
             font-size: 14px; color: var(--text); font-weight: 400;
-            flex-wrap: wrap;
+            flex-wrap: nowrap; white-space: nowrap;
         }
         .hero-perk-line .check-icon {
             width: 20px; height: 20px; border-radius: 50%;
@@ -631,6 +688,120 @@
         .footer-lang-picker .lang-btn:hover { background: rgba(255,255,255,0.2); color: #fff; }
         @media (max-width: 768px) { .footer-lang-picker { display: block; } }
 
+        /* ===== WAITLIST MODAL ===== */
+        .modal-overlay {
+            position: fixed; inset: 0; background: rgba(26,26,46,0.7);
+            backdrop-filter: blur(8px);
+            display: none; align-items: center; justify-content: center;
+            z-index: 1000; padding: 20px;
+        }
+        .modal-overlay.active { display: flex; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .modal-box {
+            background: var(--white); border-radius: 24px; padding: 40px 36px;
+            max-width: 460px; width: 100%; position: relative;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: modalSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        @keyframes modalSlideUp {
+            from { opacity: 0; transform: translateY(30px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .modal-close {
+            position: absolute; top: 16px; inset-inline-end: 16px;
+            background: transparent; border: none; cursor: pointer;
+            width: 36px; height: 36px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--muted); transition: all 0.2s;
+        }
+        .modal-close:hover { background: var(--primary-light); color: var(--primary); }
+        .modal-box h3 {
+            font-size: 26px; font-weight: 900; margin-bottom: 10px; color: var(--dark);
+        }
+        .modal-box p { color: var(--muted); font-size: 15px; margin-bottom: 24px; line-height: 1.6; }
+        .modal-form { display: flex; flex-direction: column; gap: 12px; }
+        .modal-form input[type="email"] {
+            padding: 14px 18px; border: 2px solid rgba(0,0,0,0.08);
+            border-radius: 14px; font-size: 15px; font-family: inherit;
+            transition: all 0.2s; outline: none; width: 100%;
+        }
+        .modal-form input[type="email"]:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(233,30,99,0.1);
+        }
+        .modal-form button[type="submit"] {
+            background: var(--primary); color: var(--white); border: none;
+            padding: 14px 24px; border-radius: 14px;
+            font-size: 15px; font-weight: 700; cursor: pointer;
+            transition: all 0.3s; font-family: inherit;
+        }
+        .modal-form button[type="submit"]:hover {
+            background: var(--primary-dark); transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(233,30,99,0.3);
+        }
+        .modal-form button[type="submit"]:disabled { opacity: 0.6; cursor: not-allowed; }
+        .modal-success {
+            display: none; text-align: center; padding: 20px 0;
+            color: #2E7D32; font-weight: 700;
+        }
+        .modal-success.show { display: block; }
+        .modal-consent {
+            font-size: 12px; color: var(--muted); line-height: 1.5; margin-top: 4px;
+        }
+        .modal-consent a { color: var(--primary); text-decoration: underline; }
+
+        /* ===== COOKIE / PRIVACY BANNER ===== */
+        .cookie-banner {
+            position: fixed; bottom: 16px; inset-inline-start: 16px; inset-inline-end: 16px;
+            max-width: 520px; background: var(--white);
+            border: 1px solid rgba(0,0,0,0.08); border-radius: 16px;
+            padding: 18px 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            z-index: 900; display: none;
+            font-size: 13px; color: var(--text); line-height: 1.5;
+        }
+        .cookie-banner.show { display: block; animation: modalSlideUp 0.4s ease; }
+        .cookie-banner p { margin-bottom: 12px; }
+        .cookie-banner a { color: var(--primary); text-decoration: underline; }
+        .cookie-banner-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+        .cookie-banner button {
+            border: none; padding: 8px 18px; border-radius: 20px;
+            font-size: 13px; font-weight: 600; cursor: pointer;
+            font-family: inherit; transition: all 0.2s;
+        }
+        .cookie-accept { background: var(--primary); color: var(--white); }
+        .cookie-accept:hover { background: var(--primary-dark); }
+        .cookie-decline { background: rgba(0,0,0,0.06); color: var(--text); }
+        .cookie-decline:hover { background: rgba(0,0,0,0.1); }
+
+        /* ===== STATS / SOCIAL PROOF ===== */
+        .stats-row {
+            display: flex; justify-content: center; gap: 48px; flex-wrap: wrap;
+            margin-top: 32px; padding: 24px 20px;
+        }
+        .stat-item { text-align: center; }
+        .stat-num {
+            font-size: 40px; font-weight: 900; color: var(--primary);
+            line-height: 1; font-family: var(--font-en);
+        }
+        .stat-label {
+            font-size: 13px; color: var(--muted); font-weight: 500;
+            margin-top: 6px; letter-spacing: 0.5px;
+        }
+
+        /* ===== SOCIAL LINKS ===== */
+        .social-links { display: flex; gap: 12px; justify-content: center; margin: 12px 0; }
+        .social-links a {
+            width: 36px; height: 36px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.7);
+            transition: all 0.3s;
+        }
+        .social-links a:hover {
+            background: var(--primary); color: var(--white);
+            transform: translateY(-2px);
+        }
+        .social-links svg { width: 18px; height: 18px; }
+
         /* ===== SCROLL REVEAL ===== */
         .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
         .reveal.visible { opacity: 1; transform: translateY(0); }
@@ -709,15 +880,41 @@
             .pricing-card { padding: 36px 24px; }
             .pricing-price { font-size: 42px; }
         }
+
+        /* ===== Accessibility ===== */
+        .skip-link {
+            position: absolute; top: -100px; inset-inline-start: 16px;
+            background: var(--primary); color: #fff; padding: 10px 18px;
+            border-radius: 8px; font-weight: 700; z-index: 1000;
+            text-decoration: none; transition: top .2s;
+        }
+        .skip-link:focus { top: 16px; outline: 3px solid #fff; outline-offset: 2px; }
+        :focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; border-radius: 4px; }
+        button:focus-visible, a:focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; }
+        .sr-only {
+            position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+            overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.001ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.001ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
     </style>
 </head>
 <body>
+    <a href="#main-content" class="skip-link">
+        <span class="he-text">דלג לתוכן הראשי</span><span class="en-text" style="display:none">Skip to main content</span><span class="de-text" style="display:none">Zum Hauptinhalt springen</span>
+    </a>
 
     <!-- ===== NAV ===== -->
-    <nav>
+    <nav aria-label="Main navigation">
         <div class="nav-inner">
             <a href="#" class="nav-logo">
-                <img src="assets/logo.png" alt="Polished">
+                <img src="assets/logo.png" alt="Polished logo" width="40" height="40">
                 <span>POLISHED</span>
             </a>
             <div class="nav-center">
@@ -731,40 +928,41 @@
                     <span class="he-text">הורידי עכשיו</span><span class="en-text" style="display:none">Download Now</span><span class="de-text" style="display:none">Jetzt herunterladen</span>
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                 </a>
-                <button class="lang-btn" onclick="cycleLang()">EN</button>
+                <button class="lang-btn" onclick="cycleLang()" aria-label="Change language / שינוי שפה / Sprache ändern">EN</button>
             </div>
         </div>
     </nav>
 
     <!-- ===== HERO ===== -->
-    <section class="hero" id="download">
+    <main id="main-content">
+    <section class="hero" id="download" aria-labelledby="hero-title">
         <div class="hero-container">
             <!-- Text Side -->
             <div class="hero-text">
-                <h1>
+                <h1 id="hero-title">
                     <span class="he-text">נסי את<br><span class="highlight">הלק המושלם</span><br>לפני שבכלל קמת מהמיטה.</span>
                     <span class="en-text" style="display:none">Try<br><span class="highlight">The Perfect Polish</span><br>Before You Even Left The Bed.</span>
                     <span class="de-text" style="display:none">Probier<br><span class="highlight">Den Perfekten Lack</span><br>Bevor Du Aufgestanden Bist.</span>
                 </h1>
-                <p class="subtitle"><span class="he-text">אפליקציה שנבנתה על ידי בנות, בשביל בנות!</span><span class="en-text" style="display:none">An app made by girls, for girls!</span><span class="de-text" style="display:none">Eine App von Mädchen, für Mädchen!</span></p>
+                <p class="subtitle"><span class="he-text">אפליקציה שנבנתה על ידי בנות, בשבילנו!</span><span class="en-text" style="display:none">An app built by girls, for all of us!</span><span class="de-text" style="display:none">Eine App von Mädchen, für uns alle!</span></p>
 
                 <div class="hero-download-row">
-                    <a href="https://apps.apple.com" class="hero-download-btn appstore-btn">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                    <button type="button" class="hero-download-btn appstore-btn" onclick="openWaitlist()" aria-label="Join the App Store waitlist">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
                         <div class="btn-text-group">
                             <span class="btn-small"><span class="he-text">להורדה מ-</span><span class="en-text" style="display:none">Download on</span><span class="de-text" style="display:none">Laden im</span></span>
                             <span class="btn-big">App Store</span>
                         </div>
                         <div class="soon-ribbon"><span class="he-text">בקרוב</span><span class="en-text" style="display:none">Soon</span><span class="de-text" style="display:none">Bald</span></div>
-                    </a>
-                    <div class="hero-download-btn gplay-btn">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 2.302L14.5 14.5l2.302-2.302 2.302-2.302-1.406-.388zM5.864 2.658L16.8 8.99l-2.302 2.303L5.864 2.658z"/></svg>
+                    </button>
+                    <button type="button" class="hero-download-btn gplay-btn" onclick="openWaitlist()" aria-label="Join the Google Play waitlist">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 2.302L14.5 14.5l2.302-2.302 2.302-2.302-1.406-.388zM5.864 2.658L16.8 8.99l-2.302 2.303L5.864 2.658z"/></svg>
                         <div class="btn-text-group">
                             <span class="btn-small"><span class="he-text">להורדה מ-</span><span class="en-text" style="display:none">Get it on</span><span class="de-text" style="display:none">Jetzt bei</span></span>
                             <span class="btn-big">Google Play</span>
                         </div>
                         <div class="soon-ribbon"><span class="he-text">בקרוב</span><span class="en-text" style="display:none">Soon</span><span class="de-text" style="display:none">Bald</span></div>
-                    </div>
+                    </button>
                 </div>
 
                 <div class="hero-perk-line">
@@ -818,7 +1016,7 @@
         <div class="what-is-inner">
             <div class="section-title reveal">
                 <h2 class="big-headline"><span class="color-polished">Polished</span> <span class="he-text">היא</span><span class="en-text" style="display:none">is a</span><span class="de-text" style="display:none">ist eine</span> <span class="color-accent"><span class="he-text">קהילה</span><span class="en-text" style="display:none">Community</span><span class="de-text" style="display:none">Community</span></span></h2>
-                <p><span class="he-text">נבנתה על ידי בנות, בשביל בנות ומניקוריסטיות. מקום אחד שמחבר בין השראה, טכנולוגיה, וקהילה אמיתית.</span><span class="en-text" style="display:none">Built by girls, for girls and manicurists. One place that connects inspiration, technology, and a real community.</span><span class="de-text" style="display:none">Von Mädchen entwickelt, für Mädchen und Maniküristinnen. Ein Ort, der Inspiration, Technologie und eine echte Community verbindet.</span></p>
+                <p><span class="he-text">נבנתה על ידי בנות, לכולן ולמניקוריסטיות. מקום אחד שמחבר בין השראה, טכנולוגיה וקהילה אמיתית.</span><span class="en-text" style="display:none">Built by girls, for everyone and for manicurists. One place that connects inspiration, technology, and a real community.</span><span class="de-text" style="display:none">Von Mädchen entwickelt, für alle und für Maniküristinnen. Ein Ort, der Inspiration, Technologie und eine echte Community verbindet.</span></p>
             </div>
             <div class="what-is-cards">
                 <div class="what-card reveal">
@@ -853,6 +1051,20 @@
             <div class="free-banner reveal">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2E7D32" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                 <span><span class="he-text">הכל בחינם לגמרי!</span><span class="en-text" style="display:none">COMPLETELY FREE!</span><span class="de-text" style="display:none">KOMPLETT KOSTENLOS!</span></span>
+            </div>
+            <div class="stats-row reveal">
+                <div class="stat-item">
+                    <div class="stat-num">200+</div>
+                    <div class="stat-label"><span class="he-text">מניקוריסטיות רשומות</span><span class="en-text" style="display:none">Registered Manicurists</span><span class="de-text" style="display:none">Registrierte Maniküristinnen</span></div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num">500+</div>
+                    <div class="stat-label"><span class="he-text">סוגי וצבעי לקים</span><span class="en-text" style="display:none">Nail Polish Shades</span><span class="de-text" style="display:none">Lack-Farbtöne</span></div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num">3</div>
+                    <div class="stat-label"><span class="he-text">שפות נתמכות</span><span class="en-text" style="display:none">Supported Languages</span><span class="de-text" style="display:none">Unterstützte Sprachen</span></div>
+                </div>
             </div>
         </div>
     </section>
@@ -967,15 +1179,64 @@
         </div>
     </section>
 
-    <footer>
+    <!-- ===== WAITLIST MODAL ===== -->
+    <div class="modal-overlay" id="waitlistModal" role="dialog" aria-modal="true" aria-labelledby="waitlistTitle">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeWaitlist()" aria-label="Close">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+            <h3 id="waitlistTitle"><span class="he-text">הצטרפי לרשימת ההמתנה</span><span class="en-text" style="display:none">Join the Waitlist</span><span class="de-text" style="display:none">Auf die Warteliste</span></h3>
+            <p><span class="he-text">השאירי את המייל שלך ונעדכן אותך ברגע שאפליקציית Polished תהיה זמינה להורדה. בלי ספאם, מבטיחות!</span><span class="en-text" style="display:none">Drop your email and we'll let you know the moment Polished launches. No spam, promise!</span><span class="de-text" style="display:none">Hinterlasse deine E-Mail und wir informieren dich, sobald Polished verfügbar ist. Kein Spam, versprochen!</span></p>
+            <form class="modal-form" id="waitlistForm" onsubmit="submitWaitlist(event)">
+                <input type="email" name="email" placeholder="you@email.com" required autocomplete="email" aria-label="Email address">
+                <label style="display:flex;align-items:flex-start;gap:8px;font-size:12px;color:var(--muted);cursor:pointer;">
+                    <input type="checkbox" required style="margin-top:3px;flex-shrink:0">
+                    <span class="he-text">אני מסכימה לתנאי השימוש ולמדיניות הפרטיות של Polished.</span><span class="en-text" style="display:none">I agree to Polished's Terms of Use and Privacy Policy.</span><span class="de-text" style="display:none">Ich stimme den Nutzungsbedingungen und der Datenschutzerklärung von Polished zu.</span>
+                </label>
+                <button type="submit"><span class="he-text">הצטרפי לרשימה</span><span class="en-text" style="display:none">Join Waitlist</span><span class="de-text" style="display:none">Jetzt eintragen</span></button>
+                <p class="modal-consent"><span class="he-text">על ידי הצטרפות, את מאשרת שקראת את </span><span class="en-text" style="display:none">By joining, you confirm you've read our </span><span class="de-text" style="display:none">Mit dem Beitritt bestätigst du, dass du unsere </span><a href="privacy.html"><span class="he-text">מדיניות הפרטיות</span><span class="en-text" style="display:none">Privacy Policy</span><span class="de-text" style="display:none">Datenschutzerklärung</span></a><span class="he-text">.</span><span class="en-text" style="display:none">.</span><span class="de-text" style="display:none"> gelesen hast.</span></p>
+            </form>
+            <div class="modal-success" id="waitlistSuccess">
+                <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#2E7D32" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:12px"><circle cx="12" cy="12" r="10"/><polyline points="9 12 12 15 16 10"/></svg>
+                <div><span class="he-text">את ברשימה! נעדכן אותך בקרוב 💖</span><span class="en-text" style="display:none">You're on the list! We'll be in touch soon 💖</span><span class="de-text" style="display:none">Du bist auf der Liste! Wir melden uns bald 💖</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== COOKIE / PRIVACY BANNER ===== -->
+    <div class="cookie-banner" id="cookieBanner" role="region" aria-label="Privacy notice">
+        <p>
+            <span class="he-text">אנחנו משתמשות ב-localStorage בלבד כדי לזכור את העדפות השפה שלך. אין מעקב צד שלישי, אין פרסומות. למידע נוסף - <a href="privacy.html">מדיניות פרטיות</a>.</span>
+            <span class="en-text" style="display:none">We use localStorage only to remember your language preference. No third-party tracking, no ads. Read our <a href="privacy.html">Privacy Policy</a>.</span>
+            <span class="de-text" style="display:none">Wir nutzen localStorage nur, um deine Spracheinstellung zu merken. Kein Drittanbieter-Tracking, keine Werbung. <a href="privacy.html">Datenschutzerklärung</a>.</span>
+        </p>
+        <div class="cookie-banner-btns">
+            <button class="cookie-accept" onclick="acceptCookies()"><span class="he-text">הבנתי</span><span class="en-text" style="display:none">Got it</span><span class="de-text" style="display:none">Verstanden</span></button>
+        </div>
+    </div>
+
+    </main>
+
+    <footer role="contentinfo">
+        <div class="social-links" aria-label="Social media">
+            <a href="https://instagram.com/polished.app" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="https://tiktok.com/@polished.app" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.321 5.562a5.124 5.124 0 0 1-3.414-1.267 5.124 5.124 0 0 1-1.537-3.06V.5h-3.623v14.05a2.902 2.902 0 0 1-5.156 1.805 2.902 2.902 0 0 1 2.256-4.717c.322 0 .634.054.926.149V8.12a6.568 6.568 0 0 0-.926-.065 6.566 6.566 0 1 0 6.566 6.565V8.184a8.748 8.748 0 0 0 5.108 1.636V6.196a5.117 5.117 0 0 1-.2-.634z"/></svg>
+            </a>
+            <a href="mailto:polished.app@outlook.com" aria-label="Email">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </a>
+        </div>
         <div class="footer-links">
             <a href="privacy.html"><span class="he-text">מדיניות פרטיות</span><span class="en-text" style="display:none">Privacy Policy</span><span class="de-text" style="display:none">Datenschutz</span></a>
             <a href="terms.html"><span class="he-text">תנאי שימוש</span><span class="en-text" style="display:none">Terms of Service</span><span class="de-text" style="display:none">Nutzungsbedingungen</span></a>
             <a href="mailto:polished.app@outlook.com"><span class="he-text">צרו קשר</span><span class="en-text" style="display:none">Contact Us</span><span class="de-text" style="display:none">Kontakt</span></a>
         </div>
-        <p>&copy; 2026 Polished. <span class="he-text">כל הזכויות שמורות.</span><span class="en-text" style="display:none">All rights reserved.</span><span class="de-text" style="display:none">Alle Rechte vorbehalten.</span></p>
+        <p>&copy; 2024 Polished. <span class="he-text">כל הזכויות שמורות.</span><span class="en-text" style="display:none">All rights reserved.</span><span class="de-text" style="display:none">Alle Rechte vorbehalten.</span></p>
         <div class="footer-lang-picker">
-            <button class="lang-btn" onclick="cycleLang()">EN</button>
+            <button class="lang-btn" onclick="cycleLang()" aria-label="Change language / שינוי שפה / Sprache ändern">EN</button>
         </div>
     </footer>
 
@@ -1006,6 +1267,8 @@
             document.querySelectorAll('.lang-picker-option').forEach(opt => {
                 opt.classList.toggle('active', opt.dataset.lang === lang);
             });
+            // Persist language choice
+            try { localStorage.setItem('polished_lang', lang); } catch(e) {}
         }
 
         function cycleLang() {
@@ -1013,19 +1276,76 @@
             setLang(langs[nextIdx]);
         }
 
-        // Auto-detect location
-        (function detectLocation() {
-            if (window.innerWidth > 768) return;
-            fetch('https://ipapi.co/json/', { signal: AbortSignal.timeout(3000) })
-                .then(r => r.json())
-                .then(data => {
-                    if (data.country_code === 'DE' || data.country_code === 'AT' || data.country_code === 'CH') {
-                        setLang('de');
-                    } else if (data.country_code !== 'IL' && data.country_code !== 'JO') {
-                        setLang('en');
-                    }
-                })
-                .catch(() => {});
+        // Privacy-safe language detection: URL param > localStorage > browser language (no third-party calls)
+        (function detectLang() {
+            try {
+                const urlLang = new URLSearchParams(window.location.search).get('lang');
+                if (urlLang && langs.includes(urlLang)) { setLang(urlLang); return; }
+                const savedLang = localStorage.getItem('polished_lang');
+                if (savedLang && langs.includes(savedLang)) { setLang(savedLang); return; }
+                const browserLang = (navigator.language || 'he').toLowerCase().split('-')[0];
+                if (browserLang === 'de') setLang('de');
+                else if (browserLang !== 'he' && browserLang !== 'iw') setLang('en');
+            } catch (e) { /* fallback to Hebrew default */ }
+        })();
+
+        // ===== Waitlist Modal =====
+        const waitlistModal = document.getElementById('waitlistModal');
+        function openWaitlist() {
+            waitlistModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            setTimeout(() => {
+                const input = waitlistModal.querySelector('input[type=email]');
+                if (input) input.focus();
+            }, 300);
+        }
+        function closeWaitlist() {
+            waitlistModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        waitlistModal.addEventListener('click', (e) => {
+            if (e.target === waitlistModal) closeWaitlist();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && waitlistModal.classList.contains('active')) closeWaitlist();
+        });
+
+        async function submitWaitlist(e) {
+            e.preventDefault();
+            const form = e.target;
+            const btn = form.querySelector('button[type=submit]');
+            const email = form.email.value;
+            btn.disabled = true;
+            try {
+                // TODO: Replace with your actual backend endpoint (Formspree, Netlify Forms, Firebase, etc.)
+                // Example: await fetch('https://formspree.io/f/YOUR_ID', {
+                //     method: 'POST',
+                //     headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                //     body: JSON.stringify({ email, source: 'polished-il.com', lang: currentLang })
+                // });
+                await new Promise(r => setTimeout(r, 600));
+                form.style.display = 'none';
+                document.getElementById('waitlistSuccess').classList.add('show');
+                // Store locally so we don't nag returning visitors
+                try { localStorage.setItem('polished_waitlist', email); } catch(e) {}
+                setTimeout(closeWaitlist, 2500);
+            } catch (err) {
+                alert('Something went wrong. Please email us at polished.app@outlook.com');
+                btn.disabled = false;
+            }
+        }
+
+        // ===== Cookie / Privacy Banner =====
+        function acceptCookies() {
+            try { localStorage.setItem('polished_consent', '1'); } catch(e) {}
+            document.getElementById('cookieBanner').classList.remove('show');
+        }
+        (function initCookieBanner() {
+            try {
+                if (!localStorage.getItem('polished_consent')) {
+                    setTimeout(() => document.getElementById('cookieBanner').classList.add('show'), 1200);
+                }
+            } catch(e) {}
         })();
 
         // Scroll reveal
@@ -1074,6 +1394,61 @@
         phoneScreen.addEventListener('mouseleave', () => {
             revealCircle.style.display = 'none';
         });
+
+        // ===== Mobile: tap/drag-to-reveal =====
+        const isTouch = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+        if (isTouch) {
+            const setRevealPos = (clientX, clientY) => {
+                const rect = phoneScreen.getBoundingClientRect();
+                screenW = rect.width; screenH = rect.height;
+                if (!revealCircle.querySelector('img')) {
+                    revealCircle.innerHTML = '';
+                    const img = afterImg.cloneNode();
+                    img.style.cssText = `width:${screenW}px;height:${screenH}px;position:absolute;object-fit:cover;`;
+                    revealCircle.appendChild(img);
+                }
+                const x = clientX - rect.left;
+                const y = clientY - rect.top;
+                revealCircle.style.display = 'block';
+                revealCircle.style.left = x + 'px';
+                revealCircle.style.top = y + 'px';
+                const img = revealCircle.querySelector('img');
+                if (img) {
+                    img.style.left = (-x + CIRCLE_SIZE / 2) + 'px';
+                    img.style.top = (-y + CIRCLE_SIZE / 2) + 'px';
+                }
+            };
+            phoneScreen.addEventListener('touchstart', (e) => {
+                if (e.touches[0]) { setRevealPos(e.touches[0].clientX, e.touches[0].clientY); e.preventDefault(); }
+            }, { passive: false });
+            phoneScreen.addEventListener('touchmove', (e) => {
+                if (e.touches[0]) { setRevealPos(e.touches[0].clientX, e.touches[0].clientY); e.preventDefault(); }
+            }, { passive: false });
+            phoneScreen.addEventListener('touchend', () => {
+                setTimeout(() => { revealCircle.style.display = 'none'; }, 800);
+            });
+
+            // Auto-demo on mobile: sweep the reveal once across the screen after load
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    const rect = phoneScreen.getBoundingClientRect();
+                    if (rect.width === 0) return;
+                    let t = 0;
+                    const demoInterval = setInterval(() => {
+                        t += 1;
+                        const progress = t / 40;
+                        if (progress > 1) {
+                            clearInterval(demoInterval);
+                            setTimeout(() => { revealCircle.style.display = 'none'; }, 400);
+                            return;
+                        }
+                        const x = rect.left + rect.width * progress;
+                        const y = rect.top + rect.height / 2;
+                        setRevealPos(x, y);
+                    }, 30);
+                }, 1500);
+            });
+        }
     </script>
 </body>
 </html>

@@ -71,6 +71,37 @@
         }
     }
     </script>
+
+    <!-- Firebase (modular v10) — waitlist backend -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCsNrrLw2_TDs--DoTbvRBLxilohenqgUg",
+            authDomain: "polished-cc2ba.firebaseapp.com",
+            projectId: "polished-cc2ba",
+            storageBucket: "polished-cc2ba.firebasestorage.app",
+            messagingSenderId: "242053636998",
+            appId: "1:242053636998:web:1651dcb912187206494207"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Expose a single function to the non-module script
+        window.addWaitlistEntry = async function(email, lang) {
+            return addDoc(collection(db, 'waitlist'), {
+                email: email.trim().toLowerCase(),
+                lang: (['he','en','de'].includes(lang) ? lang : 'he'),
+                source: 'polished-il.com',
+                userAgent: (navigator.userAgent || '').substring(0, 500),
+                createdAt: serverTimestamp()
+            });
+        };
+        window.firebaseReady = true;
+    </script>
+
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -1165,6 +1196,8 @@
             <h3 id="waitlistTitle"><span class="he-text">הצטרפי לרשימת ההמתנה</span><span class="en-text" style="display:none">Join the Waitlist</span><span class="de-text" style="display:none">Auf die Warteliste</span></h3>
             <p><span class="he-text">השאירי את המייל שלך ונעדכן אותך ברגע שאפליקציית Polished תהיה זמינה להורדה. בלי ספאם, מבטיחות!</span><span class="en-text" style="display:none">Drop your email and we'll let you know the moment Polished launches. No spam, promise!</span><span class="de-text" style="display:none">Hinterlasse deine E-Mail und wir informieren dich, sobald Polished verfügbar ist. Kein Spam, versprochen!</span></p>
             <form class="modal-form" id="waitlistForm" onsubmit="submitWaitlist(event)">
+                <!-- Honeypot anti-bot field (hidden from users, bots fill it out) -->
+                <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none">
                 <input type="email" name="email" placeholder="you@email.com" required autocomplete="email" aria-label="Email address">
                 <label style="display:flex;align-items:flex-start;gap:8px;font-size:12px;color:var(--muted);cursor:pointer;">
                     <input type="checkbox" required style="margin-top:3px;flex-shrink:0">
@@ -1282,23 +1315,49 @@
             e.preventDefault();
             const form = e.target;
             const btn = form.querySelector('button[type=submit]');
-            const email = form.email.value;
-            btn.disabled = true;
-            try {
-                // TODO: Replace with your actual backend endpoint (Formspree, Netlify Forms, Firebase, etc.)
-                // Example: await fetch('https://formspree.io/f/YOUR_ID', {
-                //     method: 'POST',
-                //     headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                //     body: JSON.stringify({ email, source: 'polished-il.com', lang: currentLang })
-                // });
-                await new Promise(r => setTimeout(r, 600));
+            const email = (form.email.value || '').trim();
+
+            // Honeypot check — if the hidden "website" field was filled, it's a bot
+            if (form.website && form.website.value) {
+                // Pretend success to waste the bot's time
                 form.style.display = 'none';
                 document.getElementById('waitlistSuccess').classList.add('show');
-                // Store locally so we don't nag returning visitors
+                setTimeout(closeWaitlist, 2500);
+                return;
+            }
+
+            // Basic email format validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email) || email.length > 255) {
+                const msgs = {
+                    he: 'נא להזין כתובת אימייל תקינה',
+                    en: 'Please enter a valid email address',
+                    de: 'Bitte gültige E-Mail-Adresse eingeben'
+                };
+                alert(msgs[currentLang] || msgs.he);
+                return;
+            }
+
+            if (!window.firebaseReady || typeof window.addWaitlistEntry !== 'function') {
+                alert('Service is still loading. Please try again in a moment.');
+                return;
+            }
+
+            btn.disabled = true;
+            try {
+                await window.addWaitlistEntry(email, currentLang);
+                form.style.display = 'none';
+                document.getElementById('waitlistSuccess').classList.add('show');
                 try { localStorage.setItem('polished_waitlist', email); } catch(e) {}
                 setTimeout(closeWaitlist, 2500);
             } catch (err) {
-                alert('Something went wrong. Please email us at polished.app@outlook.com');
+                console.error('[waitlist] submit failed', err);
+                const errMsgs = {
+                    he: 'משהו השתבש. אפשר לנסות שוב או לשלוח לנו מייל ל-polished.app@outlook.com',
+                    en: 'Something went wrong. Please try again or email us at polished.app@outlook.com',
+                    de: 'Etwas ist schiefgelaufen. Bitte erneut versuchen oder an polished.app@outlook.com mailen'
+                };
+                alert(errMsgs[currentLang] || errMsgs.he);
                 btn.disabled = false;
             }
         }

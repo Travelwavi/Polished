@@ -904,12 +904,15 @@
             overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
         }
         @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                animation-duration: 0.001ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.001ms !important;
-                scroll-behavior: auto !important;
+            /* Disable scroll-triggered reveals and large motion effects only.
+               Keep small ambient/decorative animations (saw guy, bobbing phone, color swatches)
+               because they are tiny, local, and do not cause vestibular issues. */
+            .reveal, .reveal-right, .reveal-scale {
+                transition: none !important;
+                transform: none !important;
+                opacity: 1 !important;
             }
+            html { scroll-behavior: auto !important; }
         }
     </style>
 </head>
@@ -1217,11 +1220,8 @@
 
     <footer role="contentinfo">
         <div class="social-links" aria-label="Social media">
-            <a href="https://instagram.com/polished.app" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <a href="https://www.instagram.com/polished_il" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-            </a>
-            <a href="https://tiktok.com/@polished.app" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.321 5.562a5.124 5.124 0 0 1-3.414-1.267 5.124 5.124 0 0 1-1.537-3.06V.5h-3.623v14.05a2.902 2.902 0 0 1-5.156 1.805 2.902 2.902 0 0 1 2.256-4.717c.322 0 .634.054.926.149V8.12a6.568 6.568 0 0 0-.926-.065 6.566 6.566 0 1 0 6.566 6.565V8.184a8.748 8.748 0 0 0 5.108 1.636V6.196a5.117 5.117 0 0 1-.2-.634z"/></svg>
             </a>
             <a href="mailto:polished.app@outlook.com" aria-label="Email">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>

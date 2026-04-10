@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Polished - קביעת תור</title>
-    <meta name="description" content="קבעי תור אונליין דרך Polished">
+    <meta name="description" content="קבעי תור אונליין דרך Polished | Book online with Polished">
     <link rel="icon" type="image/png" href="assets/favicon.png">
+    <script defer data-domain="polished-il.com" src="https://plausible.io/js/script.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -161,10 +162,21 @@
         .app-promo a { color: var(--pink); font-weight: 600; text-decoration: none; font-size: 13px; }
 
         .hidden { display: none; }
+
+        /* Language toggle */
+        .lang-toggle {
+            position: absolute; top: 16px; left: 16px;
+            background: var(--white); border: 1px solid #e0d8d0; border-radius: 8px;
+            padding: 6px 12px; font-size: 12px; font-weight: 500; cursor: pointer;
+            font-family: 'Inter', 'Rubik', sans-serif; color: var(--text);
+        }
+        .lang-toggle:hover { background: var(--bg-soft); }
+        .en-text { display: none; }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container" style="position:relative;">
+        <button class="lang-toggle" onclick="toggleBookingLang()">EN | עב</button>
         <div class="header">
             <img src="assets/logo.png" alt="Polished">
             <h1>Polished</h1>
@@ -173,14 +185,14 @@
         <!-- Loading -->
         <div id="loading" class="loading">
             <div class="spinner"></div>
-            <p>...טוענת</p>
+            <p><span class="he-text">...טוענת</span><span class="en-text">Loading...</span></p>
         </div>
 
         <!-- Error -->
         <div id="error-view" class="hidden" style="text-align:center; padding:40px;">
             <div style="font-size:50px; margin-bottom:16px;">😔</div>
-            <p style="font-size:16px; font-weight:600;">לא נמצאה מניקוריסטית</p>
-            <p style="font-size:13px; color:var(--warm-gray); margin-top:8px;">הלינק לא תקין או שהפרופיל לא זמין</p>
+            <p style="font-size:16px; font-weight:600;"><span class="he-text">לא נמצאה מניקוריסטית</span><span class="en-text">Manicurist Not Found</span></p>
+            <p style="font-size:13px; color:var(--warm-gray); margin-top:8px;"><span class="he-text">הלינק לא תקין או שהפרופיל לא זמין</span><span class="en-text">The link is invalid or the profile is unavailable</span></p>
         </div>
 
         <!-- Main booking flow -->
@@ -198,69 +210,69 @@
 
             <!-- Step 1: Date -->
             <div id="step-1">
-                <div class="step-title">באיזה תאריך?</div>
-                <div class="step-subtitle">בחרי יום לתור</div>
+                <div class="step-title"><span class="he-text">בחרי תאריך</span><span class="en-text">Select a Date</span></div>
+                <div class="step-subtitle"><span class="he-text">בחרי יום לתור</span><span class="en-text">Choose a day for your appointment</span></div>
                 <div class="card">
                     <input type="date" class="date-input" id="date-picker">
                 </div>
-                <button class="btn btn-primary" onclick="goToStep(2)">המשיכי</button>
+                <button class="btn btn-primary" onclick="goToStep(2)"><span class="he-text">הבא</span><span class="en-text">Next</span></button>
             </div>
 
             <!-- Step 2: Services -->
             <div id="step-2" class="hidden">
-                <div class="step-title">בחרי שירותים</div>
-                <div class="step-subtitle">ניתן לבחור יותר משירות אחד</div>
+                <div class="step-title"><span class="he-text">בחרי שירותים</span><span class="en-text">Select Services</span></div>
+                <div class="step-subtitle"><span class="he-text">ניתן לבחור יותר משירות אחד</span><span class="en-text">You can select more than one service</span></div>
                 <div id="services-list"></div>
                 <div class="service-summary hidden" id="services-summary"></div>
-                <button class="btn btn-primary" id="services-next-btn" disabled onclick="goToStep(3)">המשיכי</button>
-                <button class="btn-back" onclick="goToStep(1)">← חזרה</button>
+                <button class="btn btn-primary" id="services-next-btn" disabled onclick="goToStep(3)"><span class="he-text">הבא</span><span class="en-text">Next</span></button>
+                <button class="btn-back" onclick="goToStep(1)"><span class="he-text">← חזרה</span><span class="en-text">← Back</span></button>
             </div>
 
             <!-- Step 3: Time -->
             <div id="step-3" class="hidden">
-                <div class="step-title">בחרי שעה</div>
+                <div class="step-title"><span class="he-text">בחרי שעה</span><span class="en-text">Select a Time</span></div>
                 <div class="step-subtitle" id="selected-date-label"></div>
                 <div id="slots-container"></div>
-                <button class="btn-back" onclick="goToStep(2)">← חזרה</button>
+                <button class="btn-back" onclick="goToStep(2)"><span class="he-text">← חזרה</span><span class="en-text">← Back</span></button>
             </div>
 
             <!-- Step 4: Details -->
             <div id="step-4" class="hidden">
-                <div class="step-title">פרטים אחרונים</div>
-                <div class="step-subtitle">כדי שנוכל ליצור איתך קשר</div>
+                <div class="step-title"><span class="he-text">פרטים</span><span class="en-text">Your Details</span></div>
+                <div class="step-subtitle"><span class="he-text">כדי שנוכל ליצור איתך קשר</span><span class="en-text">So we can get in touch with you</span></div>
                 <div class="card" id="booking-summary"></div>
                 <div class="card">
                     <div class="field">
-                        <label>שם מלא *</label>
-                        <input type="text" id="client-name" placeholder="השם שלך" required>
+                        <label><span class="he-text">שם מלא *</span><span class="en-text">Full Name *</span></label>
+                        <input type="text" id="client-name" placeholder="השם שלך" data-placeholder-he="השם שלך" data-placeholder-en="Your name" required>
                     </div>
                     <div class="field">
-                        <label>מספר טלפון *</label>
+                        <label><span class="he-text">מספר טלפון *</span><span class="en-text">Phone Number *</span></label>
                         <input type="tel" id="client-phone" placeholder="050-0000000" required>
                     </div>
                     <div class="field">
-                        <label>הערות</label>
-                        <textarea id="client-notes" placeholder="הערות נוספות (אופציונלי)"></textarea>
+                        <label><span class="he-text">הערות</span><span class="en-text">Notes</span></label>
+                        <textarea id="client-notes" placeholder="הערות נוספות (אופציונלי)" data-placeholder-he="הערות נוספות (אופציונלי)" data-placeholder-en="Additional notes (optional)"></textarea>
                     </div>
                 </div>
                 <div class="error-msg hidden" id="submit-error"></div>
-                <button class="btn btn-primary" id="submit-btn" onclick="submitBooking()">שלחי בקשה</button>
-                <button class="btn-back" onclick="goToStep(3)">← חזרה</button>
+                <button class="btn btn-primary" id="submit-btn" onclick="submitBooking()"><span class="he-text">קבעי תור</span><span class="en-text">Book Appointment</span></button>
+                <button class="btn-back" onclick="goToStep(3)"><span class="he-text">← חזרה</span><span class="en-text">← Back</span></button>
             </div>
 
             <!-- Success -->
             <div id="success-view" class="hidden">
                 <div class="success-view">
                     <div class="success-icon">🤍</div>
-                    <div class="success-title">הבקשה נשלחה!</div>
-                    <div class="success-text">הבקשה נשלחה למניקוריסטית.<br>תקבלי עדכון כשהיא תאשר.</div>
+                    <div class="success-title"><span class="he-text">הבקשה נשלחה!</span><span class="en-text">Request Sent!</span></div>
+                    <div class="success-text"><span class="he-text">הבקשה נשלחה למניקוריסטית.<br>תקבלי עדכון כשהיא תאשר.</span><span class="en-text">Your request has been sent to the manicurist.<br>You'll be notified once she confirms.</span></div>
                 </div>
             </div>
 
             <!-- App promo -->
             <div class="app-promo">
-                <p>חוויה טובה יותר באפליקציה</p>
-                <a href="https://apps.apple.com/app/polished" target="_blank">הורידי את Polished →</a>
+                <p><span class="he-text">חוויה טובה יותר באפליקציה</span><span class="en-text">Better experience in the app</span></p>
+                <a href="https://apps.apple.com/app/polished" target="_blank"><span class="he-text">הורידי את Polished →</span><span class="en-text">Download Polished →</span></a>
             </div>
         </div>
     </div>
@@ -377,7 +389,8 @@
         function renderServices() {
             const container = document.getElementById('services-list');
             if (!services.length) {
-                container.innerHTML = '<p style="text-align:center; color:var(--warm-gray); padding:20px;">אין שירותים מוגדרים</p>';
+                const noSvcMsg = isEnglish() ? 'No services defined' : 'אין שירותים מוגדרים';
+                container.innerHTML = `<p style="text-align:center; color:var(--warm-gray); padding:20px;">${noSvcMsg}</p>`;
                 return;
             }
 
@@ -432,7 +445,10 @@
             const btn = document.getElementById('services-next-btn');
             if (selectedServices.length > 0) {
                 summary.classList.remove('hidden');
-                summary.innerHTML = `<span>${selectedServices.length} שירותים • ${totalMin} דק׳</span><span>${totalPrice > 0 ? '₪' + totalPrice : ''}</span>`;
+                const svcLabel = isEnglish()
+                    ? `${selectedServices.length} services \u2022 ${totalMin} min`
+                    : `${selectedServices.length} שירותים \u2022 ${totalMin} דק׳`;
+                summary.innerHTML = `<span>${svcLabel}</span><span>${totalPrice > 0 ? '\u20AA' + totalPrice : ''}</span>`;
                 btn.disabled = false;
             } else {
                 summary.classList.add('hidden');
@@ -484,7 +500,7 @@
                 const conflict = existingBookings.some(b => {
                     const bDate = b.date.toDate();
                     const bStart = bDate.getHours() * 60 + bDate.getMinutes();
-                    const bEnd = bStart + 60; // default duration
+                    const bEnd = bStart + (b.totalDurationMinutes || 60);
                     return slotStart < bEnd && slotEnd > bStart;
                 });
                 if (!conflict) {
@@ -505,12 +521,16 @@
             // Load slots when entering step 3
             if (step === 3) {
                 const container = document.getElementById('slots-container');
-                container.innerHTML = '<div class="loading"><div class="spinner"></div><p>בודקת שעות פנויות...</p></div>';
+                const loadingSlotsMsg = isEnglish() ? 'Checking available times...' : 'בודקת שעות פנויות...';
+                container.innerHTML = `<div class="loading"><div class="spinner"></div><p>${loadingSlotsMsg}</p></div>`;
                 document.getElementById('selected-date-label').textContent = new Date(selectedDate).toLocaleDateString('he-IL', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
 
                 const slots = await loadAvailableSlots();
                 if (!slots || !slots.length) {
-                    container.innerHTML = '<div class="no-slots">😔<br>אין שעות פנויות ביום הזה<br><small>נסי לבחור תאריך אחר</small></div>';
+                    const noSlotsMsg = isEnglish()
+                        ? '😔<br>No available times on this day<br><small>Try selecting a different date</small>'
+                        : '😔<br>אין שעות פנויות ביום הזה<br><small>נסי לבחור תאריך אחר</small>';
+                    container.innerHTML = `<div class="no-slots">${noSlotsMsg}</div>`;
                 } else {
                     container.innerHTML = '<div class="slots-grid">' +
                         slots.map(s => `<div class="time-slot" onclick="selectTime('${s}')">${s}</div>`).join('') +
@@ -559,7 +579,7 @@
             const errorEl = document.getElementById('submit-error');
 
             if (!name || !phone) {
-                errorEl.textContent = 'נא למלא שם ומספר טלפון';
+                errorEl.textContent = isEnglish() ? 'Please enter your name and phone number' : 'נא למלא שם ומספר טלפון';
                 errorEl.classList.remove('hidden');
                 return;
             }
@@ -571,7 +591,7 @@
                     anonUser = cred.user;
                 } catch (e) {
                     console.error('Auth retry failed:', e);
-                    errorEl.textContent = 'שגיאת אימות, נסי לרענן את הדף';
+                    errorEl.textContent = isEnglish() ? 'Authentication error, please refresh the page' : 'שגיאת אימות, נסי לרענן את הדף';
                     errorEl.classList.remove('hidden');
                     return;
                 }
@@ -581,7 +601,7 @@
 
             const btn = document.getElementById('submit-btn');
             btn.disabled = true;
-            btn.textContent = '...שולחת';
+            btn.textContent = isEnglish() ? 'Sending...' : '...שולחת';
             errorEl.classList.add('hidden');
 
             try {
@@ -590,6 +610,11 @@
                 bookingDate.setHours(h, m, 0, 0);
 
                 const svcNames = selectedServices.map(s => s.name).join(' + ');
+                // A4: the iOS Schedule tab reads `totalDurationMinutes` to show
+                // how long the booking will take and to draw the slot on the
+                // day grid. Web bookings used to omit it, so manicurists saw
+                // every web booking as zero-length. Persist it here.
+                const totalDurationMinutes = selectedServices.reduce((sum, s) => sum + (s.durationMinutes || 60), 0);
 
                 await addDoc(collection(db, 'bookings'), {
                     userId: currentUid,
@@ -599,6 +624,7 @@
                     manicuristName: manicurist.name,
                     date: Timestamp.fromDate(bookingDate),
                     serviceName: svcNames,
+                    totalDurationMinutes: totalDurationMinutes,
                     notes: notes,
                     status: 'pending',
                     source: 'web',
@@ -611,12 +637,36 @@
                 document.querySelectorAll('.progress-dot').forEach(d => d.classList.add('active'));
             } catch (e) {
                 console.error('Submit error:', e.code, e.message);
-                errorEl.textContent = 'שגיאה בשליחת הבקשה, נסי שוב';
+                errorEl.textContent = isEnglish() ? 'Error submitting request, please try again' : 'שגיאה בשליחת הבקשה, נסי שוב';
                 errorEl.classList.remove('hidden');
                 btn.disabled = false;
-                btn.textContent = 'שלחי בקשה';
+                btn.textContent = isEnglish() ? 'Book Appointment' : 'קבעי תור';
             }
         };
+    </script>
+
+    <!-- Language toggle -->
+    <script>
+        function isEnglish() {
+            return document.documentElement.lang === 'en';
+        }
+
+        function toggleBookingLang() {
+            const lang = document.documentElement.lang === 'he' ? 'en' : 'he';
+            document.documentElement.lang = lang;
+            document.documentElement.dir = lang === 'he' ? 'rtl' : 'ltr';
+            document.querySelectorAll('.he-text').forEach(el => el.style.display = lang === 'he' ? '' : 'none');
+            document.querySelectorAll('.en-text').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+            // Update placeholders
+            document.querySelectorAll('[data-placeholder-he]').forEach(el => {
+                el.placeholder = lang === 'he' ? el.dataset.placeholderHe : el.dataset.placeholderEn;
+            });
+            localStorage.setItem('booking_lang', lang);
+        }
+
+        // Check saved preference
+        const savedLang = localStorage.getItem('booking_lang');
+        if (savedLang === 'en') toggleBookingLang();
     </script>
 </body>
 </html>

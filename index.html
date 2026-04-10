@@ -53,7 +53,7 @@
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
         "name": "Polished",
-        "operatingSystem": "iOS, Android",
+        "operatingSystem": "iOS",
         "applicationCategory": "LifestyleApplication",
         "description": "AI-powered virtual nail polish try-on app with community inspiration board and local manicurist directory.",
         "offers": {
@@ -71,6 +71,9 @@
         }
     }
     </script>
+
+    <!-- Analytics — Plausible (privacy-friendly, no cookies, GDPR-compliant) -->
+    <script defer data-domain="polished-il.com" src="https://plausible.io/js/script.js"></script>
 
     <!-- Firebase (modular v10) — waitlist backend -->
     <script type="module">
@@ -102,7 +105,9 @@
         window.firebaseReady = true;
     </script>
 
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #E91E63;
@@ -981,7 +986,7 @@
                 <a href="#why-join"><span class="he-text">למה להצטרף?</span><span class="en-text" style="display:none">Why join?</span><span class="de-text" style="display:none">Warum mitmachen?</span></a>
             </div>
             <div class="nav-left-group">
-                <a href="#download" class="nav-cta">
+                <a href="#download" class="nav-cta" aria-label="Download Polished">
                     <span class="he-text">הורידי עכשיו</span><span class="en-text" style="display:none">Download Now</span><span class="de-text" style="display:none">Jetzt herunterladen</span>
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                 </a>
@@ -1240,7 +1245,7 @@
                 </div>
                 <div class="why-block reveal">
                     <h3><span class="he-text">איך אנחנו מתכננות להרוויח?</span><span class="en-text" style="display:none">How Do We Plan To Make Money?</span><span class="de-text" style="display:none">Wie planen wir Geld zu verdienen?</span></h3>
-                    <p><span class="he-text">1. נשיק מערכת תורים למניקוריסטיות, <span class="accent-text">במחיר הכי נמוך בשוק</span>.<br>2. בנות שמכורות ללק עם AI יוכלו לרכוש מנוי פרימיום שנתי ב-<span class="accent-text">19.9&#8362;</span> ולהנות מנסיון ללא מגבלה.<br><br><strong>אנחנו כאן כדי לבנות ולתחזק את הקהילה הזו לטווח ארוך.</strong></span><span class="en-text" style="display:none">1. We'll launch a scheduling system for manicurists, <span class="accent-text">at the lowest price in the market</span>.<br>2. Girls who are addicted to nail polish with AI can purchase a yearly premium pass for <span class="accent-text">$10</span> and enjoy unlimited tries.<br><br><strong>We're here to build and maintain this community long-term.</strong></span><span class="de-text" style="display:none">1. Wir starten ein Buchungssystem für Maniküristinnen, <span class="accent-text">zum niedrigsten Preis am Markt</span>.<br>2. Mädchen, die süchtig nach AI-Nagellack sind, können einen jährlichen Premium-Pass für <span class="accent-text">10&nbsp;€</span> kaufen und unbegrenzte Versuche genießen.<br><br><strong>Wir sind hier, um diese Community langfristig aufzubauen und zu pflegen.</strong></span></p>
+                    <p><span class="he-text">1. נשיק מערכת תורים למניקוריסטיות, <span class="accent-text">במחיר הכי נמוך בשוק</span>.<br>2. בנות שמכורות ללק עם AI יוכלו לרכוש מנוי פרימיום חודשי ב-<span class="accent-text">9.90&#8362;</span> ולהנות מנסיון ללא מגבלה.<br><br><strong>אנחנו כאן כדי לבנות ולתחזק את הקהילה הזו לטווח ארוך.</strong></span><span class="en-text" style="display:none">1. We'll launch a scheduling system for manicurists, <span class="accent-text">at the lowest price in the market</span>.<br>2. Girls who are addicted to nail polish with AI can purchase a monthly premium pass for <span class="accent-text">₪9.90/mo</span> and enjoy unlimited tries.<br><br><strong>We're here to build and maintain this community long-term.</strong></span><span class="de-text" style="display:none">1. Wir starten ein Buchungssystem für Maniküristinnen, <span class="accent-text">zum niedrigsten Preis am Markt</span>.<br>2. Mädchen, die süchtig nach AI-Nagellack sind, können ein monatliches Premium-Abo für <span class="accent-text">9,90&nbsp;₪/Monat</span> kaufen und unbegrenzte Versuche genießen.<br><br><strong>Wir sind hier, um diese Community langfristig aufzubauen und zu pflegen.</strong></span></p>
                 </div>
             </div>
         </div>
@@ -1395,7 +1400,9 @@
 
         // ===== Waitlist Modal =====
         const waitlistModal = document.getElementById('waitlistModal');
+        let lastFocusedBeforeModal = null;
         function openWaitlist() {
+            lastFocusedBeforeModal = document.activeElement;
             waitlistModal.classList.add('active');
             document.body.style.overflow = 'hidden';
             setTimeout(() => {
@@ -1406,9 +1413,27 @@
         function closeWaitlist() {
             waitlistModal.classList.remove('active');
             document.body.style.overflow = '';
+            if (lastFocusedBeforeModal) {
+                lastFocusedBeforeModal.focus();
+                lastFocusedBeforeModal = null;
+            }
         }
         waitlistModal.addEventListener('click', (e) => {
             if (e.target === waitlistModal) closeWaitlist();
+        });
+        // Focus trap inside modal
+        waitlistModal.addEventListener('keydown', (e) => {
+            if (e.key !== 'Tab') return;
+            const focusable = waitlistModal.querySelectorAll('button, [href], input:not([tabindex="-1"]):not([aria-hidden="true"]), select, textarea, [tabindex]:not([tabindex="-1"])');
+            const visible = Array.from(focusable).filter(el => el.offsetParent !== null && !el.disabled);
+            if (!visible.length) return;
+            const first = visible[0];
+            const last = visible[visible.length - 1];
+            if (e.shiftKey) {
+                if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+            } else {
+                if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+            }
         });
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && waitlistModal.classList.contains('active')) closeWaitlist();
